@@ -1,5 +1,5 @@
-Developers:
-T0RENIA rickywaikei HeathAu ChimChim2022
+Developers: 
+(1) T0RENIA  (11) ChimChim2022 (15) HeathAu (22) rickywaikei
 
 Requirement:
 node version: 18.10.0
@@ -33,4 +33,3 @@ npm install
       if not using MongoDB cloud
 // start app.js
 npm run dev
-
