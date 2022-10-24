@@ -21,9 +21,8 @@ node module versions:
     "twilio": "^3.82.1"
 
 Installation:
-mkdir -p {pathto}/helpandoffer
-cd {pathto}/helpandoffer
-git clone {link to repositories.git}
+git clone https://github.com/rickywaikei/helpandoffer.git
+cd ./helpandoffer
 nvm install 18.10.0
 nvm use 18.10.0
 npm install
