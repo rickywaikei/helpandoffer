@@ -1,8 +1,7 @@
 Requirement:
-node version: 18.10.0 or above
-mongoDB version: 5.0.12 or above or MongoDB Atlas (default)
-Default setup of MongoDB Atlas only permit ip address from SCOPE, please contact our team member
-if you want to connect from other location.
+node version: 18.10.0
+mongoDB version: MongoDB Atlas (default) or mongoDB community 5.0.12 or above
+Default setup of MongoDB Atlas only permit ip address from SCOPE office at TST, please contact our team member if you want to connect from other location.
 
 node module versions:
   "dependencies": {
