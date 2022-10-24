@@ -1,0 +1,10 @@
+<div style="margin-top:100px">
+{{#each errors}}
+<div class="alert alert-danger alert-dismissible">{{text}}</div>
+{{else}}
+{{/each}}
+
+{{#if fail_passport}}
+<div class="alert alert-danger alert-dismissible">{{fail_passport}}</div>
+{{/if}}
+</div>

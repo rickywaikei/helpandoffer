@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+    <style>
+        .card { 
+            background-color: rgb(248, 237, 227, 0.7) !important; 
+            font-size: 20px !important;
+            font: #7D6E83 !important;
+            border-radius: 50px 50px 50px 50px !important; 
+        }
+
+        body {
+            background-image: linear-gradient(to bottom,rgba(223,211,195,0.5), 
+rgb(125,110,131,0.5)),url("https://static.vecteezy.com/system/resources/previews/010/264/847/large_2x/an-image-of-plam-leave-shadow-on-the-wall-free-png.png");
+        }
+        .table {
+            background-color: #F8EDE3;
+            background-color: rgb(248, 237, 227, 0.9);
+            font-style: times;
+            font-size:16px;
+            position: fixed  sticky;
+            font: #7D6E83  !important;
+        }
+
+        .nav-link {
+            color: rgb(125, 110, 131) !important;
+        }
+        {{!-- .link {
+            color: #7D6E83  !important;
+        }
+        .item>a:hover {
+            color: #D0B8A8  !important;
+        } --}}
+        
+        /*code to change background color*/
+        .nav>.active>a {
+            background-color: rgba(0, 0, 0, 0.5) !important;
+            color: #D0B8A8 !important;
+        }
+        .btn {
+            background-color: #7D6E83 !important;
+            border:0 !important;
+            border-radius: 10px 10px 10px 10px !important;
+        }
+        .carousel-caption {
+          text-shadow: 0 0 5px rgb(33, 30, 30),0 0 10px rgb(88, 37, 74),0 0 15px rgb(153, 167, 70),0 0 40px #46453e,0 0 70px #2b0e3f
+        }
+        .img {
+          width: fit-content;
+          height: fit-content;
+        }
+    </style>
+</div>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title></title>
+
+  <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel" style="margin-top:80px">
+    <ol class="carousel-indicators">
+      <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+      <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+      <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+      <li data-target="#carouselExampleIndicators" data-slide-to="3"></li>
+      <li data-target="#carouselExampleIndicators" data-slide-to="4"></li>
+    </ol>
+    <div class="carousel-inner">
+      <div class="carousel-item active" data-interval="3000">
+        <img src="https://leanbase.de/uploads/9yt73fp97vyqf5tm5dfqxy87p4qeudv9uhpd4dm3.jpg" class="d-block w-100 img"
+          alt="..." height="500px">
+          <div class="carousel-caption d-none d-md-block">
+          <h5 class="">Little Ways</h5>
+          <p>Welcome to request cases or  provide  solutions  </p>
+          </div>
+      </div>
+      <div class="carousel-item" data-interval="3000">
+        <img src="https://www.thelifenet.eu/media/p1sjxr3h/procedures-header.png"
+          class="d-block w-100 img" alt="..." height="500px">
+          <div class="carousel-caption d-none d-md-block">
+          <h5>Little Area</h5>
+          <p>Plaform for exchange ideas and make relationship</p>
+          </div>
+      </div>
+      <div class="carousel-item" data-interval="4000">
+        <img
+          src="https://www.charleroi-entreprendre.be/volumes/images/banners/banner-finance-min.png"
+          class="d-block w-100 img" alt="..." height="500px">
+          <div class="carousel-caption d-none d-md-block">
+          <h5>Little Help</h5>
+          <p>We believe that joint power can solve difficulties</p>
+          </div>
+      </div>
+       <div class="carousel-item" data-interval="4000">
+        <img src="https://i1.wp.com/www.activision-coaching.com/acc-content/uploads/2020/10/coaching_professionnel_activision.jpeg?w=3000"
+          class="d-block w-100 img" alt="..." height="500px">
+          <div class="carousel-caption d-none d-md-block">
+          <h5>Little bliss</h5>
+          <p>Helping others is the foundation of happiness</p>
+          </div>
+      </div>
+      <div class="carousel-item" data-interval="4000">
+        <img
+          src="https://images.shulcloud.com/1566/uploads/images/Legacies/Legacy2.jpg"
+          class="d-block w-100 img" alt="..." height="500px">
+          <div class="carousel-caption d-none d-md-block">
+          <h5>Little Wish</h5>
+          <p>We Hope to build a world of mutual help and caring</p>
+          </div>
+      </div>
+    </div>
+<br>
+  <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="sr-only">Previous</span>
+  </a>
+  <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="sr-only">Next</span>
+  </a>
+  </div>
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+</head>
+
+<body>
+
+  <div class="m-4">
+    <div class="card text-center">
+      <div class="card-header">
+        <ul class="nav nav-tabs justify-content-center card-header-tabs" id="myTab">
+          <li class="nav-item">
+            <a href="#allcases" class="nav-link active fw-bolder" data-bs-toggle="tab">All Cases</a>
+          </li>
+          <li class="nav-item">
+            <a href="#unattendedcases" class="nav-link fw-bolder" data-bs-toggle="tab">Unattended Cases</a>
+          </li>
+          <li class="nav-item">
+            <a href="#attendingcases" class="nav-link fw-bolder" data-bs-toggle="tab">Attending Cases</a>
+          </li>
+          <li class="nav-item">
+            <a href="#solvedcases" class="nav-link fw-bolder" data-bs-toggle="tab">Solved Cases</a>
+          </li>
+        </ul>
+      </div>
+
+      <div class="card-body">
+        <div class="tab-content">
+          <div class="tab-pane fade show active" id="allcases">
+
+          <div class="card text-right border-0 bg-transparent">
+                <form method="POST" action="/search" class="ml-auto" >
+                      <div class="no-gutters align-items-center input-group">
+                          <div>
+                              <input class="form-control rounded-pill mr-1 pr-5 text-muted" type="search" name="searchInput">
+                          </div>
+                          <div class="col-auto">
+                              <button class="btn bg-transparent rounded-pill border-0 ml-n5" type="submit">
+                                {{!-- <input type="hidden" name="domains" value="http://helpandoffer.mooo.com:5000/">
+                                <input type="hidden" name="sitesearch" value="http://helpandoffer.mooo.com:5000/"> --}}
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                                          <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+                                        </svg>
+                              </button>
+                          </div>
+                      </div>
+                  </form>
+          </div>
+        
+            {{!-- <h5 class="card-title">All Cases</h5> --}}
+            <p class="card-text">
+            <table class="table table-xl table-hover table-borderless table-striped bg-transparent" style=" background-repeat: repeat; background-image: linear-gradient(rgb(248, 237, 227,0.9), rgb(208, 184, 168, 0.6)), url(https://blog.japanwondertravel.com/wp-content/uploads/2021/11/yukiya-shiba-LSyjrJFV-pw-unsplash.jpg)"> 
+              <thead class="text-muted">
+                <tr class="text-center">
+                  <th class="align-middle">Created At</th>
+                  <th class="align-middle">Title</th>
+                  <th class="align-middle">Details</th>
+                 
+                  <th class="align-middle">Status</th>
+                </tr>
+              </thead>
+              <tbody class="text-muted">
+                {{#each records}}
+                <tr class="text-left">
+                  <td class="align-middle">{{StringDate}}</td>
+                  <td class="text-center align-middle">{{title}}</td>
+                  <td class="align-middle">{{details}}</td>
+                  
+                  <td class="text-center align-middle">{{#if solved}} Solved {{else}} {{#if offer}} Attending {{else}}
+                    Unattended {{/if}} {{/if}}</td>
+                </tr>
+                {{/each}}
+              </tbody>
+            </table>
+            </p>
+            <a href="#" class="btn btn-primary">Back to Top</a>
+          </div>
+
+          <div class="tab-pane fade" id="unattendedcases">
+            {{!-- <h5 class="card-title">Unattended Cases</h5> --}}
+            <p class="card-text"></p>
+            <table class="table table-hover table-borderless table-striped  bg-transparent" style=" background-repeat: repeat; background-image: linear-gradient(rgb(248, 237, 227,0.9), rgb(208, 184, 168, 0.5)), url(https://image.jimcdn.com/app/cms/image/transf/none/path/sc6196b37a69d8813/backgroundarea/ie992d6d728f5e10d/version/1477617849/image.jpg)"> 
+              <thead class="text-muted">
+                <tr class="text-center">
+                  <th class="align-middle">Created At</th>
+                  <th class="align-middle">Title</th>
+                  <th class="align-middle">Details</th>
+                 
+                  <th class="align-middle">Status</th>
+                </tr>
+              </thead>
+              <tbody class="text-muted">
+                {{#each records}}
+                {{#unless solved}}{{#unless offer}}
+                <tr class="text-left">
+                  <td class="align-middle">{{StringDate}}</td>
+                  <td class="text-center align-middle">{{title}}</td>
+                  <td class="align-middle">{{details}}</td>
+                 
+                  <td class="text-center align-middle">{{#if solved}} Solved {{else}} {{#if offer}} Attending {{else}}
+                    Unattended {{/if}} {{/if}}</td>
+                </tr>
+                {{/unless}}{{/unless}}
+                {{/each}}
+              </tbody>
+            </table>
+            </p>
+            <a href="#" class="btn btn-primary">Back to Top</a>
+          </div>
+
+          <div class="tab-pane fade" id="attendingcases">
+            {{!-- <h5 class="card-title">Attending Cases</h5> --}}
+            <p class="card-text">
+            <table class="table table-hover table-borderless table-XL table-striped  bg-transparent" style=" background-repeat: repeat; background-image: linear-gradient(rgb(248, 237, 227,0.9), rgb(208, 184, 168, 0.6)), url(https://files.soundon.fm/1661239461359-dfcc83d6-9645-4feb-92ee-cbcb4c6b0f8c.jpeg)"> 
+              <thead class="text-muted">
+                <tr class="text-center">
+                  <th class="align-middle">Created At</th>
+                  <th class="align-middle">Title</th>
+                  <th class="align-middle">Details</th>
+                  
+                  <th class="align-middle">Status</th>
+                </tr>
+              </thead>
+              <tbody class="text-muted">
+                {{#each records}}
+                {{#unless solved}}{{#if offer}}
+                <tr class="text-left">
+                  <td class="align-middle">{{StringDate}}</td>
+                  <td class="text-center align-middle">{{title}}</td>
+                  <td class="align-middle">{{details}}</td>
+                  
+                  <td class="text-center align-middle">{{#if solved}} Solved {{else}} {{#if offer}} Attending {{else}}
+                    Unattended {{/if}} {{/if}}</td>
+                </tr>
+                {{/if}}{{/unless}}
+                {{/each}}
+              </tbody>
+            </table>
+            </p>
+            <a href="#" class="btn btn-primary">Back to Top</a>
+          </div>
+
+          <div class="tab-pane fade" id="solvedcases">
+            {{!-- <h5 class="card-title">Solved Cases</h5> --}}
+            <p class="card-text">
+            <table class="table table-hover table-borderless table-XL table-striped  bg-transparent" style=" background-repeat: repeat; background-image: linear-gradient(rgb(248, 237, 227,0.9), rgb(208, 184, 168, 0.6)), url(https://www.mycampbellrivernow.com/wp-content/uploads/2019/02/Cold.jpeg)"> 
+              <thead class="text-muted">
+                <tr class="text-center">
+                  <th class="align-middle">Created At</th>
+                  <th class="align-middle">Title</th>
+                  <th class="align-middle">Details</th>
+                 
+                  <th class="align-middle">Status</th>
+                </tr>
+              </thead>
+              <tbody class="text-muted">
+                {{#each records}}
+                {{#if solved}}
+                <tr class="text-left">
+                  <td class="align-middle">{{StringDate}}</td>
+                  <td class="text-center align-middle">{{title}}</td>
+                  <td class="align-middle">{{details}}</td>
+                 
+                  <td class="text-center align-middle">{{#if solved}} Solved {{else}} {{#if offer}} Attending {{else}}
+                    Unattended {{/if}} {{/if}}</td>
+                </tr>
+                {{/if}}
+                {{/each}}
+              </tbody>
+            </table>
+            </p>
+            <a href="#" class="btn btn-primary">Back to Top</a>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>
+  
+{{!-- <wix-bg-media id="bgMedia_comp-jzqzeas9" class="_3BaUs" data-container-id="comp-jzqzeas9" data-container-size="0, 0" data-page-id="c1dmp" data-bg-effect-name="BgParallax" style="width: 1553px; height: 1720px; left: 0px; top: 0px; will-change: transform; transform: translate3d(0px, 52.6px, 0px);"><video id="comp-jzqzeas9_video" class="_3vVMz" role="presentation" crossorigin="anonymous" playsinline="" preload="auto" muted="" loop="" tabindex="-1" autoplay="" src="https://video.wixstatic.com/video/ea26fd_a7989f56a9704ec0b40cff680647b589/1080p/mp4/file.mp4" style="height: 100%; width: 100%; object-fit: cover; object-position: center center; opacity: 1;"></video></wix-bg-media>   --}}
+

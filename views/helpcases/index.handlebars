@@ -1,0 +1,81 @@
+<style>
+    .row {
+            margin-top: 20px;
+            margin-bottom: 20px;
+            text-indent: 2em;
+        }
+    .card {
+            margin: 0 auto; 
+            float: none; 
+            margin-bottom: 10px; 
+            background-color: rgb(223, 211, 195, 0.5) !important; 
+            font-size: 20px !important; 
+            border-radius: 50px 50px 50px 50px;
+ 
+        }
+    body {
+            background-image: linear-gradient(to bottom,rgba(223,211,195,0.5), 
+rgb(223,211,195,0.5)),url("https://static.vecteezy.com/system/resources/previews/010/264/847/large_2x/an-image-of-plam-leave-shadow-on-the-wall-free-png.png");
+
+        }
+    .btn {
+            background-color: #7D6E83 !important;
+            border:0 !important;
+            border-radius: 10px 10px 10px 10px;
+        }
+    .btn1 {
+            background-color: rgb(248, 237, 227, 0.6)  !important;
+            border:0 !important;
+            border-radius: 10px 10px 10px 10px;
+        }
+
+</style>
+<div class="" style="margin-top: 100px"></div><br><br>   
+<h4 class="text-center">My Requested Cases</h4><br>
+    <div class="card card-body border-0">         
+        <div class="tab-content text-center">
+          <div class="tab-pane fade show active" id="mycases">
+
+            <p class="card-text">
+            <table class="table table-hover table-borderless table-XL table-striped">
+              <thead>
+                <tr class="text-center">
+                  <th class="align-middle">Created At</th>
+                  <th class="align-middle">Title</th>
+                  <th class="align-middle">Details</th>
+                  <th class="align-middle">Status</th>
+                  <th class="align-middle">HelpedBy</th>
+                  <th class="align-middle">Actions</th>
+                </tr>
+              </thead>
+              <tbody>{{#if helpcases}}
+                {{#each helpcases}}
+                <tr class="text-left">
+                  <td class="align-middle">{{StringDate}}</td>
+                  <td class="text-center align-middle">{{title}}</td>
+                  <td class="align-middle">{{details}}</td>
+                  <td class="text-center align-middle">{{#if solved}} Solved {{else}} {{#if offer}} Attending {{else}}
+                    Unattended {{/if}} {{/if}}</td>
+                  <td class="text-center align-middle">{{offer}}</td>
+                <td class="text-right align-middle">
+                  <div class="btn-group btn-sm ">
+                  <a href="/helpcases/edit/{{_id}}" class="btn1 btn-outline-info btn-sm" role="button">  Edit  </a>
+                  <form action="/helpcases/{{_id}}?_method=Delete" method="POST">
+                    <input type="hidden" name="_method" value="Delete">
+                    <input type="submit" class="btn1 btn-outline-danger btn-sm ml-1" value="Delete">
+                  </form>
+                  </div>
+                </td>
+                </tr>
+                {{else}}
+                <h5>No record found.</h5>
+                {{/each}}{{/if}}
+              </tbody>
+            </table>
+            </p>
+            <br>
+            <a href="#" class="btn  text-white text-center">Back to Top</a><br>
+          </div>
+          <br>
+        </div>
+    </div>

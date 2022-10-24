@@ -1,0 +1,91 @@
+<div style="margin-top:100px">
+    <style>
+        label {
+        text-align: right; 
+        width: 200px;
+        }
+    </style>
+
+<div class="container">
+
+<div class="card-group border-0">
+  <div class="card border-0">
+    <div class="card-body">
+      <br>
+    <div class="text-center">
+      <h5><b>User profile</b></h5>
+        <br>
+        <br>
+    </div>
+    <table class="table table-hover table-borderless">
+      <tbody>
+        <tr>
+        <th scope="row">Name:</th>
+            <td>{{name}}</td>
+        </tr>
+        <tr>
+        <th scope="row">E-mail: </th>
+            <td>{{email}}</td>
+        </tr>
+        <tr>
+          <th scope="row">Received badges: </th>
+            <td>{{phone}}</td>
+        </tr>
+        <tr>
+          <th scope="row">Received badges: </th>
+            <td><span class="badge badge-warning">{{badge}}</span></td>
+        </tr>
+      </tbody>
+    </table>
+    </div>
+  </div>
+  
+  <div class="card border-0">
+    <div class="card-body text-center">
+      <br>
+      <br>
+      <h5><b></b></h5>
+      <div class="text-right">  
+      <form action="/users/profile?_method=DELETE" method="post">
+        <input type="hidden" name="_method" value="DELETE" />
+        <button type="submit" class="btn btn-outline-light text-muted">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
+            <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
+            <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
+          </svg>
+        </button>
+      </form>  
+        
+      </div> 
+
+    <div class="card border border-5 rounded-circle justify-content-center" style="width: 250px;">
+      <img src="data:image/{{avatar.contentType}}; base64, {{avatar.data}}"  width="250" />
+    </div>
+      <nav>
+        <ul class="justify-content-end">
+          <div class="position-absolute bottom-0 end-0">
+          <form action="/users/profile" enctype="multipart/form-data" method="POST">
+        </ul>
+          <div class="position-relative">            <tbody>
+           <table class="table table-sm table-hover table-borderless">
+            <tr>
+              <td>
+                <label for="avatarUpload" class="form-label"></label>
+                <input class="form-control-file text-muted" type="file" id="avatarUpload" name="avatarUpload"/> 
+              </td>
+              <td  class="align-bottom">
+                <button class="btn btn-sm btn-outline-secondary" type="submit">Upload</button>
+              </td>
+            </tr>
+           </table>
+          </tbody>
+          </div>
+          </form>    
+    </div>
+  </div>
+    <br>
+    <br>
+  </div>
+  </div>
+</div>
+

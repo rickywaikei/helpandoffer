@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>About page</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body style="margin-top:50px">
+    <style>
+        .row {
+            margin-top: 20px;
+            margin-bottom: 20px;
+            text-indent: 2em;
+        }
+
+        .card {
+            margin: 0 auto;
+            float: none;
+            margin-bottom: 10px;
+            background-color: rgb(248, 237, 227, 0.6) !important;
+            font-size: 20px !important;
+            border-radius: 50px 50px 50px 50px;
+        }
+
+        body {
+            background-image: linear-gradient(to bottom, rgba(223, 211, 195, 0.5),
+                    rgb(125, 110, 131, 0.7)), url("https://static.vecteezy.com/system/resources/previews/010/264/847/large_2x/an-image-of-plam-leave-shadow-on-the-wall-free-png.png");
+
+        }
+
+        .btn {
+            background-color: #7D6E83 !important;
+            border: 0 !important;
+            border-radius: 10px 10px 10px 10px;
+        }
+    </style>
+    <!---sidebar--->
+    <div class="container">
+        <div class="card border-0 bg-transparent">
+            <div class="card-body">
+                <h5 class="text-center">About Us</h5>
+                <div class="row ml-1">
+                    <p>Our platform is founded in 2022. The operation of the website is that the visitors set up an
+                        account after, they can publish posts to ask questions, or respond to other people's posts, such
+                        as reply solutions or provide contact methods.</p>
+                </div>
+                <div class="row ml-1">
+                    <p>The establishment of platform is owing to the daily life, we often encounter difficulties or
+                        problems. Our platform allows people to quickly seek the help or solution of others, and at the
+                        same time, it can easily help others.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br>
+    <div class="card1 mb-3 border-0 bg-transparent">
+        <div _ngcontent-serverapp-c141="" class="col-12 text-center"><iframe _ngcontent-serverapp-c141=""
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d12416.502183446015!2d114.17337408278598!3d22.298883531443117!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x340400ef62de4b4b%3A0xa793abe65f679d0e!2sCityu%20Scope%20Tsim%20Sha%20Tsui%20Campus!5e0!3m2!1szh-TW!2shk!4v1665754044189!5m2!1szh-TW!2shk"
+                width="90%" height="400" frameborder="0" allowfullscreen="" aria-hidden="false" tabindex="0"
+                style="border: 0;">
+            </iframe></div><br>
+        <div class="card-body card">
+
+            <p class="text-center"><strong>Help and Offer</strong></p>
+            <p><em> Address: UG2, Chinachem (Golden) Plaza, 77 Mody Road, Tsim Sha Tsui East, Kowloon </em></p>
+            <p><em> Contact number: 3442 6359</em></p>
+            <p><em> Email: helpandoffer@gmail.com</em></p>
+            <p><em> office hours:</em></p>
+            <p><em> Monday to Friday</em></p>
+            <p><em> 9:00am-6:00pm (Closed on Saturdays, Sundays and public holidays)</em></p>
+            <p><em> Any enquiries or collaborate, please fill out the contact form or contact at 34426359, we'll reply
+                    you soon. </em></p>
+            <p class="card-text text-right"><small class="text-muted">Release Version 1.0</small></p>
+            <div class="contact-area">
+                <div class="text-content">
+                    <h5></h5>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <br>
+
+    <div class="card card-center">
+        <br>
+        <h5 class="card-title text-center">Contact us</h5>
+        <div class="card-body">
+            <form action="/sendmsg" method="POST">
+                <div class="form-group">
+                    <label for="name">Name</label>
+                    <input type="text" class="form-control" name="name" placeholder="enter name">
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" class="form-control" name="email" placeholder="enter email">
+                    <small class="form-text text-muted">Your email will not shared</small>
+                </div>
+
+                <div class="form-group">
+                    <label for="subject">Subject</label>
+                    <input type="text" class=form-control from-control-sm name="subject" placeholder="enter subject">
+                </div>
+
+                <div class="form-group">
+                    <label for="message">Message </label>
+                    <textarea name="message" rows="3" class="form-control"></textarea>
+                </div>
+                <div class="text-center">
+                    <button class="btn text-white text-center" type="botton">Submit</button>
+                </div>
+        </div>
+        </form>
+    </div>
+    <br>
+</body>
+
+</html>
+{{!-- style="width: 18rem;" --}}

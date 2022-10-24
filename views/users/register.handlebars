@@ -1,0 +1,59 @@
+<style>
+    .row {
+
+        }
+    .card {
+            margin: 0 auto; 
+            float: none; 
+            margin-bottom: 10px; 
+            background-color: rgb(223, 211, 195, 0.5) !important; 
+            font-size: 20px !important; 
+            border-radius: 50px 50px 50px 50px;
+        }
+    body {
+            background-image: linear-gradient(to bottom,rgba(223,211,195,0.5), 
+rgb(223,211,195,0.5)),url("https://static.vecteezy.com/system/resources/previews/010/264/847/large_2x/an-image-of-plam-leave-shadow-on-the-wall-free-png.png");
+
+        }
+    .btn {
+            background-color: #7D6E83 !important;
+            border:0 !important;
+            border-radius: 10px 10px 10px 10px;
+        }
+    .btn1 {
+            background-color: rgb(248, 237, 227, 0.6)  !important;
+            border:0 !important;
+            border-radius: 10px 10px 10px 10px;
+        }
+
+</style>
+<div style="margin-top:100px"><br>
+<div class="row">
+  <div class="col-md-6 mx-auto"><br>
+    <h3 class="text-center">Account Register</h3><br>
+    <form action="/users/register" method="post" class="card card-body border-0">
+      <div class="form-group text-left" ><br>
+        <label for="name">Name</label>
+        <input type="text" class="form-control" name="name" value="{{name}}" autocomplete="off" />
+
+      </div>
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input type="email" class="form-control" name="email" value="{{email}}" autocomplete="off" />
+      </div>
+      <div class="form-group">
+        <label for="phone">Phone</label>
+        <input type="tel" class="form-control" name="phone" pattern="[+][0-9]{3}-[0-9]{4}-[0-9]{4}" value="{{phone}}" placeholder="+852-1234-5678" required />
+      </div>
+      <div class="form-group" <label for="password">Password</label>
+        <input type="password" class="form-control" name="password" value="{{password}}" />
+      </div>
+      <div class="form-group" <label for="password2">Confirm Password</label>
+        <input type="password" class="form-control" name="password2" value="{{password2}}" />
+      </div>
+      <br>
+      <button type="submit" class="btn text-white text-center">Submit</button><br>
+    </form>
+  </div>
+</div>
+</div>
