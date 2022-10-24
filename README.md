@@ -1,3 +1,6 @@
+Developers:
+T0RENIA rickywaikei HeathAu ChimChim2022
+
 Requirement:
 node version: 18.10.0
 mongoDB version: MongoDB Atlas (default) or mongoDB community 5.0.12 or above
