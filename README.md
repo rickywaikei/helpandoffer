@@ -26,12 +26,20 @@ Default setup of MongoDB Atlas only permit ip address from SCOPE office at TST, 
     "twilio": "^3.82.1"
     
 **Installation:**
-git clone https://github.com/rickywaikei/helpandoffer.git
-cd ./helpandoffer
-nvm install 18.10.0
-nvm use 18.10.0
-npm install
+
+_git clone https://github.com/rickywaikei/helpandoffer.git_
+
+_cd ./helpandoffer_
+
+_nvm install 18.10.0_
+
+_nvm use 18.10.0_
+
+_npm install_
+
 _1. Edit config.json to change static variables i.e. PORT (default 3000) and mongo (default MongoDB Atlas)_
 _2. Start your local mongod (need version 5.0.12 or above) if not using MongoDB cloud_
-start app.js
-npm run dev
+
+_start app.js_
+
+_npm run dev_
