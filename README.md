@@ -1,7 +1,9 @@
 **Demo site**: _http://helpandoffer.mooo.com_
+
 **Deployment**: _https://hub.docker.com/repository/docker/rickychan/helpandoffer_
 
-**Developers:** 
+**Developers:**
+
 _(1) T0RENIA  (11) ChimChim2022 (15) HeathAu (22) rickywaikei_
 
 **Requirement:**
