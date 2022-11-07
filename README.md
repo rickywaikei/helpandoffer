@@ -31,8 +31,8 @@ cd ./helpandoffer
 nvm install 18.10.0
 nvm use 18.10.0
 npm install
-_- 1. Edit config.json to change static variables i.e. PORT (default 3000) and mongo (default MongoDB Atlas)
-_- 2. Start your local mongod (need version 5.0.12 or above)
-_     if not using MongoDB cloud
+_-1. Edit config.json to change static variables i.e. PORT (default 3000) and mongo (default MongoDB Atlas)_
+_- 2. Start your local mongod (need version 5.0.12 or above)_
+_     if not using MongoDB cloud_
 start app.js
 npm run dev
