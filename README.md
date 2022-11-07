@@ -2,9 +2,7 @@
 
 **Deployment**: _https://hub.docker.com/repository/docker/rickychan/helpandoffer_
 
-**Developers:**
-
-_(1) T0RENIA  (11) ChimChim2022 (15) HeathAu (22) rickywaikei_
+**Developers:**_(1) T0RENIA  (11) ChimChim2022 (15) HeathAu (22) rickywaikei_
 
 **Requirement:**
 node version: 18.10.0
