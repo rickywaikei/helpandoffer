@@ -13,6 +13,11 @@ A web application that connects people who need help with those who can offer as
 - **Error Handling**: Custom 404 and 500 error pages with return to home option
 - **Phone Number Support**: Validation for Hong Kong phone number format (+852 9876-4321)
 - **User Profiles**: Detailed user profiles with badges and achievements
+- **Multi-language Support**: Full internationalization with English, Traditional Chinese, and Simplified Chinese
+- **Modern UI**: Redesigned About page with improved layout and user experience
+- **Graphical Action Buttons**: Intuitive icons instead of text labels for actions
+- **Centered Navigation**: Improved navbar with centered navigation items
+- **Confirmation Dialogs**: Confirmation prompts for all delete operations
 
 ## 🔧 Technologies
 

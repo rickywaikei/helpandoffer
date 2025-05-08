@@ -58,36 +58,36 @@
       <div class="alert alert-danger">{{test}}</div>
       {{else}}
       {{/each}}
-      <h4 class="text-center">Update offered case</h4><br>
+      <h4 class="text-center">{{__ 'cases.updateOfferedCase'}}</h4><br>
       <!-- _method with "put" -->
       <div class="card card-body">
         <div class="form-group"><br>
-          <label for="title">Title</label>
+          <label for="title">{{__ 'cases.title'}}</label>
           <input type=text name="title" class="form-control" value="{{helpcase.title}}" readonly />
         </div><br>
         <div class="form-group">
-          <label for="details">Details</label>
+          <label for="details">{{__ 'cases.details'}}</label>
           <textarea name="details" class="form-control" rows="5" readonly>{{helpcase.details}}</textarea>
         </div>
         <hr>
-        <h5 class="text-center">Send message to case author</h5>
+        <h5 class="text-center">{{__ 'messages.sendMessageToAuthor'}}</h5>
         <form action="/helpcases/update/{{helpcase._id}}?_method=PUT" method="POST">
           <input type="hidden" name="_method" value="PUT" required />
           <input type="hidden" name="_csrf" value="{{csrfToken}}" />
           <div class="form-group">
-            <label for="offermsg">Your message</label>
+            <label for="offermsg">{{__ 'messages.yourMessage'}}</label>
             <textarea name="offermsg" class="form-control" rows="3"></textarea>
           </div><br>
           <div class="form-group">
-            <label for="offer">Remove your Offerer role? [Enter "REMOVE" to confirm]</label>
+            <label for="offer">{{__ 'cases.removeOffererRole'}}</label>
             <input type=text name="offer" class="form-control" value="{{helpcase.offer}}" />
           </div><br>
           <div class="text-center">
-            <button type="submit" class="btn text-white text-center">Submit</button>
+            <button type="submit" class="btn text-white text-center">{{__ 'profile.submit'}}</button>
           </div>
         </form><br>
         <div class="form-group">
-          <label for="offermsg">Previous messages</label>
+          <label for="offermsg">{{__ 'messages.previousMessages'}}</label>
           <textarea name="offermsg" class="form-control" rows="4" readonly>{{helpcase.offermsg}}</textarea>
         </div>
       </div><br>

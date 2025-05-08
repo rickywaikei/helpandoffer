@@ -58,15 +58,15 @@
   {{/each}}
 
   <!-- _method with "put" -->
-  <h4 class="text-center">Case Information</h4><br>
+  <h4 class="text-center">{{__ 'cases.caseInformation'}}</h4><br>
   <div class="card card-body"><br>
 
     <div class="form-group">
-      <label for="title">Title</label>
+      <label for="title">{{__ 'cases.title'}}</label>
       <textarea name="title" class="form-control" readonly>{{helpcase.title}}</textarea>
     </div>
     <div class="form-group">
-      <label for="details">Details</label>
+      <label for="details">{{__ 'cases.details'}}</label>
       <textarea name="details" class="form-control" readonly>{{helpcase.details}}</textarea>
     </div>
     <hr>
@@ -75,13 +75,13 @@
       <input type="hidden" name="_method" value="PUT" required />
       <input type="hidden" name="_csrf" value="{{csrfToken}}" />
       <div class="form-group">
-        <label for="offermsg">Add new offerer message</label>
+        <label for="offermsg">{{__ 'messages.addNewOffererMessage'}}</label>
         <textarea name="offermsg" class="form-control"></textarea>
       </div>
-      <button type="submit" class="btn text-white text-center">Submit</button>
+      <button type="submit" class="btn text-white text-center">{{__ 'profile.submit'}}</button>
     </form><br>
     <div class="form-group">
-      <label for="offermsg">Previous offerer messages</label>
+      <label for="offermsg">{{__ 'messages.previousOffererMessages'}}</label>
       <textarea name="offermsg" class="form-control" readonly>{{helpcase.offermsg}}</textarea>
     </div><br>
   </div>

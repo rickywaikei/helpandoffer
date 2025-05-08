@@ -37,7 +37,22 @@
         color: #D0B8A8;
       }
 
-      /* Right-align all navbar items in collapsed mode */
+      /* Center nav styles */
+      .center-nav {
+        display: flex;
+        justify-content: center;
+      }
+
+      .center-nav .nav-item {
+        margin: 0 10px;
+      }
+
+      /* Right nav styles */
+      .right-nav {
+        justify-content: flex-end;
+      }
+
+      /* Responsive styles for mobile devices */
       @media (max-width: 767.98px) {
         .navbar-collapse {
           background-color: rgba(248, 237, 227, 0.95);
@@ -47,16 +62,28 @@
           box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
 
-        .navbar-collapse .navbar-nav {
-          text-align: right;
+        /* Center nav becomes stacked in mobile */
+        .center-nav {
+          margin-bottom: 15px;
+          width: 100%;
         }
 
-        .navbar-collapse .nav-item {
+        .center-nav .nav-item {
+          text-align: center;
+          margin: 5px 0;
+        }
+
+        /* Right nav alignment in mobile */
+        .right-nav {
+          width: 100%;
+        }
+
+        .right-nav .nav-item {
           text-align: right;
           padding: 5px 0;
         }
 
-        .navbar-collapse .nav-link {
+        .right-nav .nav-link {
           text-align: right;
           padding-right: 1rem;
           font-size: 20px;
@@ -64,12 +91,23 @@
 
         /* Ensure dropdown menus are properly aligned */
         .navbar-collapse .dropdown-menu {
-          text-align: right;
-          right: 0;
-          left: auto;
           background-color: rgba(248, 237, 227, 0.9);
           border: none;
           box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Center nav dropdowns */
+        .center-nav .dropdown-menu {
+          text-align: center;
+          left: 50%;
+          transform: translateX(-50%);
+        }
+
+        /* Right nav dropdowns */
+        .right-nav .dropdown-menu {
+          text-align: right;
+          right: 0;
+          left: auto;
         }
 
         /* Style for the toggler button */
@@ -90,7 +128,7 @@
         width="50" height="50" />
     </div>
 
-    <a class="navbar-brand font-weight-bold" href="/">HelpAndOffer</a>
+    <a class="navbar-brand font-weight-bold" href="/">{{t 'app.name'}}</a>
 
     <button class="navbar-toggler shadow btn-sm" type="button" data-toggle="collapse"
       data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -98,49 +136,67 @@
     </button>
 
     <div class="collapse navbar-collapse" id="navbarNav">
-      <ul class="navbar-nav ml-auto w-100 justify-content-end">
+      <!-- Center-aligned navigation items -->
+      <ul class="navbar-nav mx-auto center-nav">
         <li class="nav-item">
-          <a class="nav-link text-right" href="/"><i class="fas fa-home"></i> Home</a>
+          <a class="nav-link text-center" href="/"><i class="fas fa-home"></i> {{t 'nav.home'}}</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link text-right" href="/search"><i class="fas fa-search"></i> Search</a>
+          <a class="nav-link text-center" href="/search"><i class="fas fa-search"></i> {{t 'nav.search'}}</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link text-right" href="/about"><i class="fas fa-info-circle"></i> About</a>
+          <a class="nav-link text-center" href="/about"><i class="fas fa-info-circle"></i> {{t 'nav.about'}}</a>
         </li>
+        <li class="nav-item dropdown">
+          <a href="#" class="nav-link dropdown-toggle text-center" data-toggle="dropdown" id="languageDropdown">
+            <i class="fas fa-globe"></i> {{t 'nav.language'}}
+          </a>
+          <div class="dropdown-menu bg-light border-0">
+            <a href="/language/en" class="dropdown-item text-center {{#if_eq currentLanguage 'en'}}font-weight-bold{{/if_eq}}">
+              {{t 'nav.english'}}
+            </a>
+            <a href="/language/zh-TW" class="dropdown-item text-center {{#if_eq currentLanguage 'zh-TW'}}font-weight-bold{{/if_eq}}">
+              {{t 'nav.traditionalChinese'}}
+            </a>
+            <a href="/language/zh-CN" class="dropdown-item text-center {{#if_eq currentLanguage 'zh-CN'}}font-weight-bold{{/if_eq}}">
+              {{t 'nav.simplifiedChinese'}}
+            </a>
+          </div>
+        </li>
+      </ul>
+
+      <!-- Right-aligned navigation items -->
+      <ul class="navbar-nav ml-auto right-nav">
         {{#if user}}
         <li class="nav-item dropdown">
           <a href="#" class="nav-link dropdown-toggle text-right font-weight-bold" data-toggle="dropdown"
-            id="navbarDropdownMenuLink">Cases</a>
+            id="navbarDropdownMenuLink">{{t 'nav.cases'}}</a>
           <div class="dropdown-menu bg-light border-0">
-            <a href="/helpcases" class="dropdown-item text-center">My Requested</a>
-            <a href="/helpcases/add" class="dropdown-item text-center">Request new case</a>
-            <a href="/helpcases/offered" class="dropdown-item text-center">My Offered</a>
+            <a href="/helpcases" class="dropdown-item text-center">{{t 'cases.myRequestedCases'}}</a>
+            <a href="/helpcases/add" class="dropdown-item text-center">{{t 'cases.requestNewCase'}}</a>
+            <a href="/helpcases/offered" class="dropdown-item text-center">{{t 'cases.myOfferedCases'}}</a>
             <hr>
-            <a href="/helpcases/records" class="dropdown-item text-center">All cases</a>
+            <a href="/helpcases/records" class="dropdown-item text-center">{{t 'cases.allCases'}}</a>
           </div>
         </li>
         <li class="nav-item dropdown">
           <a href="#" class="nav-link dropdown-toggle text-right font-weight-bold" data-toggle="dropdown"
-            id="navbarDropdownMenuLink">Profiles</a>
+            id="navbarDropdownMenuLink">{{t 'nav.userProfile'}}</a>
           <div class="dropdown-menu bg-light border-0">
-            <a href="/users/myprofile" class="dropdown-item text-center">My profile</a>
+            <a href="/users/myprofile" class="dropdown-item text-center">{{t 'profile.myProfile'}}</a>
             <hr>
-            <a href="/users/profiles" class="dropdown-item text-center">All profiles</a>
+            <a href="/users/profiles" class="dropdown-item text-center">{{t 'nav.allProfiles'}}</a>
           </div>
         </li>
         <li class="nav-item">
-          <a href="#" class="nav-link text-right font-weight-bold" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><i class="fas fa-sign-out-alt"></i> Logout</a>
-          <form id="logout-form" action="/users/logout" method="POST" style="display: none;">
-            <input type="hidden" name="_csrf" value="{{csrfToken}}">
-          </form>
+          <a href="/users/logout" class="nav-link text-right font-weight-bold"><i class="fas fa-sign-out-alt"></i> {{t 'nav.logout'}}</a>
         </li>
         {{else}}
         <li class="nav-item">
-          <a href="/users/login" class="nav-link text-right"><i class="fas fa-sign-in-alt"></i> Login</a>
+          <a href="/users/login" class="nav-link text-right"><i class="fas fa-sign-in-alt"></i> {{t 'nav.login'}}</a>
         </li>
         <li class="nav-item">
-          <a href="/users/register" class="nav-link text-right"><i class="fas fa-user-plus"></i> Register</a>
+          <a href="/users/register" class="nav-link text-right"><i class="fas fa-user-plus"></i> {{t 'nav.register'}}</a>
         </li>
         {{/if}}
       </ul>

@@ -31,20 +31,20 @@
 <div style="margin-top: 100px; padding: 0;"><br>
   <div class="row">
     <div class="col-md-6 mx-auto">
-      <h4 class="text-center">Request New Case</h4><br>
+      <h4 class="text-center">{{__ 'cases.requestNewCase'}}</h4><br>
       <div class="card card-body" style="padding: 2rem;">
         <form action="/helpcases" method="POST">
           <input type="hidden" name="_csrf" value="{{csrfToken}}" />
           <div class="form-group">
-            <label for="title">Title</label>
+            <label for="title">{{__ 'cases.title'}}</label>
             <input type="text" name="title" class="form-control" />
           </div><br>
           <div class="form-group">
-            <label for="details">Details</label>
+            <label for="details">{{__ 'cases.details'}}</label>
             <textarea name="details" class="form-control" rows="5"></textarea>
           </div>
           <div class="text-center">
-            <button type="submit" class="btn text-white text-center">Submit</button>
+            <button type="submit" class="btn text-white text-center">{{__ 'profile.submit'}}</button>
           </div>
         </form>
       </div>

@@ -20,7 +20,7 @@
 <link rel="stylesheet" href="/css/table-responsive.css">
 
 <div class="container-fluid" style="margin-top: 100px; padding: 0;"></div><br><br>
-<h4 class="card-title text-center">All Cases</h4><br>
+<h4 class="card-title text-center">{{__ 'cases.allCases'}}</h4><br>
 <div class="wide-container">
     <div class="all-cases-card card card-body border-0"><br>
         <div class="tab-content text-center">
@@ -30,12 +30,12 @@
                 <table class="table table-hover table-borderless table-XL table-striped">
               <thead>
                 <tr class="text-center">
-                  <th class="align-middle">Created At</th>
-                  <th class="align-middle">Title</th>
-                  <th class="align-middle">Details</th>
-                  <th class="align-middle">Requestor</th>
-                  <th class="align-middle">Status</th>
-                  <th class="align-middle">Actions</th>
+                  <th class="align-middle">{{__ 'cases.createdAt'}}</th>
+                  <th class="align-middle">{{__ 'cases.title'}}</th>
+                  <th class="align-middle">{{__ 'cases.details'}}</th>
+                  <th class="align-middle">{{__ 'cases.requestor'}}</th>
+                  <th class="align-middle">{{__ 'cases.status'}}</th>
+                  <th class="align-middle">{{__ 'cases.actions'}}</th>
                 </tr>
               </thead>
               <tbody>{{#if records}}
@@ -47,19 +47,19 @@
                   <td class="text-center align-middle">{{userInfo.name}}</td>
                   <td class="text-center align-middle">
                     {{#if solved}}
-                      <span class="badge bg-success text-white">Solved</span>
+                      <span class="badge bg-success text-white">{{__ 'cases.solved'}}</span>
                     {{else}}
                       {{#if offer}}
-                        <span class="badge bg-warning text-dark">Attending</span>
+                        <span class="badge bg-warning text-dark">{{__ 'cases.attending'}}</span>
                       {{else}}
-                        <span class="badge bg-secondary text-white">Unattended</span>
+                        <span class="badge bg-secondary text-white">{{__ 'cases.unattended'}}</span>
                       {{/if}}
                     {{/if}}
                   </td>
                   <td class="text-center align-middle">
                     {{#unless solved}}
                       {{#unless offer}}
-                        <a href="/helpcases/addoffer/{{_id}}" class="btn1 btn-outline-success btn-sm" role="button" title="Help">
+                        <a href="/helpcases/addoffer/{{_id}}" class="btn1 btn-outline-success btn-sm" role="button" title="{{__ 'cases.offerHelp'}}">
                           <i class="fas fa-hands-helping"></i>
                         </a>
                       {{/unless}}
@@ -67,14 +67,14 @@
                   </td>
                 </tr>
                 {{else}}
-                <h5>No record found.</h5>
+                <h5>{{__ 'cases.noRecord'}}</h5>
                 {{/each}}{{/if}}
 
               </tbody>
                 </table>
               </div>
             </div><br>
-            <a href="#" class="btn btn-primary">Back to Top</a>
+            <a href="#" class="btn btn-primary">{{__ 'cases.backToTop'}}</a>
           </div><br>
         </div>
     </div>

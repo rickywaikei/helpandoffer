@@ -53,7 +53,7 @@
 <link rel="stylesheet" href="/css/table-responsive.css">
 
 <div style="margin-top:100px"></div><br><br>
-<h4 class="text-center">All member profiles {{res.locals.user.name}}</h4><br>
+<h4 class="text-center">{{__ 'profile.allProfiles'}} {{res.locals.user.name}}</h4><br>
 {{#if profiles}}
 <div class="wide-container-admin">
   <div class="all-cases-card card card-body border-0">
@@ -62,14 +62,14 @@
         <table class="table table-stripted table-hover table-xl table-striped table-borderless profiles-admin-table">
     <thead>
       <tr class="text-center">
-        <th class="align-middle">Created At</th>
-        <th class="align-middle">Avatar</th>
-        <th class="align-middle">Name</th>
-        <th class="align-middle">Email</th>
-        <th class="align-middle">Phone</th>
-        <th class="align-middle">Role</th>
-        <th class="align-middle">Badge</th>
-        <th class="align-middle">Actions</th>
+        <th class="align-middle">{{__ 'cases.createdAt'}}</th>
+        <th class="align-middle">{{__ 'profile.avatar'}}</th>
+        <th class="align-middle">{{__ 'profile.name'}}</th>
+        <th class="align-middle">{{__ 'profile.email'}}</th>
+        <th class="align-middle">{{__ 'profile.phone'}}</th>
+        <th class="align-middle">{{__ 'profile.role'}}</th>
+        <th class="align-middle">{{__ 'profile.badge'}}</th>
+        <th class="align-middle">{{__ 'cases.actions'}}</th>
       </tr>
     </thead>
     <tbody>
@@ -82,21 +82,21 @@
         <td class="text-center align-middle">{{name}}</td>
         <td class="align-middle">{{email}}</td>
         <td class="align-middle">{{phone}}</td>
-        <td class="text-center align-middle">{{#if isAdmin}} admin {{else}} user {{/if}}</td>
+        <td class="text-center align-middle">{{#if isAdmin}} {{__ 'profile.admin'}} {{else}} {{__ 'profile.user'}} {{/if}}</td>
         <td class="text-center align-middle"><span class="badge bg-warning text-dark">{{badge}}</span></td>
         <td class="text-center align-middle actions-column">
           <div class="btn-group btn-sm admin-buttons">
-            <a href="/users/edit/{{_id}}" class="btn1 btn-outline-info btn-sm" role="button" title="Edit" onclick="event.preventDefault(); document.getElementById('edit-form-{{_id}}').submit();">
+            <a href="/users/edit/{{_id}}" class="btn1 btn-outline-info btn-sm" role="button" title="{{__ 'profile.editProfile'}}" onclick="event.preventDefault(); document.getElementById('edit-form-{{_id}}').submit();">
               <i class="fas fa-edit"></i>
             </a>
             <form id="edit-form-{{_id}}" action="/users/edit/{{_id}}" method="GET" style="display: none;">
               <input type="hidden" name="_csrf" value="{{../csrfToken}}">
             </form>
 
-            <form action="/users/{{_id}}?_method=Delete" method="POST" onsubmit="return confirm('Are you sure you want to delete this user?');" class="d-inline">
+            <form action="/users/{{_id}}?_method=Delete" method="POST" onsubmit="return confirm('{{__ 'profile.deleteUserConfirm'}}');" class="d-inline">
               <input type="hidden" name="_method" value="Delete">
               <input type="hidden" name="_csrf" value="{{../csrfToken}}">
-              <button type="submit" class="btn1 btn-outline-danger btn-sm ml-1" title="Delete">
+              <button type="submit" class="btn1 btn-outline-danger btn-sm ml-1" title="{{__ 'profile.deleteUser'}}">
                 <i class="fas fa-trash-alt"></i>
               </button>
             </form>
@@ -112,6 +112,6 @@
 </div>
 {{else}}
 <div class="text-center">
-  <h2>No record found.</h2>
+  <h2>{{__ 'cases.noRecord'}}</h2>
 </div>
 {{/if}}

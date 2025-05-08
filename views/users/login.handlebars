@@ -43,20 +43,23 @@
 <div style="margin-top:100px"><br><br>
   <div class="row">
     <div class="col-md-6 mx-auto">
-      <h3 class="text-center">Account Login</h3><br>
+      <h3 class="text-center">{{__ 'auth.login'}}</h3><br>
       <div class="card card-body">
         <form action="/users/login" method="post">
           <input type="hidden" name="_csrf" value="{{csrfToken}}" />
           <div class="form-group"><br>
-            <label for="usernameInput">Username</label>
+            <label for="usernameInput">{{__ 'auth.name'}}</label>
             <input type="username" name="usernameInput" class="form-control" required />
           </div><br>
           <div class="form-group">
-            <label for="password">Password</label>
+            <label for="password">{{__ 'auth.password'}}</label>
             <input type="password" name="passwordInput" class="form-control" required autocomplete="current-password" />
           </div><br>
           <div class="text-center">
-            <button type="submit" class="btn text-white text-center">Submit</button>
+            <button type="submit" class="btn text-white text-center">{{__ 'auth.loginButton'}}</button>
+          </div>
+          <div class="text-center mt-3">
+            <a href="/users/register">{{__ 'auth.noAccount'}}</a>
           </div>
         </form><br>
       </div>

@@ -44,7 +44,7 @@
     <div class="row">
       <div class="col-md-8 mx-auto">
         <br><br>
-        <h4 class="text-center">My Profile</h4><br>
+        <h4 class="text-center">{{__ 'profile.myProfile'}}</h4><br>
 
         <div class="card border-0">
           <div class="card-body" style="padding: 2rem;">
@@ -58,7 +58,7 @@
                     </div>
                   </div>
                 {{else}}
-                  <div class="alert alert-info">No Avatar uploaded yet</div>
+                  <div class="alert alert-info">{{__ 'profile.noAvatar'}}</div>
                 {{/if}}
               </div>
             </div>
@@ -70,9 +70,9 @@
                   <!-- CSRF token removed for file uploads -->
                   <div class="input-group mx-auto" style="max-width: 400px;">
                     <input class="form-control" type="file" id="avatarUpload" name="avatarUpload" />
-                    <button type="submit" class="btn btn-sm text-white">Upload</button>
+                    <button type="submit" class="btn btn-sm text-white">{{__ 'profile.uploadAvatar'}}</button>
                   </div>
-                  <small class="form-text text-muted mt-1">Select an image file (PNG, JPG, JPEG) to upload as your avatar</small>
+                  <small class="form-text text-muted mt-1">{{__ 'profile.selectImage'}}</small>
                 </form>
               </div>
             </div>
@@ -81,10 +81,10 @@
             {{#if avatar.data}}
             <div class="row mb-4">
               <div class="col-md-12 text-center">
-                <form action="/users/myprofile/delete-avatar" method="POST" onsubmit="return confirm('Are you sure you want to delete your avatar?');">
+                <form action="/users/myprofile/delete-avatar" method="POST" onsubmit="return confirm('{{__ 'profile.deleteConfirm'}}');">
                   <input type="hidden" name="_csrf" value="{{csrfToken}}" />
                   <button type="submit" class="btn btn-sm btn-outline-danger">
-                    <i class="fas fa-trash"></i> Delete Avatar
+                    <i class="fas fa-trash"></i> {{__ 'profile.deleteAvatar'}}
                   </button>
                 </form>
               </div>
@@ -101,50 +101,50 @@
                   <table class="table table-hover table-borderless">
                     <tbody>
                       <tr>
-                        <td scope="row">Name</td>
+                        <td scope="row">{{__ 'profile.name'}}</td>
                         <td>
                           <input type="text" class="form-control" name="name" value="{{name}}" readonly />
                         </td>
                       </tr>
                       <tr>
-                        <td scope="row">E-mail</td>
+                        <td scope="row">{{__ 'profile.email'}}</td>
                         <td>
                           <input type="text" class="form-control" name="email" value="{{email}}" />
                         </td>
                       </tr>
                       <tr>
-                        <td scope="row">Phone</td>
+                        <td scope="row">{{__ 'profile.phone'}}</td>
                         <td>
                           <input type="tel" class="form-control" name="phone" value="{{phone}}" placeholder="+852 9876-4321" />
-                          <small class="form-text text-muted">Hong Kong format: +852 9876-4321 or 98764321</small>
+                          <small class="form-text text-muted">{{__ 'auth.phoneFormat'}}</small>
                         </td>
                       </tr>
                       <tr>
-                        <td scope="row">Role</td>
-                        <td>{{#if isAdmin}} admin {{else}} user {{/if}}</td>
+                        <td scope="row">{{__ 'profile.role'}}</td>
+                        <td>{{#if isAdmin}} {{__ 'profile.admin'}} {{else}} {{__ 'profile.user'}} {{/if}}</td>
                       </tr>
                       <tr>
-                        <td scope="row">Change Password</td>
+                        <td scope="row">{{__ 'profile.changePassword'}}</td>
                         <td>
                           <input type="password" class="form-control" name="password" autocomplete="off" />
-                          <small class="form-text text-muted">Leave blank to keep current password</small>
+                          <small class="form-text text-muted">{{__ 'profile.leaveBlank'}}</small>
                         </td>
                       </tr>
                       <tr>
-                        <td scope="row">Confirm Password</td>
+                        <td scope="row">{{__ 'profile.confirmPassword'}}</td>
                         <td>
                           <input type="password" class="form-control" name="password2" autocomplete="off" />
                         </td>
                       </tr>
                       <tr>
-                        <td scope="row">Received badges</td>
+                        <td scope="row">{{__ 'profile.receivedBadges'}}</td>
                         <td class="align-middle"><span class="badge bg-warning text-dark">{{badge}}</span></td>
                       </tr>
                     </tbody>
                   </table>
 
                   <div class="text-center mt-4">
-                    <button type="submit" class="btn text-white text-center">Save Profile</button>
+                    <button type="submit" class="btn text-white text-center">{{__ 'profile.saveProfile'}}</button>
                   </div>
                 </form>
               </div>

@@ -45,31 +45,38 @@
 <div style="margin-top:100px"><br>
 <div class="row">
   <div class="col-md-6 mx-auto"><br>
-    <h3 class="text-center">Account Register</h3><br>
+    <h3 class="text-center">{{__ 'auth.register'}}</h3><br>
     <form action="/users/register" method="post" class="card card-body border-0">
       <input type="hidden" name="_csrf" value="{{csrfToken}}" />
       <div class="form-group text-left" ><br>
-        <label for="name">Name</label>
+        <label for="name">{{__ 'auth.name'}}</label>
         <input type="text" class="form-control" name="name" value="{{name}}" autocomplete="off" />
-
       </div>
       <div class="form-group">
-        <label for="email">Email</label>
+        <label for="email">{{__ 'auth.email'}}</label>
         <input type="email" class="form-control" name="email" value="{{email}}" autocomplete="off" />
       </div>
       <div class="form-group">
-        <label for="phone">Phone</label>
+        <label for="phone">{{__ 'auth.phone'}}</label>
         <input type="tel" class="form-control" name="phone" value="{{phone}}" placeholder="+852 9876-4321" />
-        <small class="form-text text-muted">Hong Kong format: +852 9876-4321 or 98764321</small>
+        <small class="form-text text-muted">{{__ 'auth.phoneFormat'}}</small>
       </div>
-      <div class="form-group" <label for="password">Password</label>
+      <div class="form-group">
+        <label for="password">{{__ 'auth.password'}}</label>
         <input type="password" class="form-control" name="password" value="{{password}}" />
       </div>
-      <div class="form-group" <label for="password2">Confirm Password</label>
+      <div class="form-group">
+        <label for="password2">{{__ 'auth.confirmPassword'}}</label>
         <input type="password" class="form-control" name="password2" value="{{password2}}" />
       </div>
       <br>
-      <button type="submit" class="btn text-white text-center">Submit</button><br>
+      <div class="text-center">
+        <button type="submit" class="btn text-white text-center">{{__ 'auth.registerButton'}}</button>
+      </div>
+      <div class="text-center mt-3">
+        <a href="/users/login">{{__ 'auth.haveAccount'}}</a>
+      </div>
+      <br>
     </form>
   </div>
 </div>

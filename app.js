@@ -60,6 +60,13 @@ import passport from "passport";
 import defaultRoute from "./routes/default.Route.js";
 import helpcasesRoute from "./routes/helpcases.Route.js";
 import usersRoute from "./routes/usersRoute.js";
+import languageRoute from "./routes/language.Route.js";
+
+// Import i18n configuration for multi-language support
+import i18n from "./config/i18n.js";
+
+// Cookie parser for reading cookies
+import cookieParser from "cookie-parser";
 
 // Helper functions for authentication, time formatting, and validation
 import {
@@ -125,6 +132,49 @@ const hbs = create({
       // Get the type of a value (for debugging)
       typeof(value) {
         return typeof value;
+      },
+
+      // Check if two values are equal (for language selection)
+      if_eq(a, b) {
+        return a === b;
+      },
+
+      // Translation helper for i18n
+      t(key, options) {
+        // Get the request from the options hash
+        const req = options.data.root.req;
+
+        // If req is available, use its translation function
+        if (req && typeof req.__ === 'function') {
+          return req.__(key);
+        }
+
+        // Fallback to global i18n function
+        if (typeof i18n.__ === 'function') {
+          return i18n.__(key);
+        }
+
+        // Last resort fallback
+        return key;
+      },
+
+      // Alias for t helper to support both naming conventions
+      __(key, options) {
+        // Get the request from the options hash
+        const req = options.data.root.req;
+
+        // If req is available, use its translation function
+        if (req && typeof req.__ === 'function') {
+          return req.__(key);
+        }
+
+        // Fallback to global i18n function
+        if (typeof i18n.__ === 'function') {
+          return i18n.__(key);
+        }
+
+        // Last resort fallback
+        return key;
       }
   }
 });
@@ -154,10 +204,34 @@ app.use(morgan("tiny")); // Logs requests in format: GET / 404 123ms
 
 // Serve static files from the public directory
 app.use(express.static('views/public')); // CSS, JavaScript, images, etc.
+app.use(express.static('public')); // Additional public assets
 
 // Parse request bodies
 app.use(bodyParser.urlencoded({extended: false})); // Form submissions
 app.use(bodyParser.json()); // JSON API requests
+
+// Parse cookies
+app.use(cookieParser());
+
+// Initialize i18n middleware for multi-language support
+app.use((req, res, next) => {
+  // Check for locale in cookie first
+  const cookieLocale = req.cookies && req.cookies.locale;
+  if (cookieLocale) {
+    console.log(`Setting locale from cookie: ${cookieLocale}`);
+    i18n.setLocale(req, cookieLocale);
+  }
+  // Then check if locale is set in the session
+  else if (req.session && req.session.locale) {
+    console.log(`Setting locale from session: ${req.session.locale}`);
+    i18n.setLocale(req, req.session.locale);
+  }
+  // Initialize i18n
+  i18n.init(req, res, next);
+});
+
+// Make i18n available to the app
+app.set('i18n', i18n);
 
 // Support for HTTP methods that clients don't support natively
 app.use(methodOverride("_method")); // Allows forms to use PUT/DELETE
@@ -182,7 +256,8 @@ app.use(
       maxAge: 1000 * 60 * 60 * 24 * 7, // 7 days in milliseconds
       httpOnly: true,                   // Prevents client-side JS from reading the cookie
       secure: false,                    // Set to true in production with HTTPS
-      sameSite: 'lax'                   // Controls when cookies are sent with cross-site requests
+      sameSite: 'lax',                  // Controls when cookies are sent with cross-site requests
+      path: '/'                         // Make cookie available for the entire site
     },
 
     // Reset expiration countdown on every response
@@ -241,6 +316,25 @@ app.use(function(req, res, next) {
     res.locals.csrfToken = req.csrfToken();
   }
 
+  // Make current language available to all views
+  res.locals.currentLanguage = req.getLocale();
+  res.locals.availableLanguages = i18n.getLocales();
+
+  // Make the request object available to views for i18n
+  res.locals.req = req;
+
+  // Make the translation function directly available to views
+  res.locals.__ = function(phrase) {
+    return req.__(phrase);
+  };
+
+  // Add a shorthand t function for translation
+  res.locals.t = function(phrase) {
+    return req.__(phrase);
+  };
+
+  console.log(`Current language for this request: ${req.getLocale()}`);
+
   // Continue to next middleware
   next();
 });
@@ -256,10 +350,13 @@ app.use(function(req, res, next) {
 // Main routes for browsing and searching help requests
 app.use("/", defaultRoute);
 
+// Language switching route
+app.use("/language", languageRoute);
+
 // About page
 app.get('/about', (req, res) => {
     res.render('about', {
-      title: 'About Us'
+      title: req.__('about.title')
     });
 });
 
@@ -286,7 +383,7 @@ app.use("*", (req, res) => {
   // Render custom 404 page
   res.render("404", {
     layout: 'main',
-    title: '404 - Page Not Found'
+    title: req.__('errors.404')
   });
 });
 
@@ -305,7 +402,7 @@ app.use((err, req, res, next) => {
   // Render custom 500 page
   res.render("500", {
     layout: 'main',
-    title: '500 - Server Error',
+    title: req.__('errors.500'),
     errorId: errorId // Provide error ID for user to reference when reporting issues
   });
 });

@@ -1,146 +1,324 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-  <meta charset="UTF-8">
-  <title>About page</title>
-  <link rel="stylesheet" href="style.css">
-</head>
-
-<body style="margin-top:50px">
+<div class="about-page">
   <style>
-    .row {
-      margin-top: 20px;
+    /* About page specific styles */
+    .about-page {
+      padding-top: 30px;
+      padding-bottom: 50px;
+    }
+
+    .about-header {
+      background-color: rgba(248, 237, 227, 0.7);
+      padding: 40px 0;
+      border-radius: 15px;
+      margin-bottom: 40px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .about-section {
+      background-color: rgba(248, 237, 227, 0.7);
+      border-radius: 15px;
+      padding: 30px;
+      margin-bottom: 30px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .about-section h3 {
+      color: #7D6E83;
       margin-bottom: 20px;
-      text-indent: 2em;
+      font-weight: 600;
+      border-bottom: 2px solid #D0B8A8;
+      padding-bottom: 10px;
     }
 
-    .card {
-      margin: 0 auto;
-      float: none;
-      margin-bottom: 10px;
-      background-color: rgb(248, 237, 227, 0.6) !important;
-      font-size: 20px !important;
-      border-radius: 50px 50px 50px 50px;
+    .about-section p {
+      font-size: 1.1rem;
+      line-height: 1.6;
     }
 
-    /* Body background is now handled by global.css */
-
-    .btn {
-      background-color: #7D6E83 !important;
-      border: 0 !important;
-      border-radius: 10px 10px 10px 10px;
+    .feature-box {
+      text-align: center;
+      padding: 20px;
+      margin-bottom: 20px;
+      transition: transform 0.3s ease;
+      height: 100%;
     }
 
-    /* Mobile-specific styles */
+    .feature-box:hover {
+      transform: translateY(-5px);
+    }
+
+    .feature-icon {
+      font-size: 2.5rem;
+      color: #7D6E83;
+      margin-bottom: 15px;
+    }
+
+    .team-member {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    .team-member img {
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin-bottom: 15px;
+      border: 5px solid #D0B8A8;
+    }
+
+    .contact-info {
+      background-color: rgba(248, 237, 227, 0.7);
+      border-radius: 15px;
+      padding: 30px;
+      margin-bottom: 30px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .contact-form {
+      background-color: rgba(248, 237, 227, 0.7);
+      border-radius: 15px;
+      padding: 30px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .contact-form .form-control {
+      border-radius: 10px;
+      border: 1px solid #D0B8A8;
+    }
+
+    .contact-form .btn {
+      background-color: #7D6E83;
+      border: none;
+      border-radius: 10px;
+      padding: 10px 30px;
+      font-weight: 600;
+      transition: all 0.3s ease;
+    }
+
+    .contact-form .btn:hover {
+      background-color: #6a5d70;
+      transform: translateY(-2px);
+    }
+
+    .map-container {
+      border-radius: 15px;
+      overflow: hidden;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      margin-bottom: 30px;
+    }
+
+    .info-item {
+      margin-bottom: 15px;
+      display: flex;
+      align-items: center;
+    }
+
+    .info-icon {
+      font-size: 1.5rem;
+      color: #7D6E83;
+      margin-right: 15px;
+      width: 30px;
+      text-align: center;
+    }
+
+    .mission-vision {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+
+    .mission-box, .vision-box {
+      flex: 1;
+      min-width: 300px;
+      background-color: rgba(255, 255, 255, 0.5);
+      border-radius: 10px;
+      padding: 20px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+    }
+
+    .mission-box h4, .vision-box h4 {
+      color: #7D6E83;
+      margin-bottom: 15px;
+      font-weight: 600;
+    }
+
+    .version-info {
+      text-align: right;
+      font-size: 0.8rem;
+      color: #888;
+      margin-top: 30px;
+    }
+
+    /* Responsive adjustments */
     @media (max-width: 767.98px) {
-      .container {
-        padding: 0 !important;
-        margin: 0 auto !important;
-        width: 100% !important;
-        max-width: 100% !important;
+      .about-header {
+        padding: 30px 15px;
       }
 
-      .card {
-        border-radius: 30px !important;
-        margin: 0.5rem auto !important;
-        width: 95% !important;
-        max-width: 600px !important;
+      .about-section {
+        padding: 20px 15px;
       }
 
-      .form-control {
-        width: 100% !important;
+      .feature-box {
+        margin-bottom: 30px;
       }
 
-      .form-group {
-        width: 100% !important;
-      }
-
-      iframe {
-        width: 95% !important;
-        height: 300px !important;
+      .mission-box, .vision-box {
+        min-width: 100%;
       }
     }
   </style>
-  <!---sidebar--->
+
+  <!-- About Header Section -->
   <div class="container">
-    <div class="card border-0 bg-transparent">
-      <div class="card-body">
-        <h5 class="text-center">About Us</h5>
-        <div class="row ml-1">
-          <p>Our platform is founded in 2022. The operation of the website is that the visitors set up an
-            account after, they can publish posts to ask questions, or respond to other people's posts, such
-            as reply solutions or provide contact methods.</p>
+    <div class="about-header text-center">
+      <h1>{{__ 'about.title'}}</h1>
+      <p class="lead">{{__ 'about.description'}}</p>
+    </div>
+
+    <!-- Mission & Vision Section -->
+    <div class="about-section">
+      <h3 class="text-center">{{__ 'about.missionVision'}}</h3>
+      <div class="mission-vision">
+        <div class="mission-box">
+          <h4><i class="fas fa-bullseye mr-2"></i> {{__ 'about.mission'}}</h4>
+          <p>{{__ 'about.missionDesc'}}</p>
         </div>
-        <div class="row ml-1">
-          <p>The establishment of platform is owing to the daily life, we often encounter difficulties or
-            problems. Our platform allows people to quickly seek the help or solution of others, and at the
-            same time, it can easily help others.</p>
+        <div class="vision-box">
+          <h4><i class="fas fa-eye mr-2"></i> {{__ 'about.vision'}}</h4>
+          <p>{{__ 'about.visionDesc'}}</p>
         </div>
       </div>
     </div>
-  </div>
-  <br>
-  <div class="card1 mb-3 border-0 bg-transparent">
-    <div class="col-12 text-center">
-      <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d12416.502183446015!2d114.17337408278598!3d22.298883531443117!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x340400ef62de4b4b%3A0xa793abe65f679d0e!2sCityu%20Scope%20Tsim%20Sha%20Tsui%20Campus!5e0!3m2!1szh-TW!2shk!4v1665754044189!5m2!1szh-TW!2shk"
-        width="90%" height="400" frameborder="0" allowfullscreen="" aria-hidden="false" tabindex="0" style="border: 0;">
-      </iframe>
-    </div><br>
-    <div class="card-body card">
 
-      <p class="text-center"><strong>Help and Offer</strong></p>
-      <p><em> Address: UG2, Chinachem (Golden) Plaza, 77 Mody Road, Tsim Sha Tsui East, Kowloon </em></p>
-      <p><em> Contact number: 3442 6359</em></p>
-      <p><em> Email: helpandoffer@gmail.com</em></p>
-      <p><em> office hours:</em></p>
-      <p><em> Monday to Friday</em></p>
-      <p><em> 9:00am-6:00pm (Closed on Saturdays, Sundays and public holidays)</em></p>
-      <p><em> Any enquiries or collaborate, please fill out the contact form or contact at 34426359, we'll reply
-          you soon. </em></p>
-      <p class="card-text text-right"><small class="text-muted">Release Version 2.0 wsl2</small></p>
-      <div class="contact-area">
-        <div class="text-content">
-          <h5></h5>
-
+    <!-- How It Works Section -->
+    <div class="about-section">
+      <h3 class="text-center">{{__ 'about.howItWorks'}}</h3>
+      <div class="row">
+        <div class="col-md-4">
+          <div class="feature-box">
+            <div class="feature-icon">
+              <i class="fas fa-question-circle"></i>
+            </div>
+            <h4>{{__ 'about.requestHelp'}}</h4>
+            <p>{{__ 'about.requestHelpDesc'}}</p>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="feature-box">
+            <div class="feature-icon">
+              <i class="fas fa-hands-helping"></i>
+            </div>
+            <h4>{{__ 'about.offerHelp'}}</h4>
+            <p>{{__ 'about.offerHelpDesc'}}</p>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="feature-box">
+            <div class="feature-icon">
+              <i class="fas fa-handshake"></i>
+            </div>
+            <h4>{{__ 'about.connect'}}</h4>
+            <p>{{__ 'about.connectDesc'}}</p>
+          </div>
         </div>
       </div>
     </div>
-  </div>
 
-  <br>
-
-  <div class="card card-center">
-    <br>
-    <h5 class="card-title text-center">Contact us</h5>
-    <div class="card-body">
-      <form action="/sendmsg" method="POST">
-        <div class="form-group">
-          <label for="name">Name</label>
-          <input type="text" class="form-control" name="name" placeholder="enter name">
-        </div>
-        <div class="form-group">
-          <label for="email">Email</label>
-          <input type="email" class="form-control" name="email" placeholder="enter email">
-          <small class="form-text text-muted">Your email will not shared</small>
+    <!-- Contact Section -->
+    <div class="row">
+      <!-- Map and Contact Info -->
+      <div class="col-lg-6">
+        <div class="map-container">
+          <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d12416.502183446015!2d114.17337408278598!3d22.298883531443117!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x340400ef62de4b4b%3A0xa793abe65f679d0e!2sCityu%20Scope%20Tsim%20Sha%20Tsui%20Campus!5e0!3m2!1szh-TW!2shk!4v1665754044189!5m2!1szh-TW!2shk"
+            width="100%" height="300" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
         </div>
 
-        <div class="form-group">
-          <label for="subject">Subject</label>
-          <input type="text" class=form-control from-control-sm name="subject" placeholder="enter subject">
-        </div>
+        <div class="contact-info">
+          <h3 class="text-center">{{__ 'about.contactInfo'}}</h3>
 
-        <div class="form-group">
-          <label for="message">Message </label>
-          <textarea name="message" rows="3" class="form-control"></textarea>
+          <div class="info-item">
+            <div class="info-icon">
+              <i class="fas fa-map-marker-alt"></i>
+            </div>
+            <div>
+              <strong>{{__ 'about.address'}}:</strong><br>
+              UG2, Chinachem (Golden) Plaza, 77 Mody Road, Tsim Sha Tsui East, Kowloon
+            </div>
+          </div>
+
+          <div class="info-item">
+            <div class="info-icon">
+              <i class="fas fa-phone"></i>
+            </div>
+            <div>
+              <strong>{{__ 'about.phone'}}:</strong> 3442 6359
+            </div>
+          </div>
+
+          <div class="info-item">
+            <div class="info-icon">
+              <i class="fas fa-envelope"></i>
+            </div>
+            <div>
+              <strong>{{__ 'about.email'}}:</strong> helpandoffer@gmail.com
+            </div>
+          </div>
+
+          <div class="info-item">
+            <div class="info-icon">
+              <i class="fas fa-clock"></i>
+            </div>
+            <div>
+              <strong>{{__ 'about.officeHours'}}:</strong><br>
+              {{__ 'about.weekdays'}}: 9:00am - 6:00pm<br>
+              <small>({{__ 'about.closed'}})</small>
+            </div>
+          </div>
         </div>
-        <div class="text-center">
-          <button class="btn text-white text-center" type="submit">Submit</button>
+      </div>
+
+      <!-- Contact Form -->
+      <div class="col-lg-6">
+        <div class="contact-form">
+          <h3 class="text-center">{{__ 'about.contactUs'}}</h3>
+          <p class="text-center mb-4">{{__ 'about.contactDesc'}}</p>
+
+          <form action="/sendmsg" method="POST">
+            <input type="hidden" name="_csrf" value="{{csrfToken}}">
+
+            <div class="form-group">
+              <label for="name">{{__ 'auth.name'}}</label>
+              <input type="text" class="form-control" id="name" name="name" placeholder="{{__ 'auth.name'}}" required>
+            </div>
+
+            <div class="form-group">
+              <label for="email">{{__ 'auth.email'}}</label>
+              <input type="email" class="form-control" id="email" name="email" placeholder="{{__ 'auth.email'}}" required>
+              <small class="form-text text-muted">{{__ 'about.emailPrivacy'}}</small>
+            </div>
+
+            <div class="form-group">
+              <label for="subject">{{__ 'about.subject'}}</label>
+              <input type="text" class="form-control" id="subject" name="subject" placeholder="{{__ 'about.subject'}}" required>
+            </div>
+
+            <div class="form-group">
+              <label for="message">{{__ 'about.message'}}</label>
+              <textarea class="form-control" id="message" name="message" rows="4" placeholder="{{__ 'about.messagePlaceholder'}}" required></textarea>
+            </div>
+
+            <div class="text-center">
+              <button type="submit" class="btn text-white">{{__ 'about.send'}}</button>
+            </div>
+          </form>
         </div>
+      </div>
     </div>
-    </form>
-  </div>
-  <br>
-</body>
 
-</html>
+    <div class="version-info">
+      <p>{{__ 'app.name'}} - {{__ 'about.version'}} 2.0</p>
+    </div>
+  </div>
+</div>

@@ -1,7 +1,7 @@
 <div style="margin-top:100px">
     <style>
         label {
-        text-align: right; 
+        text-align: right;
         width: 200px;
         }
     </style>
@@ -13,39 +13,39 @@
     <div class="card-body">
       <br>
     <div class="text-center">
-      <h5><b>User profile</b></h5>
+      <h5><b>{{__ 'profile.userProfile'}}</b></h5>
         <br>
         <br>
     </div>
     <table class="table table-hover table-borderless">
       <tbody>
         <tr>
-        <th scope="row">Name:</th>
+        <th scope="row">{{__ 'profile.name'}}:</th>
             <td>{{name}}</td>
         </tr>
         <tr>
-        <th scope="row">E-mail: </th>
+        <th scope="row">{{__ 'profile.email'}}: </th>
             <td>{{email}}</td>
         </tr>
         <tr>
-          <th scope="row">Received badges: </th>
+          <th scope="row">{{__ 'profile.phone'}}: </th>
             <td>{{phone}}</td>
         </tr>
         <tr>
-          <th scope="row">Received badges: </th>
+          <th scope="row">{{__ 'profile.receivedBadges'}}: </th>
             <td><span class="badge badge-warning">{{badge}}</span></td>
         </tr>
       </tbody>
     </table>
     </div>
   </div>
-  
+
   <div class="card border-0">
     <div class="card-body text-center">
       <br>
       <br>
       <h5><b></b></h5>
-      <div class="text-right">  
+      <div class="text-right">
       <form action="/users/profile?_method=DELETE" method="post">
         <input type="hidden" name="_method" value="DELETE" />
         <button type="submit" class="btn btn-outline-light text-muted">
@@ -54,9 +54,9 @@
             <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
           </svg>
         </button>
-      </form>  
-        
-      </div> 
+      </form>
+
+      </div>
 
     <div class="card border border-5 rounded-circle justify-content-center" style="width: 250px;">
       <img src="data:image/{{avatar.contentType}}; base64, {{avatar.data}}"  width="250" />
@@ -71,16 +71,16 @@
             <tr>
               <td>
                 <label for="avatarUpload" class="form-label"></label>
-                <input class="form-control-file text-muted" type="file" id="avatarUpload" name="avatarUpload"/> 
+                <input class="form-control-file text-muted" type="file" id="avatarUpload" name="avatarUpload"/>
               </td>
               <td  class="align-bottom">
-                <button class="btn btn-sm btn-outline-secondary" type="submit">Upload</button>
+                <button class="btn btn-sm btn-outline-secondary" type="submit">{{__ 'profile.uploadAvatar'}}</button>
               </td>
             </tr>
            </table>
           </tbody>
           </div>
-          </form>    
+          </form>
     </div>
   </div>
     <br>

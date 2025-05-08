@@ -41,7 +41,7 @@
 <link rel="stylesheet" href="/css/table-responsive.css">
 
 <div style="margin-top:100px"></div><br>
-<h4 class="text-center">All member profiles {{res.locals.user.name}}</h4><br>
+<h4 class="text-center">{{__ 'profile.allProfiles'}} {{res.locals.user.name}}</h4><br>
 {{#if profiles}}
 <div class="wide-container">
   <div class="all-cases-card card card-body border-0">
@@ -50,11 +50,11 @@
         <table class="table table-stripted table-hover table-xl table-striped table-borderless profiles-table">
     <thead>
       <tr class="text-center">
-        <th class="align-middle">Created At</th>
-        <th class="align-middle">Avatar</th>
-        <th class="align-middle">Name</th>
-        <th class="align-middle">Role</th>
-        <th class="align-middle">Badge</th>
+        <th class="align-middle">{{__ 'cases.createdAt'}}</th>
+        <th class="align-middle">{{__ 'profile.avatar'}}</th>
+        <th class="align-middle">{{__ 'profile.name'}}</th>
+        <th class="align-middle">{{__ 'profile.role'}}</th>
+        <th class="align-middle">{{__ 'profile.badge'}}</th>
       </tr>
     </thead>
     <tbody>
@@ -65,7 +65,7 @@
             src="data:image/{{avatar.contentType}}; base64, {{avatar.data}}" width="50" height="50" /> {{else}} -
           {{/if}}</td>
         <td class="text-center align-middle">{{name}}</td>
-        <td class="text-center align-middle">{{#if isAdmin}} admin {{else}} user {{/if}}</td>
+        <td class="text-center align-middle">{{#if isAdmin}} {{__ 'profile.admin'}} {{else}} {{__ 'profile.user'}} {{/if}}</td>
         <td class="text-center align-middle"><span class="badge bg-warning text-dark">{{badge}}</span></td>
       </tr>
       {{/unless}}{{/each}}
@@ -77,6 +77,6 @@
 </div>
 {{else}}
 <div class="text-center">
-  <h2>No record found.</h2>
+  <h2>{{__ 'cases.noRecord'}}</h2>
 </div>
 {{/if}}

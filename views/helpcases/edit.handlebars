@@ -58,18 +58,18 @@
       <div class="alert alert-danger">{{test}}</div>
       {{else}}
       {{/each}}
-      <h4 class="text-center">Edit Help case</h4><br>
+      <h4 class="text-center">{{__ 'cases.editCase'}}</h4><br>
       <!-- _method with "put" -->
       <div class="card card-body">
         <form action="/helpcases/edit/{{helpcase._id}}?_method=PUT" method="POST">
           <input type="hidden" name="_method" value="PUT" />
           <input type="hidden" name="_csrf" value="{{csrfToken}}" />
           <div class="form-group"><br>
-            <label for="title">Title</label>
+            <label for="title">{{__ 'cases.title'}}</label>
             <input type="text" class="form-control" name="title" value="{{helpcase.title}}" required />
           </div><br>
           <div class="form-group">
-            <label for="details">Details</label>
+            <label for="details">{{__ 'cases.details'}}</label>
             <textarea name="details" class="form-control" rows="5" required>{{helpcase.details}}</textarea>
           </div><br>
           <div class="form-group">
@@ -81,29 +81,29 @@
             <input type=text class="form-control" name="solved" value="{{solved}}" />
           </div><br>
           <div class="text-center">
-            <button type="submit" class="btn text-white text-center">Submit</button>
+            <button type="submit" class="btn text-white text-center">{{__ 'profile.submit'}}</button>
           </div>
         </form>
         <hr>
-        <h5 class="text-center">Add new message</h5>
+        <h5 class="text-center">{{__ 'messages.addNewMessage'}}</h5>
         <form action="/helpcases/update/{{helpcase._id}}?_method=PUT" method="POST">
           <input type="hidden" name="_method" value="PUT" required />
           <input type="hidden" name="_csrf" value="{{csrfToken}}" />
           <div class="form-group">
-            <label for="offermsg">Your new message</label>
+            <label for="offermsg">{{__ 'messages.yourNewMessage'}}</label>
             <textarea name="offermsg" class="form-control" rows="3"></textarea>
           </div><br>
           <div class="text-center">
-            <button type="submit" class="btn text-white text-center">Send message</button>
+            <button type="submit" class="btn text-white text-center">{{__ 'messages.sendMessage'}}</button>
           </div>
         </form><br>
         <form action="/helpcases/givebadge/{{helpcase.offer}}?_method=PUT" method="POST" class="text-center">
           <input type="hidden" name="_method" value="PUT">
           <input type="hidden" name="_csrf" value="{{csrfToken}}" />
-          <input type="submit" class="btn text-white text-center" value="Give a badge">
+          <input type="submit" class="btn text-white text-center" value="{{__ 'profile.giveBadge'}}">
         </form><br>
         <div class="form-group">
-          <label for="offermsg">Previous messages</label>
+          <label for="offermsg">{{__ 'messages.previousMessages'}}</label>
           <textarea name="offermsg" class="form-control" rows="4" readonly>{{helpcase.offermsg}}</textarea>
         </div>
       </div><br>

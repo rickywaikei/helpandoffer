@@ -242,7 +242,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Help and Offer</title>
+  <title>{{__ 'app.name'}}</title>
   <link rel="stylesheet" href="/css/pagination.css">
 
   <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel" style="margin-top:80px">
@@ -259,42 +259,42 @@
     <div class="carousel-inner">
       <div class="carousel-item active" data-bs-interval="3000">
         <img src="https://i.imghippo.com/files/Rev7600cc.jpg" class="d-block w-100 img"
-          alt="Little Ways" height="500px">
+          alt="{{__ 'app.carousel.littleWays.title'}}" height="500px">
         <div class="carousel-caption">
-          <h5>Little Ways</h5>
-          <p>Welcome to request cases or provide solutions</p>
+          <h5>{{__ 'app.carousel.littleWays.title'}}</h5>
+          <p>{{__ 'app.carousel.littleWays.description'}}</p>
         </div>
       </div>
       <div class="carousel-item" data-bs-interval="3000">
         <img src="https://i.imghippo.com/files/mDQ7720eoY.jpg" class="d-block w-100 img"
-          alt="Little Area" height="500px">
+          alt="{{__ 'app.carousel.littleArea.title'}}" height="500px">
         <div class="carousel-caption">
-          <h5>Little Area</h5>
-          <p>Platform for exchange ideas and make relationships</p>
+          <h5>{{__ 'app.carousel.littleArea.title'}}</h5>
+          <p>{{__ 'app.carousel.littleArea.description'}}</p>
         </div>
       </div>
       <div class="carousel-item" data-bs-interval="4000">
         <img src="https://i.imghippo.com/files/uC1206cGY.jpg"
-          class="d-block w-100 img" alt="Little Help" height="500px">
+          class="d-block w-100 img" alt="{{__ 'app.carousel.littleHelp.title'}}" height="500px">
         <div class="carousel-caption">
-          <h5>Little Help</h5>
-          <p>We believe that joint power can solve difficulties</p>
+          <h5>{{__ 'app.carousel.littleHelp.title'}}</h5>
+          <p>{{__ 'app.carousel.littleHelp.description'}}</p>
         </div>
       </div>
       <div class="carousel-item" data-bs-interval="4000">
         <img src="https://i1.wp.com/www.activision-coaching.com/acc-content/uploads/2020/10/coaching_professionnel_activision.jpeg?w=3000"
-          class="d-block w-100 img" alt="Little Bliss" height="500px">
+          class="d-block w-100 img" alt="{{__ 'app.carousel.littleBliss.title'}}" height="500px">
         <div class="carousel-caption">
-          <h5>Little Bliss</h5>
-          <p>Helping others is the foundation of happiness</p>
+          <h5>{{__ 'app.carousel.littleBliss.title'}}</h5>
+          <p>{{__ 'app.carousel.littleBliss.description'}}</p>
         </div>
       </div>
       <div class="carousel-item" data-bs-interval="4000">
         <img src="https://images.shulcloud.com/1566/uploads/images/Legacies/Legacy2.jpg" class="d-block w-100 img"
-          alt="Little Wish" height="500px">
+          alt="{{__ 'app.carousel.littleWish.title'}}" height="500px">
         <div class="carousel-caption">
-          <h5>Little Wish</h5>
-          <p>We hope to build a world of mutual help and caring</p>
+          <h5>{{__ 'app.carousel.littleWish.title'}}</h5>
+          <p>{{__ 'app.carousel.littleWish.description'}}</p>
         </div>
       </div>
     </div>
@@ -302,11 +302,11 @@
     <!-- Carousel controls positioned at the center of the picture -->
     <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
       <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-      <span class="visually-hidden">Previous</span>
+      <span class="visually-hidden">{{__ 'app.carousel.previous'}}</span>
     </button>
     <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
       <span class="carousel-control-next-icon" aria-hidden="true"></span>
-      <span class="visually-hidden">Next</span>
+      <span class="visually-hidden">{{__ 'app.carousel.next'}}</span>
     </button>
   </div>
 
@@ -601,16 +601,16 @@
       <div class="card-header p-3">
         <ul class="nav nav-tabs justify-content-center card-header-tabs" id="myTab">
           <li class="nav-item">
-            <a href="#allcases" class="nav-link active fw-bolder" data-bs-toggle="tab">All Cases</a>
+            <a href="#allcases" class="nav-link active fw-bolder" data-bs-toggle="tab">{{__ 'cases.allCases'}}</a>
           </li>
           <li class="nav-item">
-            <a href="#unattendedcases" class="nav-link fw-bolder" data-bs-toggle="tab">Unattended Cases</a>
+            <a href="#unattendedcases" class="nav-link fw-bolder" data-bs-toggle="tab">{{__ 'cases.unattendedCases'}}</a>
           </li>
           <li class="nav-item">
-            <a href="#attendingcases" class="nav-link fw-bolder" data-bs-toggle="tab">Attending Cases</a>
+            <a href="#attendingcases" class="nav-link fw-bolder" data-bs-toggle="tab">{{__ 'cases.attendingCases'}}</a>
           </li>
           <li class="nav-item">
-            <a href="#solvedcases" class="nav-link fw-bolder" data-bs-toggle="tab">Solved Cases</a>
+            <a href="#solvedcases" class="nav-link fw-bolder" data-bs-toggle="tab">{{__ 'cases.solvedCases'}}</a>
           </li>
         </ul>
       </div>
@@ -628,12 +628,12 @@
                       type="search"
                       name="searchInput"
                       value="{{searchTerm}}"
-                      placeholder="Search by title or details..."
-                      aria-label="Search help cases"
+                      placeholder="{{__ 'search.searchPlaceholder'}}"
+                      aria-label="{{__ 'search.searchCases'}}"
                     >
                     <div class="input-group-append">
                       <button class="btn btn-primary" type="submit">
-                        <i class="fas fa-search"></i> Search
+                        <i class="fas fa-search"></i> {{__ 'search.searchButton'}}
                       </button>
                     </div>
                     <input type="hidden" name="itemsPerPage" value="{{pagination.itemsPerPage}}">
@@ -649,10 +649,10 @@
               style=" background-repeat: repeat; background-image: linear-gradient(rgb(248, 237, 227,0.9), rgb(208, 184, 168, 0.6)), url(https://blog.japanwondertravel.com/wp-content/uploads/2021/11/yukiya-shiba-LSyjrJFV-pw-unsplash.jpg)">
               <thead class="text-muted">
                 <tr class="text-center">
-                  <th class="align-middle">Created At</th>
-                  <th class="align-middle">Title</th>
-                  <th class="align-middle">Details</th>
-                  <th class="align-middle">Status</th>
+                  <th class="align-middle">{{__ 'cases.createdAt'}}</th>
+                  <th class="align-middle">{{__ 'cases.title'}}</th>
+                  <th class="align-middle">{{__ 'cases.details'}}</th>
+                  <th class="align-middle">{{__ 'cases.status'}}</th>
                 </tr>
               </thead>
               <tbody class="text-muted">
@@ -663,12 +663,12 @@
                   <td class="align-middle">{{details}}</td>
                   <td class="text-center align-middle">
                     {{#if solved}}
-                      <span class="badge bg-success text-white">Solved</span>
+                      <span class="badge bg-success text-white">{{__ 'cases.solved'}}</span>
                     {{else}}
                       {{#if offer}}
-                        <span class="badge bg-warning text-dark">Attending</span>
+                        <span class="badge bg-warning text-dark">{{__ 'cases.attending'}}</span>
                       {{else}}
-                        <span class="badge bg-secondary text-white">Unattended</span>
+                        <span class="badge bg-secondary text-white">{{__ 'cases.unattended'}}</span>
                       {{/if}}
                     {{/if}}
                   </td>
@@ -682,7 +682,7 @@
             <div class="pagination-container">
               <div class="items-per-page">
                 <form id="itemsPerPageForm" method="GET" action="/">
-                  <label for="itemsPerPage">Items per page:</label>
+                  <label for="itemsPerPage">{{__ 'pagination.itemsPerPage'}}:</label>
                   <select id="itemsPerPage" name="itemsPerPage" class="form-select form-select-sm" onchange="document.getElementById('itemsPerPageForm').submit()">
                     {{#if (eq pagination.itemsPerPage 5)}}
                       <option value="5" selected>5</option>
@@ -712,7 +712,7 @@
               </div>
 
               <div class="pagination-info">
-                Showing {{pagination.startIndex}} to {{pagination.endIndex}} of {{pagination.totalRecords}} entries
+                {{__ 'pagination.showing'}} {{pagination.startIndex}} {{__ 'pagination.to'}} {{pagination.endIndex}} {{__ 'pagination.of'}} {{pagination.totalRecords}} {{__ 'pagination.entries'}}
                 <!-- Debug info: Items per page = {{pagination.itemsPerPage}} -->
               </div>
 
@@ -789,7 +789,7 @@
             </div>
             {{/if}}
 
-            <a href="#" class="btn btn-primary">Back to Top</a>
+            <a href="#" class="btn btn-primary">{{__ 'cases.backToTop'}}</a>
           </div>
 
           <div class="tab-pane fade" id="unattendedcases">
@@ -799,10 +799,10 @@
               style=" background-repeat: repeat; background-image: linear-gradient(rgb(248, 237, 227,0.9), rgb(208, 184, 168, 0.5)), url(https://image.jimcdn.com/app/cms/image/transf/none/path/sc6196b37a69d8813/backgroundarea/ie992d6d728f5e10d/version/1477617849/image.jpg)">
               <thead class="text-muted">
                 <tr class="text-center">
-                  <th class="align-middle">Created At</th>
-                  <th class="align-middle">Title</th>
-                  <th class="align-middle">Details</th>
-                  <th class="align-middle">Status</th>
+                  <th class="align-middle">{{__ 'cases.createdAt'}}</th>
+                  <th class="align-middle">{{__ 'cases.title'}}</th>
+                  <th class="align-middle">{{__ 'cases.details'}}</th>
+                  <th class="align-middle">{{__ 'cases.status'}}</th>
                 </tr>
               </thead>
               <tbody class="text-muted">
@@ -814,12 +814,12 @@
                   <td class="align-middle">{{details}}</td>
                   <td class="text-center align-middle">
                     {{#if solved}}
-                      <span class="badge bg-success text-white">Solved</span>
+                      <span class="badge bg-success text-white">{{__ 'cases.solved'}}</span>
                     {{else}}
                       {{#if offer}}
-                        <span class="badge bg-warning text-dark">Attending</span>
+                        <span class="badge bg-warning text-dark">{{__ 'cases.attending'}}</span>
                       {{else}}
-                        <span class="badge bg-secondary text-white">Unattended</span>
+                        <span class="badge bg-secondary text-white">{{__ 'cases.unattended'}}</span>
                       {{/if}}
                     {{/if}}
                   </td>
@@ -829,7 +829,7 @@
               </tbody>
             </table>
             </p>
-            <a href="#" class="btn btn-primary">Back to Top</a>
+            <a href="#" class="btn btn-primary">{{__ 'cases.backToTop'}}</a>
           </div>
           <div class="tab-pane fade" id="attendingcases">
             {{!-- <h5 class="card-title">Attending Cases</h5> --}}
@@ -838,10 +838,10 @@
               style=" background-repeat: repeat; background-image: linear-gradient(rgb(248, 237, 227,0.9), rgb(208, 184, 168, 0.6)), url(https://files.soundon.fm/1661239461359-dfcc83d6-9645-4feb-92ee-cbcb4c6b0f8c.jpeg)">
               <thead class="text-muted">
                 <tr class="text-center">
-                  <th class="align-middle">Created At</th>
-                  <th class="align-middle">Title</th>
-                  <th class="align-middle">Details</th>
-                  <th class="align-middle">Status</th>
+                  <th class="align-middle">{{__ 'cases.createdAt'}}</th>
+                  <th class="align-middle">{{__ 'cases.title'}}</th>
+                  <th class="align-middle">{{__ 'cases.details'}}</th>
+                  <th class="align-middle">{{__ 'cases.status'}}</th>
                 </tr>
               </thead>
               <tbody class="text-muted">
@@ -853,12 +853,12 @@
                   <td class="align-middle">{{details}}</td>
                   <td class="text-center align-middle">
                     {{#if solved}}
-                      <span class="badge bg-success text-white">Solved</span>
+                      <span class="badge bg-success text-white">{{__ 'cases.solved'}}</span>
                     {{else}}
                       {{#if offer}}
-                        <span class="badge bg-warning text-dark">Attending</span>
+                        <span class="badge bg-warning text-dark">{{__ 'cases.attending'}}</span>
                       {{else}}
-                        <span class="badge bg-secondary text-white">Unattended</span>
+                        <span class="badge bg-secondary text-white">{{__ 'cases.unattended'}}</span>
                       {{/if}}
                     {{/if}}
                   </td>
@@ -868,7 +868,7 @@
               </tbody>
             </table>
             </p>
-            <a href="#" class="btn btn-primary">Back to Top</a>
+            <a href="#" class="btn btn-primary">{{__ 'cases.backToTop'}}</a>
           </div>
           <div class="tab-pane fade" id="solvedcases">
             {{!-- <h5 class="card-title">Solved Cases</h5> --}}
@@ -877,10 +877,10 @@
               style=" background-repeat: repeat; background-image: linear-gradient(rgb(248, 237, 227,0.9), rgb(208, 184, 168, 0.6)), url(https://www.mycampbellrivernow.com/wp-content/uploads/2019/02/Cold.jpeg)">
               <thead class="text-muted">
                 <tr class="text-center">
-                  <th class="align-middle">Created At</th>
-                  <th class="align-middle">Title</th>
-                  <th class="align-middle">Details</th>
-                  <th class="align-middle">Status</th>
+                  <th class="align-middle">{{__ 'cases.createdAt'}}</th>
+                  <th class="align-middle">{{__ 'cases.title'}}</th>
+                  <th class="align-middle">{{__ 'cases.details'}}</th>
+                  <th class="align-middle">{{__ 'cases.status'}}</th>
                 </tr>
               </thead>
               <tbody class="text-muted">
@@ -892,12 +892,12 @@
                   <td class="align-middle">{{details}}</td>
                   <td class="text-center align-middle">
                     {{#if solved}}
-                      <span class="badge bg-success text-white">Solved</span>
+                      <span class="badge bg-success text-white">{{__ 'cases.solved'}}</span>
                     {{else}}
                       {{#if offer}}
-                        <span class="badge bg-warning text-dark">Attending</span>
+                        <span class="badge bg-warning text-dark">{{__ 'cases.attending'}}</span>
                       {{else}}
-                        <span class="badge bg-secondary text-white">Unattended</span>
+                        <span class="badge bg-secondary text-white">{{__ 'cases.unattended'}}</span>
                       {{/if}}
                     {{/if}}
                   </td>
@@ -907,7 +907,7 @@
               </tbody>
             </table>
             </p>
-            <a href="#" class="btn btn-primary">Back to Top</a>
+            <a href="#" class="btn btn-primary">{{__ 'cases.backToTop'}}</a>
           </div>
         </div>
       </div>

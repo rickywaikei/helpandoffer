@@ -97,7 +97,7 @@ export const postRegister = (req, res) => {
         newUser
           .save()
           .then(() => {
-            req.flash("success_msg", "Register Done !");
+            req.flash("success_msg", req.__('messages.registerSuccess'));
             res.redirect("/users/login");
           })
           .catch((err) => {
@@ -151,7 +151,7 @@ export const getLogout = (req, res) => {
   // console.log(getLogTime() + " logout: " + res.locals.user.name); // todo logout
   req.logout((err) => {
     if (err) throw err;
-    req.flash("success_msg", "You're logged out !");
+    req.flash("success_msg", req.__('messages.logoutSuccess'));
     res.redirect("/users/login");
   });
 };
