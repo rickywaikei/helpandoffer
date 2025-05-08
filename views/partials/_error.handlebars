@@ -1,10 +1,10 @@
-<div style="margin-top:100px">
+<div class="container-fluid px-2">
 {{#each errors}}
-<div class="alert alert-danger alert-dismissible">{{text}}</div>
+<div class="alert alert-danger text-center w-100" role="alert">{{text}}</div>
 {{else}}
 {{/each}}
 
 {{#if fail_passport}}
-<div class="alert alert-danger alert-dismissible">{{fail_passport}}</div>
+<div class="alert alert-danger text-center w-100" role="alert">{{fail_passport}}</div>
 {{/if}}
 </div>

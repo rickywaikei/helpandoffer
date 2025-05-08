@@ -1,17 +1,15 @@
 {
   "app": {
     "PORT": 3000,
-    "logTIME": true
+    "logTIME": true,
+    "LOCALE": "zh-HK"
   },
   "db": {
-    "mongoATDEV": "mongodb+srv://mdbadmin:123Secret98639230@cluster0.yuwggji.mongodb.net/note-dev?retryWrites=true&w=majority",
-    "mongoATPROD": "mongodb+srv://mdbadmin:123Secret98639230@cluster0.yuwggji.mongodb.net/note-prod?retryWrites=true&w=majority",
-    "mongoLODEV": "mongodb://student:student@localhost:27017/note-dev",
-    "mongoLOPROD": "mongodb://student:student@localhost:27017/note-prod",
-    "mongoURI": "mongodb+srv://mdbadmin:123Secret98639230@cluster0.yuwggji.mongodb.net/note-dev?retryWrites=true&w=majority"
+    "mongoURI": "process.env.MONGO_URI"
   },
   "twilio": {
-    "ACCOUNTSID": "AC6621e27e68370a68add02ee4b6e6xxxx",
-    "AUTHTOKEN": "8489e48c7ca85cbbc0693731e0dfxxxx"
+    "ACCOUNTSID": "process.env.TWILIO_ACCOUNT_SID",
+    "AUTHTOKEN": "process.env.TWILIO_AUTH_TOKEN"
   }
 }
+

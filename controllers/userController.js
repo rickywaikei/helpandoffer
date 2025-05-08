@@ -1,37 +1,48 @@
 // ./controllers/userController.js
-import { getTimestamp, getLogTime } from "../helpers/helper.js";
+import { getTimestamp, getLogTime, validatePhoneNumber } from "../helpers/helper.js";
 import bcrypt from "bcryptjs";
 import passport from "passport";
 import User from "../models/User.js";
 import multer from "multer";
 import * as fs from "fs";
 
+// Improved file upload security
 const storageSetting = multer.diskStorage({
   destination: (req, file, cb) => {
     cb(null, "./uploads");
   },
   filename: (req, file, cb) => {
-    cb(null, file.originalname);
+    // Generate a secure filename with timestamp and user ID to prevent overwriting
+    const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
+    const fileExt = file.originalname.split('.').pop();
+    cb(null, `avatar-${req.user.id}-${uniqueSuffix}.${fileExt}`);
   },
 });
 
-export const uploadAvatar = multer({
+// Limit file size to 2MB
+const fileSize = 2 * 1024 * 1024;
+
+// Create the multer upload instance
+const upload = multer({
   storage: storageSetting,
+  limits: {
+    fileSize: fileSize
+  },
   fileFilter: (req, file, cb) => {
-    const mimetype = file.mimetype;
-    if (
-      mimetype === "image/png" ||
-      mimetype === "image/jpg" ||
-      mimetype === "image/jpeg" ||
-      mimetype === "image/gif"
-    ) {
+    // Validate file type
+    const allowedMimeTypes = ["image/png", "image/jpg", "image/jpeg"];
+    if (allowedMimeTypes.includes(file.mimetype)) {
       cb(null, true);
     } else {
-      req.flash("error_msg", "Wrong file type for avatar");
-      cb(null, false);
+      cb(new Error("Only PNG, JPG and JPEG files are allowed"), false);
     }
   },
-}).single("avatarUpload");
+});
+
+// Function that handles file upload with callback
+export const uploadAvatar = (req, res, callback) => {
+  upload.single("avatarUpload")(req, res, callback);
+};
 
 export const getRegister = (req, res) => {
   res.render("users/register");
@@ -44,9 +55,21 @@ export const postRegister = (req, res) => {
   }
   if (!req.body.email) {
     errors.push({ text: "Email is missing !" });
+  } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(req.body.email)) {
+    errors.push({ text: "Please enter a valid email address!" });
   }
-  if (req.body.password.length < 4) {
-    errors.push({ text: "Password must be at least 4 characters !" });
+
+  // Add phone number validation
+  if (req.body.phone && !validatePhoneNumber(req.body.phone)) {
+    errors.push({ text: "Please enter a valid phone number!" });
+  }
+  // Improved password requirements
+  if (!req.body.password) {
+    errors.push({ text: "Password is required!" });
+  } else if (req.body.password.length < 8) {
+    errors.push({ text: "Password must be at least 8 characters!" });
+  } else if (!/(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]/.test(req.body.password)) {
+    errors.push({ text: "Password must include at least one uppercase letter, one lowercase letter, one number, and one special character!" });
   }
   if (req.body.password != req.body.password2) {
     errors.push({ text: "Password do not match !" });
@@ -93,12 +116,35 @@ export const getLogin = (req, res) => {
 };
 
 export const postLogin = (req, res, next) => {
-  passport.authenticate("local", {
-    successRedirect: "/helpcases",
-    failureRedirect: "/users/login",
-    failureFlash: true,
+  // Use a custom callback to handle successful login
+  passport.authenticate("local", (err, user, info) => {
+    if (err) {
+      console.error("Login error:", err);
+      return next(err);
+    }
+
+    // If authentication failed
+    if (!user) {
+      req.flash("error_msg", info.message || "Invalid username or password");
+      return res.redirect("/users/login");
+    }
+
+    // Log in the user
+    req.logIn(user, (loginErr) => {
+      if (loginErr) {
+        console.error("Login error:", loginErr);
+        return next(loginErr);
+      }
+
+      console.log(getLogTime() + " login: " + user.name);
+
+      // Redirect to the returnTo URL if it exists, otherwise to helpcases
+      const returnTo = req.session.returnTo || "/helpcases";
+      delete req.session.returnTo;
+
+      return res.redirect(returnTo);
+    });
   })(req, res, next);
-  console.log(getLogTime() + " login: " + req.body.usernameInput); // todo login 
 };
 
 export const getLogout = (req, res) => {
@@ -118,51 +164,100 @@ export const getMyprofile = (req, res) => {
     avatar: res.locals.user.avatar,
     badge: res.locals.user.badge,
     isAdmin: res.locals.user.isAdmin,
+    csrfToken: req.csrfToken()
   });
 };
 
 export const postMyprofile = (req, res) => {
-  User.findOne({ _id: res.locals.user._id }).then((user) => {
-    if (req.file) {
-      let avatarData = fs.readFileSync(req.file.path).toString("base64");
-      let avatarContentType = req.file.mimetype;
+  try {
+    console.log("Avatar upload started");
 
-      user.avatar.data = avatarData;
-      user.avatar.contentType = avatarContentType;
+    // Check if file was uploaded
+    if (!req.file) {
+      console.log("No file uploaded");
+      req.flash("error_msg", "Please select a file before clicking 'Upload' button");
+      return res.redirect("/users/myprofile");
+    }
 
-      fs.unlink(req.file.path, (err) => {
-        if (err) throw err;
-      });
+    console.log("File uploaded:", req.file.path);
 
-      user.save().then(() => {
-        console.log(getLogTime() + res.locals.user.name + " UploadAvatar"); // todo upload avatar
-        req.flash("success_msg", "Avatar uploaded !");
+    // Read file and convert to base64
+    let avatarData;
+    try {
+      avatarData = fs.readFileSync(req.file.path).toString("base64");
+    } catch (err) {
+      console.error("Error reading file:", err);
+      req.flash("error_msg", "Error processing uploaded file");
+      return res.redirect("/users/myprofile");
+    }
+
+    const avatarContentType = req.file.mimetype;
+
+    // Find user and update avatar
+    User.findById(res.locals.user._id)
+      .then(user => {
+        if (!user) {
+          console.log("User not found");
+          req.flash("error_msg", "User not found");
+          return res.redirect("/users/myprofile");
+        }
+
+        // Set avatar data
+        if (!user.avatar) {
+          user.avatar = {};
+        }
+
+        user.avatar.data = avatarData;
+        user.avatar.contentType = avatarContentType;
+
+        // Save user
+        return user.save();
+      })
+      .then(() => {
+        // Delete temporary file
+        try {
+          fs.unlinkSync(req.file.path);
+        } catch (err) {
+          console.error("Error deleting temp file:", err);
+        }
+
+        console.log(getLogTime() + " " + res.locals.user.name + " uploaded avatar");
+        req.flash("success_msg", "Avatar uploaded successfully!");
+        res.redirect("/users/myprofile");
+      })
+      .catch(err => {
+        console.error("Error saving avatar:", err);
+        req.flash("error_msg", "Error uploading avatar");
         res.redirect("/users/myprofile");
       });
-    } else {
-      req.flash(
-        "error_msg",
-        " choose a correct file before clicking 'Upload Avatar' button"
-      );
-      res.redirect("/users/myprofile");
-    }
-  });
+  } catch (error) {
+    console.error("Unexpected error in avatar upload:", error);
+    req.flash("error_msg", "An unexpected error occurred");
+    res.redirect("/users/myprofile");
+  }
 };
 
 export const deleteAvatar = (req, res) => {
-  User.updateOne(
-    { _id: res.locals.user._id },
-    {
-      $unset: {
-        avatar: "",
-      },
-    }
-  ).then(() => {
-    req.flash("success_msg", "Avatar successfully deleted !");
-    res.redirect("/users/myprofile");
-  });
-};
+  console.log("Delete avatar started");
+  console.log("Deleting avatar for user:", res.locals.user._id);
 
+  // Find user and remove avatar
+  User.findByIdAndUpdate(
+    res.locals.user._id,
+    { $unset: { avatar: "" } },
+    { new: true }
+  )
+    .then(() => {
+      console.log(getLogTime() + " " + res.locals.user.name + " deleted avatar");
+      req.flash("success_msg", "Avatar successfully deleted!");
+      res.redirect("/users/myprofile");
+    })
+    .catch(err => {
+      console.error("Error deleting avatar:", err);
+      req.flash("error_msg", "Error deleting avatar");
+      res.redirect("/users/myprofile");
+    });
+};
 
 export const getProfiles = (req, res) => {
   User.aggregate([
@@ -193,161 +288,269 @@ export const getProfiles = (req, res) => {
       res.render("users/profilesAdmin", { profiles: profilesDB });
     } else {
       res.render("users/profiles", { profiles: profilesDB });
-    }    
+    }
   });
 };
 
-export const deleteUser = (req,res) => {
-    User.deleteOne({_id: req.params.id}).then(()=> {
-      req.flash("error_msg", "User Deleted !");
+export const deleteUser = (req, res) => {
+  User.deleteOne({ _id: req.params.id }).then(() => {
+    req.flash("error_msg", "User Deleted !");
+    res.redirect("/users/profiles");
+  });
+};
+
+export const postAddBadge = (req, res) => {
+  User.findOne({ _id: req.params.id }).then((badgeuser) => {
+    if (badgeuser.name != res.locals.user._id) badgeuser.badge++;
+    badgeuser.save().then(() => {
+      req.flash("success_msg", "A badge is given to the user !");
       res.redirect("/users/profiles");
     });
-  };
-  
-  export const postAddBadge = (req, res) => {
-    User.findOne({ _id: req.params.id}).then((badgeuser) => {
-      if (badgeuser.name != res.locals.user._id)
-      badgeuser.badge++;
-      badgeuser.save().then(() => {
-        req.flash("success_msg", "A badge is given to the user !");
-        res.redirect("/users/profiles");
-      });
-    });
-    };
+  });
+};
 
-    export const getEditUser = (req, res)=> {
-      User.findOne({_id: req.params.id})
-      .lean()
-      .then((user) => {
-        res.render("users/edit", { user: user });
-      });
-    };
-    
-    export const postEditUser = (req, res) => {
-        User.findOne({ _id: req.params.id}).then((user) => {
+export const getEditUser = (req, res) => {
+  User.findOne({ _id: req.params.id })
+    .lean()
+    .then((user) => {
+      res.render("users/edit", { user: user });
+    });
+};
+
+export const postEditUser = (req, res) => {
+  User.findOne({ _id: req.params.id }).then((user) => {
     let errors = [];
-      if (req.body.password) {          
-        if (req.body.password.length < 4) {
-          errors.push({ text: "Password must be at least 4 characters !" });
-        }
-        if (req.body.password != req.body.password2) {
-          errors.push({ text: "Password do not match !" });
-        }
+    // Validate email if provided
+    if (req.body.email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(req.body.email)) {
+      errors.push({ text: "Please enter a valid email address!" });
+    }
+
+    // Validate phone if provided
+    if (req.body.phone && !validatePhoneNumber(req.body.phone)) {
+      errors.push({ text: "Please enter a valid phone number!" });
+    }
+
+    if (req.body.password) {
+      // Improved password requirements
+      if (req.body.password.length < 8) {
+        errors.push({ text: "Password must be at least 8 characters!" });
+      } else if (!/(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]/.test(req.body.password)) {
+        errors.push({ text: "Password must include at least one uppercase letter, one lowercase letter, one number, and one special character!" });
       }
-        if (errors.length > 0) {
-          res.render("users/profiles", {
-            errors: errors,
-            name: req.body.name,
-            email: req.body.email,
-            phone: req.body.phone,
-            password: req.body.password,
-            password2: req.body.password2,
-          });
-        } else {
-            if (req.body.email) {
-              user.email = req.body.email;
+      if (req.body.password != req.body.password2) {
+        errors.push({ text: "Password do not match !" });
+      }
+    }
+    if (errors.length > 0) {
+      // Add validation errors as flash messages
+      errors.forEach(error => {
+        req.flash("error_msg", error.text);
+      });
+
+      // Render the edit form again with the user data
+      res.render("users/edit", {
+        user: {
+          _id: req.params.id,
+          name: user.name,
+          email: req.body.email || user.email,
+          phone: req.body.phone || user.phone
+        },
+        csrfToken: req.csrfToken()
+      });
+    } else {
+      if (req.body.email) {
+        user.email = req.body.email;
+      }
+      if (req.body.phone) {
+        user.phone = req.body.phone;
+      }
+
+      // Only update password if provided
+      if (req.body.password) {
+        bcrypt.genSalt(10, (err, salt) => {
+          if (err) {
+            console.error("Error generating salt:", err);
+            req.flash("error_msg", "Error updating password");
+            return res.redirect("/users/profiles");
+          }
+
+          bcrypt.hash(req.body.password, salt, (err, hash) => {
+            if (err) {
+              console.error("Error hashing password:", err);
+              req.flash("error_msg", "Error updating password");
+              return res.redirect("/users/profiles");
             }
-            if (req.body.phone) {
-              user.phone = req.body.phone;
-            }
-            user.password = req.body.password;
-            bcrypt.genSalt(10, (err, salt) => {
-              bcrypt.hash(user.password, salt, (err, hash) => {
-                if (err) throw err;
-                user.password = hash;
-                user
-                  .save()
-                  .then(() => {
-                    console.log(getLogTime()+ " " + user.name + " changed password")
-                    req.flash("success_msg", "Updated this user information !");
-                    res.redirect("/users/profiles");
-                  })
-                  .catch((err) => {
-                    console.log(err);
-                    req.flash("error_msg", "Server rejected, please correct your inputs !");
-                    res.redirect("/users/profiles");
-                    return;
-                  });
+
+            user.password = hash;
+            user.save()
+              .then(() => {
+                console.log(getLogTime() + " " + user.name + " changed password");
+                req.flash("success_msg", "Updated this user information !");
+                res.redirect("/users/profiles");
+              })
+              .catch((err) => {
+                console.error("Error saving user:", err);
+                req.flash("error_msg", "Server rejected, please correct your inputs !");
+                res.redirect("/users/profiles");
               });
-            });
-          };
+          });
         });
-      };
+      } else {
+        // No password change, just save other fields
+        user.save()
+          .then(() => {
+            console.log(getLogTime() + " " + user.name + " updated profile");
+            req.flash("success_msg", "Updated this user information !");
+            res.redirect("/users/profiles");
+          })
+          .catch((err) => {
+            console.error("Error saving user:", err);
+            req.flash("error_msg", "Server rejected, please correct your inputs !");
+            res.redirect("/users/profiles");
+          });
+      }
+    }
+  }).catch(err => {
+    console.error("Error finding user:", err);
+    req.flash("error_msg", "User not found");
+    res.redirect("/users/profiles");
+  });
+};
 
 export const putUpdateMyprofile = (req, res) => {
-  User.findOne({ _id: res.locals.user._id}).then((user) => {
-    let errors = [];
-      if (req.body.password) {          
-        if (req.body.password.length < 4) {
-          errors.push({ text: "Password must be at least 4 characters !" });
-        }
-        if (req.body.password != req.body.password2) {
-          errors.push({ text: "Password do not match !" });
+  console.log("Profile update started");
+  console.log("Form data:", req.body);
+
+  // Find user
+  User.findById(res.locals.user._id)
+    .then(user => {
+      if (!user) {
+        console.log("User not found");
+        req.flash("error_msg", "User not found");
+        return res.redirect("/users/myprofile");
+      }
+
+      let errors = [];
+
+      // Validate email if provided
+      if (req.body.email) {
+        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(req.body.email)) {
+          errors.push({ text: "Please enter a valid email address!" });
+        } else {
+          user.email = req.body.email;
         }
       }
-        if (errors.length > 0) {
-          res.render("users/myprofile", {
-            errors: errors,
-            name: req.body.name,
-            email: req.body.email,
-            phone: req.body.phone,
-            password: req.body.password,
-            password2: req.body.password2,
-          });
-        } else {
-            if (req.body.email) {
-              user.email = req.body.email;
-            }
-            if (req.body.phone) {
-              user.phone = req.body.phone;
-            }
-            user.password = req.body.password;
-            bcrypt.genSalt(10, (err, salt) => {
-              bcrypt.hash(user.password, salt, (err, hash) => {
-                if (err) throw err;
-                user.password = hash;
-                user
-                  .save()
-                  .then(() => {
-                    console.log(getLogTime()+ " " + user.name + " changed password")
-                    req.flash("success_msg", "Updated this user information !");
-                    res.redirect("/users/myprofile");
-                  })
-                  .catch((err) => {
-                    console.log(err);
-                    req.flash("error_msg", "Server rejected, please correct your inputs !");
-                    res.redirect("/users/myprofile");
-                    return;
-                  });
-              });
-            });
-          };
-        });
-      };
 
-    // export const postProfile = (req, res) => {
-    //   User.findOne({ _id: req.params.id }).then((user) => {
-    //     if (req.file) {
-    //       let avatarData = fs.readFileSync(req.file.path).toString("base64");
-    //       let avatarContentType = req.file.mimetype;
-    
-    //       user.avatar.data = avatarData;
-    //       user.avatar.contentType = avatarContentType;
-    
-    //       // fs.unlink(req.file.path, (err) => {
-    //       //   if (err) throw err;
-    //       // });
-    
-    //       user.save().then(() => {
-    //         req.flash("success_msg", "Avatar uploaded !");
-    //         res.redirect("/users/myprofile");
-    //       });
-    //     } else {
-    //       req.flash(
-    //         "error_msg",
-    //         " choose a correct file before clicking 'Upload Avatar' button"
-    //       );
-    //       res.redirect("/users/myprofile"); 
-    //     }
-    //   });
-    // };
+      // Validate phone if provided
+      if (req.body.phone) {
+        if (!validatePhoneNumber(req.body.phone)) {
+          errors.push({ text: "Please enter a valid phone number!" });
+        } else {
+          user.phone = req.body.phone;
+        }
+      }
+
+      // Validate password if provided
+      if (req.body.password && req.body.password.trim() !== '') {
+        if (req.body.password.length < 8) {
+          errors.push({ text: "Password must be at least 8 characters!" });
+        } else if (req.body.password !== req.body.password2) {
+          errors.push({ text: "Passwords do not match!" });
+        } else {
+          // Password is valid, will be updated below
+        }
+      }
+
+      if (errors.length > 0) {
+        console.log("Validation errors:", errors);
+        return res.render("users/myprofile", {
+          errors: errors,
+          name: user.name,
+          email: req.body.email || user.email,
+          phone: req.body.phone || user.phone,
+          avatar: user.avatar,
+          badge: user.badge,
+          isAdmin: user.isAdmin,
+          csrfToken: req.csrfToken()
+        });
+      }
+
+      // Update password if provided and valid
+      if (req.body.password && req.body.password.trim() !== '' && req.body.password === req.body.password2) {
+        bcrypt.genSalt(10, (saltErr, salt) => {
+          if (saltErr) {
+            console.error("Error generating salt:", saltErr);
+            req.flash("error_msg", "Error updating password");
+            return res.redirect("/users/myprofile");
+          }
+
+          bcrypt.hash(req.body.password, salt, (hashErr, hash) => {
+            if (hashErr) {
+              console.error("Error hashing password:", hashErr);
+              req.flash("error_msg", "Error updating password");
+              return res.redirect("/users/myprofile");
+            }
+
+            user.password = hash;
+
+            user.save()
+              .then(() => {
+                console.log(getLogTime() + " " + user.name + " updated profile with new password");
+                req.flash("success_msg", "Profile updated successfully with new password!");
+                res.redirect("/users/myprofile");
+              })
+              .catch(err => {
+                console.error("Error saving user:", err);
+                req.flash("error_msg", "Error updating profile");
+                res.redirect("/users/myprofile");
+              });
+          });
+        });
+      } else {
+        // No password change, just save other fields
+        user.save()
+          .then(() => {
+            console.log(getLogTime() + " " + user.name + " updated profile");
+            req.flash("success_msg", "Profile updated successfully!");
+            res.redirect("/users/myprofile");
+          })
+          .catch(err => {
+            console.error("Error saving user:", err);
+            req.flash("error_msg", "Error updating profile");
+            res.redirect("/users/myprofile");
+          });
+      }
+    })
+    .catch(err => {
+      console.error("Error finding user:", err);
+      req.flash("error_msg", "Error updating profile");
+      res.redirect("/users/myprofile");
+    });
+};
+
+// export const postProfile = (req, res) => {
+//   User.findOne({ _id: req.params.id }).then((user) => {
+//     if (req.file) {
+//       let avatarData = fs.readFileSync(req.file.path).toString("base64");
+//       let avatarContentType = req.file.mimetype;
+
+//       user.avatar.data = avatarData;
+//       user.avatar.contentType = avatarContentType;
+
+//       // fs.unlink(req.file.path, (err) => {
+//       //   if (err) throw err;
+//       // });
+
+//       user.save().then(() => {
+//         req.flash("success_msg", "Avatar uploaded !");
+//         res.redirect("/users/myprofile");
+//       });
+//     } else {
+//       req.flash(
+//         "error_msg",
+//         " choose a correct file before clicking 'Upload Avatar' button"
+//       );
+//       res.redirect("/users/myprofile");
+//     }
+//   });
+// };

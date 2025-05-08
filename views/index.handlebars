@@ -1,132 +1,604 @@
 <!DOCTYPE html>
 <html lang="en">
-    <style>
-        .card { 
-            background-color: rgb(248, 237, 227, 0.7) !important; 
-            font-size: 20px !important;
-            font: #7D6E83 !important;
-            border-radius: 50px 50px 50px 50px !important; 
-        }
+<style>
+  .card {
+    background-color: rgb(248, 237, 227, 0.7) !important;
+    font-size: 20px !important;
+    font: #7D6E83 !important;
+    border-radius: 50px 50px 50px 50px !important;
+    overflow: hidden; /* Ensures content doesn't overflow */
+  }
 
-        body {
-            background-image: linear-gradient(to bottom,rgba(223,211,195,0.5), 
-rgb(125,110,131,0.5)),url("https://static.vecteezy.com/system/resources/previews/010/264/847/large_2x/an-image-of-plam-leave-shadow-on-the-wall-free-png.png");
-        }
-        .table {
-            background-color: #F8EDE3;
-            background-color: rgb(248, 237, 227, 0.9);
-            font-style: times;
-            font-size:16px;
-            position: fixed  sticky;
-            font: #7D6E83  !important;
-        }
+  /* Fix card header and body width mismatch on mobile */
+  .card-header, .card-body {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    width: 100% !important;
+  }
 
-        .nav-link {
-            color: rgb(125, 110, 131) !important;
-        }
-        {{!-- .link {
-            color: #7D6E83  !important;
-        }
-        .item>a:hover {
-            color: #D0B8A8  !important;
-        } --}}
-        
-        /*code to change background color*/
-        .nav>.active>a {
-            background-color: rgba(0, 0, 0, 0.5) !important;
-            color: #D0B8A8 !important;
-        }
-        .btn {
-            background-color: #7D6E83 !important;
-            border:0 !important;
-            border-radius: 10px 10px 10px 10px !important;
-        }
-        .carousel-caption {
-          text-shadow: 0 0 5px rgb(33, 30, 30),0 0 10px rgb(88, 37, 74),0 0 15px rgb(153, 167, 70),0 0 40px #46453e,0 0 70px #2b0e3f
-        }
-        .img {
-          width: fit-content;
-          height: fit-content;
-        }
-    </style>
+  /* Ensure consistent padding inside card components */
+  .card-header .nav-tabs {
+    width: 100%;
+    padding: 0;
+    margin: 0;
+  }
+
+  /* Mobile-specific card styles */
+  @media (max-width: 767.98px) {
+    .container {
+      padding: 0 !important;
+      margin: 0 auto !important;
+      width: 100% !important;
+      max-width: 100% !important;
+    }
+
+    .card {
+      border-radius: 30px !important;
+      margin: 0.5rem auto !important;
+      width: 95% !important;
+      max-width: 600px !important;
+    }
+
+    .card-header, .card-body {
+      border-radius: inherit;
+      width: 100% !important;
+    }
+
+    .tab-content {
+      padding: 0.5rem;
+    }
+  }
+
+  /* Landscape mode specific styles */
+  @media (max-width: 915px) and (orientation: landscape) {
+    .container {
+      padding: 0 !important;
+      margin: 0 auto !important;
+      width: 90% !important;
+      max-width: 800px !important;
+    }
+
+    .card {
+      margin: 0.5rem auto !important;
+      width: 100% !important;
+      max-width: 800px !important;
+    }
+  }
+
+  /* Body background is now handled by global.css */
+
+  /* Responsive table styling */
+  .table {
+    background-color: #F8EDE3;
+    background-color: rgb(248, 237, 227, 0.9);
+    font-style: times;
+    position: fixed sticky;
+    font: #7D6E83 !important;
+    transition: all 0.3s ease;
+  }
+
+  .table th {
+    font-size: calc(13px + 0.4vw);
+    transition: padding 0.3s ease;
+  }
+
+  .table td {
+    font-size: calc(12px + 0.3vw);
+    transition: padding 0.3s ease;
+  }
+
+  /* Card title and text transitions */
+  .card-title {
+    font-size: calc(16px + 0.5vw);
+    transition: padding 0.3s ease;
+  }
+
+  .card-text {
+    font-size: calc(14px + 0.3vw);
+    transition: padding 0.3s ease;
+  }
+
+  .btn {
+    font-size: calc(13px + 0.4vw);
+    transition: padding 0.3s ease;
+  }
+
+  .badge {
+    font-size: 0.9rem;
+    padding: 0.4rem 0.6rem;
+  }
+
+  .search-form {
+    margin-bottom: 20px;
+  }
+
+  /* Responsive typography based on viewport width */
+  .responsive-text-xs {
+    font-size: calc(10px + 0.5vw);
+  }
+
+  .responsive-text-sm {
+    font-size: calc(12px + 0.5vw);
+  }
+
+  .responsive-text-md {
+    font-size: calc(14px + 0.5vw);
+  }
+
+  .responsive-text-lg {
+    font-size: calc(16px + 0.5vw);
+  }
+
+  /* Responsive nav-link styling */
+  .nav-link {
+    color: rgb(125, 110, 131) !important;
+    transition: all 0.3s ease;
+    font-size: calc(12px + 0.5vw);
+    padding: 8px 12px;
+  }
+
+  /* Tab title transitions */
+  .nav-tabs .nav-link {
+    transition: font-size 0.3s ease, padding 0.3s ease;
+  }
+
+    {
+      {
+      !-- .link {
+        color: #7D6E83 !important;
+      }
+
+      .item>a:hover {
+        color: #D0B8A8 !important;
+      }
+
+      --
+    }
+  }
+
+  /*code to change background color*/
+  .nav>.active>a {
+    background-color: rgba(0, 0, 0, 0.5) !important;
+    color: #D0B8A8 !important;
+  }
+
+  .btn {
+    background-color: #7D6E83 !important;
+    border: 0 !important;
+    border-radius: 10px 10px 10px 10px !important;
+  }
+
+  /* Responsive carousel caption styling */
+  .carousel-caption {
+    text-shadow: 0 0 5px rgb(33, 30, 30), 0 0 10px rgb(88, 37, 74), 0 0 15px rgb(153, 167, 70), 0 0 40px #46453e, 0 0 70px #2b0e3f;
+    bottom: 20px; /* Standard position */
+    padding: 10px;
+    background-color: rgba(0, 0, 0, 0.5);
+    border-radius: 10px;
+    max-width: 80%;
+    margin: 0 auto;
+    transition: all 0.3s ease;
+  }
+
+  .carousel-caption h5 {
+    margin-bottom: 5px;
+    font-weight: bold;
+    transition: font-size 0.3s ease;
+  }
+
+  .carousel-caption p {
+    margin-bottom: 0;
+    transition: font-size 0.3s ease;
+  }
+
+  /* Mobile-specific caption styles */
+  @media (max-width: 767.98px) {
+    .carousel-caption {
+      padding: 5px;
+      bottom: 10px;
+    }
+
+    .carousel-caption h5 {
+      font-size: 14px;
+    }
+
+    .carousel-caption p {
+      font-size: 12px;
+    }
+  }
+
+  .img {
+    width: fit-content;
+    height: fit-content;
+  }
+
+  /* Position carousel controls at the center of the picture */
+  .carousel-control-prev,
+  .carousel-control-next {
+    top: 50%;
+    transform: translateY(-50%);
+    width: 40px;
+    height: 40px;
+    background-color: rgba(0, 0, 0, 0.5);
+    border-radius: 50%;
+    opacity: 0.8;
+  }
+
+  .carousel-control-prev {
+    left: 15px;
+  }
+
+  .carousel-control-next {
+    right: 15px;
+  }
+
+  /* Adjust indicators position */
+  .carousel-indicators {
+    margin-bottom: 10px;
+  }
+</style>
 </div>
+
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title></title>
+  <title>Help and Offer</title>
+  <link rel="stylesheet" href="/css/pagination.css">
 
-  <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel" style="margin-top:80px">
-    <ol class="carousel-indicators">
-      <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-      <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-      <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-      <li data-target="#carouselExampleIndicators" data-slide-to="3"></li>
-      <li data-target="#carouselExampleIndicators" data-slide-to="4"></li>
-    </ol>
+  <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel" style="margin-top:80px">
+    <!-- Carousel indicators -->
+    <div class="carousel-indicators">
+      <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+      <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+      <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+      <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="3" aria-label="Slide 4"></button>
+      <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="4" aria-label="Slide 5"></button>
+    </div>
+
+    <!-- Carousel items -->
     <div class="carousel-inner">
-      <div class="carousel-item active" data-interval="3000">
-        <img src="https://leanbase.de/uploads/9yt73fp97vyqf5tm5dfqxy87p4qeudv9uhpd4dm3.jpg" class="d-block w-100 img"
-          alt="..." height="500px">
-          <div class="carousel-caption d-none d-md-block">
-          <h5 class="">Little Ways</h5>
-          <p>Welcome to request cases or  provide  solutions  </p>
-          </div>
+      <div class="carousel-item active" data-bs-interval="3000">
+        <img src="https://i.imghippo.com/files/Rev7600cc.jpg" class="d-block w-100 img"
+          alt="Little Ways" height="500px">
+        <div class="carousel-caption">
+          <h5>Little Ways</h5>
+          <p>Welcome to request cases or provide solutions</p>
+        </div>
       </div>
-      <div class="carousel-item" data-interval="3000">
-        <img src="https://www.thelifenet.eu/media/p1sjxr3h/procedures-header.png"
-          class="d-block w-100 img" alt="..." height="500px">
-          <div class="carousel-caption d-none d-md-block">
+      <div class="carousel-item" data-bs-interval="3000">
+        <img src="https://i.imghippo.com/files/mDQ7720eoY.jpg" class="d-block w-100 img"
+          alt="Little Area" height="500px">
+        <div class="carousel-caption">
           <h5>Little Area</h5>
-          <p>Plaform for exchange ideas and make relationship</p>
-          </div>
+          <p>Platform for exchange ideas and make relationships</p>
+        </div>
       </div>
-      <div class="carousel-item" data-interval="4000">
-        <img
-          src="https://www.charleroi-entreprendre.be/volumes/images/banners/banner-finance-min.png"
-          class="d-block w-100 img" alt="..." height="500px">
-          <div class="carousel-caption d-none d-md-block">
+      <div class="carousel-item" data-bs-interval="4000">
+        <img src="https://i.imghippo.com/files/uC1206cGY.jpg"
+          class="d-block w-100 img" alt="Little Help" height="500px">
+        <div class="carousel-caption">
           <h5>Little Help</h5>
           <p>We believe that joint power can solve difficulties</p>
-          </div>
+        </div>
       </div>
-       <div class="carousel-item" data-interval="4000">
+      <div class="carousel-item" data-bs-interval="4000">
         <img src="https://i1.wp.com/www.activision-coaching.com/acc-content/uploads/2020/10/coaching_professionnel_activision.jpeg?w=3000"
-          class="d-block w-100 img" alt="..." height="500px">
-          <div class="carousel-caption d-none d-md-block">
-          <h5>Little bliss</h5>
+          class="d-block w-100 img" alt="Little Bliss" height="500px">
+        <div class="carousel-caption">
+          <h5>Little Bliss</h5>
           <p>Helping others is the foundation of happiness</p>
-          </div>
+        </div>
       </div>
-      <div class="carousel-item" data-interval="4000">
-        <img
-          src="https://images.shulcloud.com/1566/uploads/images/Legacies/Legacy2.jpg"
-          class="d-block w-100 img" alt="..." height="500px">
-          <div class="carousel-caption d-none d-md-block">
+      <div class="carousel-item" data-bs-interval="4000">
+        <img src="https://images.shulcloud.com/1566/uploads/images/Legacies/Legacy2.jpg" class="d-block w-100 img"
+          alt="Little Wish" height="500px">
+        <div class="carousel-caption">
           <h5>Little Wish</h5>
-          <p>We Hope to build a world of mutual help and caring</p>
-          </div>
+          <p>We hope to build a world of mutual help and caring</p>
+        </div>
       </div>
     </div>
-<br>
-  <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-    <span class="sr-only">Previous</span>
-  </a>
-  <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-    <span class="sr-only">Next</span>
-  </a>
+
+    <!-- Carousel controls positioned at the center of the picture -->
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Next</span>
+    </button>
   </div>
 
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Pagination JavaScript -->
+  <script>
+    // Add event listener when the DOM is fully loaded
+    document.addEventListener('DOMContentLoaded', function() {
+      // Get the items per page dropdown
+      const itemsPerPageSelect = document.getElementById('itemsPerPage');
+
+      // Add change event listener
+      if (itemsPerPageSelect) {
+        itemsPerPageSelect.addEventListener('change', function() {
+          const value = this.value;
+          console.log('Changing items per page to:', value);
+
+          // Get current URL
+          const url = new URL(window.location.href);
+
+          // Update or add the itemsPerPage parameter
+          url.searchParams.set('itemsPerPage', value);
+
+          // Reset to page 1 when changing items per page
+          url.searchParams.set('page', 1);
+
+          // Log the URL we're redirecting to
+          console.log('Redirecting to:', url.toString());
+
+          // Redirect to the new URL
+          window.location.href = url.toString();
+        });
+      }
+    });
+
+    // Keep the original function for backward compatibility
+    function changeItemsPerPage(value) {
+      console.log('changeItemsPerPage called with value:', value);
+
+      // Get current URL
+      const url = new URL(window.location.href);
+
+      // Update or add the itemsPerPage parameter
+      url.searchParams.set('itemsPerPage', value);
+
+      // Reset to page 1 when changing items per page
+      url.searchParams.set('page', 1);
+
+      // Log the URL we're redirecting to
+      console.log('Redirecting to:', url.toString());
+
+      // Redirect to the new URL
+      window.location.href = url.toString();
+    }
+  </script>
+
+  <!-- Custom script for mobile optimizations -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Function to position carousel controls at the center
+      function positionCarouselControls() {
+        const isMobile = window.innerWidth < 768;
+
+        // Get carousel elements
+        const carousel = document.getElementById('carouselExampleIndicators');
+        const indicators = carousel.querySelector('.carousel-indicators');
+        const prevControl = carousel.querySelector('.carousel-control-prev');
+        const nextControl = carousel.querySelector('.carousel-control-next');
+
+        // Position controls at the center of the picture
+        if (indicators && prevControl && nextControl) {
+          // Reset any previously set inline styles
+          prevControl.style.top = '50%';
+          nextControl.style.top = '50%';
+          prevControl.style.transform = 'translateY(-50%)';
+          nextControl.style.transform = 'translateY(-50%)';
+
+          // Adjust positions based on screen size
+          if (isMobile) {
+            prevControl.style.left = '10px';
+            nextControl.style.right = '10px';
+          } else {
+            prevControl.style.left = '15px';
+            nextControl.style.right = '15px';
+          }
+
+          // Remove bottom positioning
+          prevControl.style.bottom = '';
+          nextControl.style.bottom = '';
+        }
+      }
+
+      // Function to resize carousel captions based on image size
+      function resizeCarouselCaptions() {
+        const isMobile = window.innerWidth < 768;
+        const carousel = document.getElementById('carouselExampleIndicators');
+        const carouselItems = carousel.querySelectorAll('.carousel-item');
+
+        carouselItems.forEach(item => {
+          const img = item.querySelector('img');
+          const caption = item.querySelector('.carousel-caption');
+
+          if (img && caption) {
+            // Get the image dimensions
+            const imgHeight = img.clientHeight;
+            const imgWidth = img.clientWidth;
+
+            // Calculate the appropriate font size based on image dimensions
+            // This creates a proportional relationship between image size and text size
+            let headingSize, paragraphSize;
+
+            if (isMobile) {
+              // For mobile devices
+              headingSize = Math.max(14, Math.min(18, imgHeight * 0.04));
+              paragraphSize = Math.max(12, Math.min(16, imgHeight * 0.03));
+
+              // Adjust caption width based on image width
+              caption.style.maxWidth = Math.min(90, imgWidth * 0.8) + '%';
+              caption.style.padding = Math.max(5, imgHeight * 0.01) + 'px';
+            } else {
+              // For desktop devices
+              headingSize = Math.max(18, Math.min(24, imgHeight * 0.05));
+              paragraphSize = Math.max(14, Math.min(18, imgHeight * 0.035));
+
+              // Adjust caption width based on image width
+              caption.style.maxWidth = Math.min(80, imgWidth * 0.6) + '%';
+              caption.style.padding = Math.max(10, imgHeight * 0.02) + 'px';
+            }
+
+            // Apply the calculated font sizes to carousel caption
+            const heading = caption.querySelector('h5');
+            const paragraph = caption.querySelector('p');
+
+            if (heading) heading.style.fontSize = headingSize + 'px';
+            if (paragraph) paragraph.style.fontSize = paragraphSize + 'px';
+
+            // Adjust bottom position based on image height
+            caption.style.bottom = Math.max(10, imgHeight * 0.05) + 'px';
+          }
+        });
+      }
+
+      // Function to adjust padding based on viewport width
+      function adjustPaddingBasedOnViewport() {
+        const viewportWidth = window.innerWidth;
+        const isMobile = viewportWidth < 768;
+
+        // Adjust tab padding
+        const tabLinks = document.querySelectorAll('.nav-tabs .nav-link');
+        tabLinks.forEach(link => {
+          // Calculate padding based on viewport width
+          const horizontalPadding = Math.max(5, viewportWidth * 0.01);
+          const verticalPadding = Math.max(3, viewportWidth * 0.005);
+          link.style.padding = `${verticalPadding}px ${horizontalPadding}px`;
+        });
+
+        // Adjust table cell padding
+        const tableCells = document.querySelectorAll('.table th, .table td');
+        tableCells.forEach(cell => {
+          const cellPadding = Math.max(4, viewportWidth * 0.005);
+          cell.style.padding = `${cellPadding}px`;
+        });
+
+        // Adjust button padding
+        const buttons = document.querySelectorAll('.btn');
+        buttons.forEach(button => {
+          const btnVerticalPadding = Math.max(4, viewportWidth * 0.004);
+          const btnHorizontalPadding = Math.max(8, viewportWidth * 0.008);
+          button.style.padding = `${btnVerticalPadding}px ${btnHorizontalPadding}px`;
+        });
+      }
+
+      // Function to ensure card header and body widths match and center content
+      function fixCardWidths() {
+        const isMobile = window.innerWidth < 768;
+        const isLandscape = window.matchMedia("(orientation: landscape)").matches;
+        const container = document.querySelector('.container');
+        const card = document.querySelector('.card');
+        const cardHeader = document.querySelector('.card-header');
+        const cardBody = document.querySelector('.card-body');
+
+        if (card && cardHeader && cardBody) {
+          // Center the card in the container
+          if (isLandscape && window.innerWidth <= 915) {
+            // Landscape mode on mobile
+            container.style.margin = '0 auto';
+            container.style.maxWidth = '800px';
+            card.style.margin = '0.5rem auto';
+            card.style.maxWidth = '800px';
+            card.style.width = '100%';
+          } else if (isMobile) {
+            // Portrait mode on mobile
+            container.style.margin = '0 auto';
+            container.style.maxWidth = '100%';
+            card.style.margin = '0.5rem auto';
+            card.style.maxWidth = '600px';
+            card.style.width = '95%';
+          } else {
+            // Desktop
+            container.style.margin = '0 auto';
+            card.style.margin = '0.5rem auto';
+          }
+
+          // Get the computed width of the card
+          const cardWidth = card.offsetWidth;
+
+          // Apply the same width to header and body
+          cardHeader.style.width = cardWidth + 'px';
+          cardBody.style.width = cardWidth + 'px';
+
+          // Ensure no horizontal overflow
+          cardHeader.style.maxWidth = '100%';
+          cardBody.style.maxWidth = '100%';
+
+          // Remove any padding that might cause width issues
+          cardHeader.style.paddingLeft = '0';
+          cardHeader.style.paddingRight = '0';
+          cardBody.style.paddingLeft = '0';
+          cardBody.style.paddingRight = '0';
+        }
+      }
+
+      // Function to optimize carousel images and resize captions
+      function optimizeCarouselImages() {
+        const carousel = document.getElementById('carouselExampleIndicators');
+        const images = carousel.querySelectorAll('.carousel-item img');
+
+        images.forEach(img => {
+          // When image loads, resize the caption
+          img.addEventListener('load', function() {
+            resizeCarouselCaptions();
+          });
+
+          // If image is already loaded, resize caption now
+          if (img.complete) {
+            resizeCarouselCaptions();
+          }
+        });
+      }
+
+      // Run on page load
+      positionCarouselControls();
+      fixCardWidths();
+      optimizeCarouselImages();
+      resizeCarouselCaptions();
+      adjustPaddingBasedOnViewport(); // Add viewport-based padding adjustment
+
+      // Run on window resize
+      window.addEventListener('resize', function() {
+        positionCarouselControls();
+        fixCardWidths();
+        resizeCarouselCaptions();
+        adjustPaddingBasedOnViewport(); // Update padding based on new viewport size
+      });
+
+      // Listen for orientation changes
+      window.addEventListener('orientationchange', function() {
+        // Small delay to allow the browser to complete the orientation change
+        setTimeout(function() {
+          positionCarouselControls();
+          fixCardWidths();
+          resizeCarouselCaptions();
+          adjustPaddingBasedOnViewport(); // Update padding after orientation change
+        }, 200);
+      });
+
+      // Run after carousel slide
+      const carousel = document.getElementById('carouselExampleIndicators');
+      if (carousel) {
+        carousel.addEventListener('slid.bs.carousel', function() {
+          positionCarouselControls();
+          resizeCarouselCaptions();
+        });
+      }
+
+      // Also run when images are loaded or window is fully loaded
+      window.addEventListener('load', function() {
+        resizeCarouselCaptions();
+        fixCardWidths(); // Ensure card is centered on initial load
+        adjustPaddingBasedOnViewport(); // Ensure padding is properly set on load
+      });
+    });
+  </script>
 </head>
 
 <body>
 
-  <div class="m-4">
-    <div class="card text-center">
-      <div class="card-header">
+  <div class="container px-0 mx-auto">
+    <div class="card text-center mx-auto" style="max-width: 1200px;">
+      <div class="card-header p-3">
         <ul class="nav nav-tabs justify-content-center card-header-tabs" id="myTab">
           <li class="nav-item">
             <a href="#allcases" class="nav-link active fw-bolder" data-bs-toggle="tab">All Cases</a>
@@ -143,38 +615,43 @@ rgb(125,110,131,0.5)),url("https://static.vecteezy.com/system/resources/previews
         </ul>
       </div>
 
-      <div class="card-body">
+      <div class="card-body p-3">
         <div class="tab-content">
           <div class="tab-pane fade show active" id="allcases">
 
-          <div class="card text-right border-0 bg-transparent">
-                <form method="POST" action="/search" class="ml-auto" >
-                      <div class="no-gutters align-items-center input-group">
-                          <div>
-                              <input class="form-control rounded-pill mr-1 pr-5 text-muted" type="search" name="searchInput">
-                          </div>
-                          <div class="col-auto">
-                              <button class="btn bg-transparent rounded-pill border-0 ml-n5" type="submit">
-                                {{!-- <input type="hidden" name="domains" value="http://helpandoffer.mooo.com:5000/">
-                                <input type="hidden" name="sitesearch" value="http://helpandoffer.mooo.com:5000/"> --}}
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
-                                          <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
-                                        </svg>
-                              </button>
-                          </div>
-                      </div>
-                  </form>
-          </div>
-        
+            <div class="row mb-4">
+              <div class="col-md-8 mx-auto">
+                <form method="GET" action="/" class="search-form">
+                  <div class="input-group">
+                    <input
+                      class="form-control rounded-left"
+                      type="search"
+                      name="searchInput"
+                      value="{{searchTerm}}"
+                      placeholder="Search by title or details..."
+                      aria-label="Search help cases"
+                    >
+                    <div class="input-group-append">
+                      <button class="btn btn-primary" type="submit">
+                        <i class="fas fa-search"></i> Search
+                      </button>
+                    </div>
+                    <input type="hidden" name="itemsPerPage" value="{{pagination.itemsPerPage}}">
+                    <input type="hidden" name="page" value="1">
+                  </div>
+                </form>
+              </div>
+            </div>
+
             {{!-- <h5 class="card-title">All Cases</h5> --}}
             <p class="card-text">
-            <table class="table table-xl table-hover table-borderless table-striped bg-transparent" style=" background-repeat: repeat; background-image: linear-gradient(rgb(248, 237, 227,0.9), rgb(208, 184, 168, 0.6)), url(https://blog.japanwondertravel.com/wp-content/uploads/2021/11/yukiya-shiba-LSyjrJFV-pw-unsplash.jpg)"> 
+            <table class="table table-xl table-hover table-borderless table-striped bg-transparent"
+              style=" background-repeat: repeat; background-image: linear-gradient(rgb(248, 237, 227,0.9), rgb(208, 184, 168, 0.6)), url(https://blog.japanwondertravel.com/wp-content/uploads/2021/11/yukiya-shiba-LSyjrJFV-pw-unsplash.jpg)">
               <thead class="text-muted">
                 <tr class="text-center">
                   <th class="align-middle">Created At</th>
                   <th class="align-middle">Title</th>
                   <th class="align-middle">Details</th>
-                 
                   <th class="align-middle">Status</th>
                 </tr>
               </thead>
@@ -184,27 +661,147 @@ rgb(125,110,131,0.5)),url("https://static.vecteezy.com/system/resources/previews
                   <td class="align-middle">{{StringDate}}</td>
                   <td class="text-center align-middle">{{title}}</td>
                   <td class="align-middle">{{details}}</td>
-                  
-                  <td class="text-center align-middle">{{#if solved}} Solved {{else}} {{#if offer}} Attending {{else}}
-                    Unattended {{/if}} {{/if}}</td>
+                  <td class="text-center align-middle">
+                    {{#if solved}}
+                      <span class="badge bg-success text-white">Solved</span>
+                    {{else}}
+                      {{#if offer}}
+                        <span class="badge bg-warning text-dark">Attending</span>
+                      {{else}}
+                        <span class="badge bg-secondary text-white">Unattended</span>
+                      {{/if}}
+                    {{/if}}
+                  </td>
                 </tr>
                 {{/each}}
               </tbody>
             </table>
             </p>
+
+            {{#if pagination}}
+            <div class="pagination-container">
+              <div class="items-per-page">
+                <form id="itemsPerPageForm" method="GET" action="/">
+                  <label for="itemsPerPage">Items per page:</label>
+                  <select id="itemsPerPage" name="itemsPerPage" class="form-select form-select-sm" onchange="document.getElementById('itemsPerPageForm').submit()">
+                    {{#if (eq pagination.itemsPerPage 5)}}
+                      <option value="5" selected>5</option>
+                    {{else}}
+                      <option value="5">5</option>
+                    {{/if}}
+
+                    {{#if (eq pagination.itemsPerPage 10)}}
+                      <option value="10" selected>10</option>
+                    {{else}}
+                      <option value="10">10</option>
+                    {{/if}}
+
+                    {{#if (eq pagination.itemsPerPage 25)}}
+                      <option value="25" selected>25</option>
+                    {{else}}
+                      <option value="25">25</option>
+                    {{/if}}
+
+                    <!-- Debug: Current itemsPerPage = {{pagination.itemsPerPage}} ({{typeof pagination.itemsPerPage}}) -->
+                  </select>
+                  <input type="hidden" name="page" value="1">
+                  {{#if searchTerm}}
+                  <input type="hidden" name="searchInput" value="{{searchTerm}}">
+                  {{/if}}
+                </form>
+              </div>
+
+              <div class="pagination-info">
+                Showing {{pagination.startIndex}} to {{pagination.endIndex}} of {{pagination.totalRecords}} entries
+                <!-- Debug info: Items per page = {{pagination.itemsPerPage}} -->
+              </div>
+
+              <ul class="pagination">
+                <!-- First and Previous buttons -->
+                {{#if pagination.hasPrevPage}}
+                  <li class="page-item">
+                    <a class="page-link" href="?page=1&itemsPerPage={{pagination.itemsPerPage}}{{#if searchTerm}}&searchInput={{searchTerm}}{{/if}}" aria-label="First">
+                      <span aria-hidden="true">&laquo;&laquo;</span>
+                    </a>
+                  </li>
+                  <li class="page-item">
+                    <a class="page-link" href="?page={{pagination.prevPage}}&itemsPerPage={{pagination.itemsPerPage}}{{#if searchTerm}}&searchInput={{searchTerm}}{{/if}}" aria-label="Previous">
+                      <span aria-hidden="true">&laquo;</span>
+                    </a>
+                  </li>
+                {{else}}
+                  <li class="page-item disabled">
+                    <a class="page-link" href="#" aria-label="First">
+                      <span aria-hidden="true">&laquo;&laquo;</span>
+                    </a>
+                  </li>
+                  <li class="page-item disabled">
+                    <a class="page-link" href="#" aria-label="Previous">
+                      <span aria-hidden="true">&laquo;</span>
+                    </a>
+                  </li>
+                {{/if}}
+
+                <!-- Page numbers -->
+                {{#each pagination.pages}}
+                  {{#if (eq this "...")}}
+                    <li class="page-item disabled">
+                      <span class="page-link">...</span>
+                    </li>
+                  {{else}}
+                    {{#if (eq ../pagination.page this)}}
+                      <li class="page-item active">
+                        <span class="page-link">{{this}}</span>
+                      </li>
+                    {{else}}
+                      <li class="page-item">
+                        <a class="page-link" href="?page={{this}}&itemsPerPage={{../pagination.itemsPerPage}}{{#if ../searchTerm}}&searchInput={{../searchTerm}}{{/if}}">{{this}}</a>
+                      </li>
+                    {{/if}}
+                  {{/if}}
+                {{/each}}
+
+                <!-- Next and Last buttons -->
+                {{#if pagination.hasNextPage}}
+                  <li class="page-item">
+                    <a class="page-link" href="?page={{pagination.nextPage}}&itemsPerPage={{pagination.itemsPerPage}}{{#if searchTerm}}&searchInput={{searchTerm}}{{/if}}" aria-label="Next">
+                      <span aria-hidden="true">&raquo;</span>
+                    </a>
+                  </li>
+                  <li class="page-item">
+                    <a class="page-link" href="?page={{pagination.totalPages}}&itemsPerPage={{pagination.itemsPerPage}}{{#if searchTerm}}&searchInput={{searchTerm}}{{/if}}" aria-label="Last">
+                      <span aria-hidden="true">&raquo;&raquo;</span>
+                    </a>
+                  </li>
+                {{else}}
+                  <li class="page-item disabled">
+                    <a class="page-link" href="#" aria-label="Next">
+                      <span aria-hidden="true">&raquo;</span>
+                    </a>
+                  </li>
+                  <li class="page-item disabled">
+                    <a class="page-link" href="#" aria-label="Last">
+                      <span aria-hidden="true">&raquo;&raquo;</span>
+                    </a>
+                  </li>
+                {{/if}}
+              </ul>
+            </div>
+            {{/if}}
+
             <a href="#" class="btn btn-primary">Back to Top</a>
           </div>
 
           <div class="tab-pane fade" id="unattendedcases">
             {{!-- <h5 class="card-title">Unattended Cases</h5> --}}
             <p class="card-text"></p>
-            <table class="table table-hover table-borderless table-striped  bg-transparent" style=" background-repeat: repeat; background-image: linear-gradient(rgb(248, 237, 227,0.9), rgb(208, 184, 168, 0.5)), url(https://image.jimcdn.com/app/cms/image/transf/none/path/sc6196b37a69d8813/backgroundarea/ie992d6d728f5e10d/version/1477617849/image.jpg)"> 
+            <table class="table table-hover table-borderless table-striped  bg-transparent"
+              style=" background-repeat: repeat; background-image: linear-gradient(rgb(248, 237, 227,0.9), rgb(208, 184, 168, 0.5)), url(https://image.jimcdn.com/app/cms/image/transf/none/path/sc6196b37a69d8813/backgroundarea/ie992d6d728f5e10d/version/1477617849/image.jpg)">
               <thead class="text-muted">
                 <tr class="text-center">
                   <th class="align-middle">Created At</th>
                   <th class="align-middle">Title</th>
                   <th class="align-middle">Details</th>
-                 
                   <th class="align-middle">Status</th>
                 </tr>
               </thead>
@@ -215,9 +812,17 @@ rgb(125,110,131,0.5)),url("https://static.vecteezy.com/system/resources/previews
                   <td class="align-middle">{{StringDate}}</td>
                   <td class="text-center align-middle">{{title}}</td>
                   <td class="align-middle">{{details}}</td>
-                 
-                  <td class="text-center align-middle">{{#if solved}} Solved {{else}} {{#if offer}} Attending {{else}}
-                    Unattended {{/if}} {{/if}}</td>
+                  <td class="text-center align-middle">
+                    {{#if solved}}
+                      <span class="badge bg-success text-white">Solved</span>
+                    {{else}}
+                      {{#if offer}}
+                        <span class="badge bg-warning text-dark">Attending</span>
+                      {{else}}
+                        <span class="badge bg-secondary text-white">Unattended</span>
+                      {{/if}}
+                    {{/if}}
+                  </td>
                 </tr>
                 {{/unless}}{{/unless}}
                 {{/each}}
@@ -226,17 +831,16 @@ rgb(125,110,131,0.5)),url("https://static.vecteezy.com/system/resources/previews
             </p>
             <a href="#" class="btn btn-primary">Back to Top</a>
           </div>
-
           <div class="tab-pane fade" id="attendingcases">
             {{!-- <h5 class="card-title">Attending Cases</h5> --}}
             <p class="card-text">
-            <table class="table table-hover table-borderless table-XL table-striped  bg-transparent" style=" background-repeat: repeat; background-image: linear-gradient(rgb(248, 237, 227,0.9), rgb(208, 184, 168, 0.6)), url(https://files.soundon.fm/1661239461359-dfcc83d6-9645-4feb-92ee-cbcb4c6b0f8c.jpeg)"> 
+            <table class="table table-hover table-borderless table-XL table-striped  bg-transparent"
+              style=" background-repeat: repeat; background-image: linear-gradient(rgb(248, 237, 227,0.9), rgb(208, 184, 168, 0.6)), url(https://files.soundon.fm/1661239461359-dfcc83d6-9645-4feb-92ee-cbcb4c6b0f8c.jpeg)">
               <thead class="text-muted">
                 <tr class="text-center">
                   <th class="align-middle">Created At</th>
                   <th class="align-middle">Title</th>
                   <th class="align-middle">Details</th>
-                  
                   <th class="align-middle">Status</th>
                 </tr>
               </thead>
@@ -247,9 +851,17 @@ rgb(125,110,131,0.5)),url("https://static.vecteezy.com/system/resources/previews
                   <td class="align-middle">{{StringDate}}</td>
                   <td class="text-center align-middle">{{title}}</td>
                   <td class="align-middle">{{details}}</td>
-                  
-                  <td class="text-center align-middle">{{#if solved}} Solved {{else}} {{#if offer}} Attending {{else}}
-                    Unattended {{/if}} {{/if}}</td>
+                  <td class="text-center align-middle">
+                    {{#if solved}}
+                      <span class="badge bg-success text-white">Solved</span>
+                    {{else}}
+                      {{#if offer}}
+                        <span class="badge bg-warning text-dark">Attending</span>
+                      {{else}}
+                        <span class="badge bg-secondary text-white">Unattended</span>
+                      {{/if}}
+                    {{/if}}
+                  </td>
                 </tr>
                 {{/if}}{{/unless}}
                 {{/each}}
@@ -258,17 +870,16 @@ rgb(125,110,131,0.5)),url("https://static.vecteezy.com/system/resources/previews
             </p>
             <a href="#" class="btn btn-primary">Back to Top</a>
           </div>
-
           <div class="tab-pane fade" id="solvedcases">
             {{!-- <h5 class="card-title">Solved Cases</h5> --}}
             <p class="card-text">
-            <table class="table table-hover table-borderless table-XL table-striped  bg-transparent" style=" background-repeat: repeat; background-image: linear-gradient(rgb(248, 237, 227,0.9), rgb(208, 184, 168, 0.6)), url(https://www.mycampbellrivernow.com/wp-content/uploads/2019/02/Cold.jpeg)"> 
+            <table class="table table-hover table-borderless table-XL table-striped  bg-transparent"
+              style=" background-repeat: repeat; background-image: linear-gradient(rgb(248, 237, 227,0.9), rgb(208, 184, 168, 0.6)), url(https://www.mycampbellrivernow.com/wp-content/uploads/2019/02/Cold.jpeg)">
               <thead class="text-muted">
                 <tr class="text-center">
                   <th class="align-middle">Created At</th>
                   <th class="align-middle">Title</th>
                   <th class="align-middle">Details</th>
-                 
                   <th class="align-middle">Status</th>
                 </tr>
               </thead>
@@ -279,9 +890,17 @@ rgb(125,110,131,0.5)),url("https://static.vecteezy.com/system/resources/previews
                   <td class="align-middle">{{StringDate}}</td>
                   <td class="text-center align-middle">{{title}}</td>
                   <td class="align-middle">{{details}}</td>
-                 
-                  <td class="text-center align-middle">{{#if solved}} Solved {{else}} {{#if offer}} Attending {{else}}
-                    Unattended {{/if}} {{/if}}</td>
+                  <td class="text-center align-middle">
+                    {{#if solved}}
+                      <span class="badge bg-success text-white">Solved</span>
+                    {{else}}
+                      {{#if offer}}
+                        <span class="badge bg-warning text-dark">Attending</span>
+                      {{else}}
+                        <span class="badge bg-secondary text-white">Unattended</span>
+                      {{/if}}
+                    {{/if}}
+                  </td>
                 </tr>
                 {{/if}}
                 {{/each}}
@@ -290,14 +909,9 @@ rgb(125,110,131,0.5)),url("https://static.vecteezy.com/system/resources/previews
             </p>
             <a href="#" class="btn btn-primary">Back to Top</a>
           </div>
-
         </div>
       </div>
     </div>
   </div>
 </body>
-
 </html>
-  
-{{!-- <wix-bg-media id="bgMedia_comp-jzqzeas9" class="_3BaUs" data-container-id="comp-jzqzeas9" data-container-size="0, 0" data-page-id="c1dmp" data-bg-effect-name="BgParallax" style="width: 1553px; height: 1720px; left: 0px; top: 0px; will-change: transform; transform: translate3d(0px, 52.6px, 0px);"><video id="comp-jzqzeas9_video" class="_3vVMz" role="presentation" crossorigin="anonymous" playsinline="" preload="auto" muted="" loop="" tabindex="-1" autoplay="" src="https://video.wixstatic.com/video/ea26fd_a7989f56a9704ec0b40cff680647b589/1080p/mp4/file.mp4" style="height: 100%; width: 100%; object-fit: cover; object-position: center center; opacity: 1;"></video></wix-bg-media>   --}}
-

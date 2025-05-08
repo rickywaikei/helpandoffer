@@ -1,83 +1,96 @@
-    <style>
-        .card { 
-            background-color: rgb(248, 237, 227, 0.7) !important; 
-            font-size: 20px !important;
-            font: #7D6E83 !important;
-            border-radius: 50px 50px 50px 50px !important; 
-        }
+<style>
+  .card {
+    background-color: rgb(248, 237, 227, 0.7) !important;
+    font-size: 20px !important;
+    font: #7D6E83 !important;
+    border-radius: 50px 50px 50px 50px !important;
+  }
 
-        body {
-            background-image: linear-gradient(to bottom,rgba(223,211,195,0.5), 
-rgb(125,110,131,0.5)),url("https://static.vecteezy.com/system/resources/previews/010/264/847/large_2x/an-image-of-plam-leave-shadow-on-the-wall-free-png.png");
-        }
-        .table {
-            background-color: #F8EDE3;
-            background-color: rgb(248, 237, 227, 0.9);
-            font-style: times;
-            font-size:16px;
-            position: fixed  sticky;
-            font: #7D6E83  !important;
-        }
+  /* Body background is now handled by global.css */
 
-        .nav-link {
-            color: rgb(125, 110, 131) !important;
-        }
-        {{!-- .link {
-            color: #7D6E83  !important;
-        }
-        .item>a:hover {
-            color: #D0B8A8  !important;
-        } --}}
-        
-        /*code to change background color*/
-        .nav>.active>a {
-            background-color: rgba(0, 0, 0, 0.5) !important;
-            color: #D0B8A8 !important;
-        }
-        .btn {
-            background-color: #7D6E83 !important;
-            border:0 !important;
-            border-radius: 10px 10px 10px 10px !important;
-        }
-        .carousel-caption {
-          text-shadow: 0 0 5px rgb(33, 30, 30),0 0 10px rgb(88, 37, 74),0 0 15px rgb(153, 167, 70),0 0 40px #46453e,0 0 70px #2b0e3f
-        }
-    </style>
+  .table {
+    background-color: #F8EDE3;
+    background-color: rgb(248, 237, 227, 0.9);
+    font-style: times;
+    font-size: 16px;
+    position: fixed sticky;
+    font: #7D6E83 !important;
+  }
+
+  .nav-link {
+    color: rgb(125, 110, 131) !important;
+  }
+
+    {
+      {
+      !-- .link {
+        color: #7D6E83 !important;
+      }
+
+      .item>a:hover {
+        color: #D0B8A8 !important;
+      }
+
+      --
+    }
+  }
+
+  /*code to change background color*/
+  .nav>.active>a {
+    background-color: rgba(0, 0, 0, 0.5) !important;
+    color: #D0B8A8 !important;
+  }
+
+  .btn {
+    background-color: #7D6E83 !important;
+    border: 0 !important;
+    border-radius: 10px 10px 10px 10px !important;
+  }
+
+  .carousel-caption {
+    text-shadow: 0 0 5px rgb(33, 30, 30), 0 0 10px rgb(88, 37, 74), 0 0 15px rgb(153, 167, 70), 0 0 40px #46453e, 0 0 70px #2b0e3f
+  }
+</style>
 <div style="margin-top:100px"><br><br>
-{{#each errors}}
-<div class="alert alert-danger">{{test}}</div>
-{{else}}
-{{/each}}
-    <h4 class="text-center">Update offered case</h4><br>
-<!-- _method with "put" -->
-<div class="card card-body"><br>
-    <h6>
+  <div class="row">
+    <div class="col-md-6 mx-auto">
+      {{#each errors}}
+      <div class="alert alert-danger">{{test}}</div>
+      {{else}}
+      {{/each}}
+      <h4 class="text-center">Update offered case</h4><br>
+      <!-- _method with "put" -->
+      <div class="card card-body">
+        <div class="form-group"><br>
+          <label for="title">Title</label>
+          <input type=text name="title" class="form-control" value="{{helpcase.title}}" readonly />
+        </div><br>
         <div class="form-group">
-            <label for="title">Title</label>
-            <input type=text name="title" class="form-control" value="{{helpcase.title}}" readonly />
+          <label for="details">Details</label>
+          <textarea name="details" class="form-control" rows="5" readonly>{{helpcase.details}}</textarea>
         </div>
-        <div class="form-group">
-            <label for="details">Details</label>
-            <textarea name="details" class="form-control" readonly>{{helpcase.details}}</textarea>
-        </div>
-    </h6>
-    <hr>
-    <h5>Send message to case author</h5>
-    <h6>
+        <hr>
+        <h5 class="text-center">Send message to case author</h5>
         <form action="/helpcases/update/{{helpcase._id}}?_method=PUT" method="POST">
-            <input type="hidden" name="_method" value="PUT" required />
-            <div class="form-group">
-                <label for="offermsg">Your message</label>
-                <textarea name="offermsg" class="form-control"></textarea>
-            </div>
+          <input type="hidden" name="_method" value="PUT" required />
+          <input type="hidden" name="_csrf" value="{{csrfToken}}" />
+          <div class="form-group">
+            <label for="offermsg">Your message</label>
+            <textarea name="offermsg" class="form-control" rows="3"></textarea>
+          </div><br>
+          <div class="form-group">
             <label for="offer">Remove your Offerer role? [Enter "REMOVE" to confirm]</label>
-            <input type=text name="offer" class="form-control" value="{{helpcase.offer}}" /><br>
+            <input type=text name="offer" class="form-control" value="{{helpcase.offer}}" />
+          </div><br>
+          <div class="text-center">
             <button type="submit" class="btn text-white text-center">Submit</button>
+          </div>
         </form><br>
         <div class="form-group">
-            <label for="offermsg">Previous messages</label>
-            <textarea name="offermsg" class="form-control" readonly>{{helpcase.offermsg}}</textarea>
+          <label for="offermsg">Previous messages</label>
+          <textarea name="offermsg" class="form-control" rows="4" readonly>{{helpcase.offermsg}}</textarea>
         </div>
-    </h6>
-</div>
+      </div><br>
+    </div>
+  </div>
 </div>

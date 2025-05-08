@@ -1,81 +1,117 @@
 <style>
-    .row {
-            margin-top: 20px;
-            margin-bottom: 20px;
-            text-indent: 2em;
-        }
+  .row {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    text-indent: 2em;
+  }
+
+  .card {
+    margin: 0 auto;
+    float: none;
+    margin-bottom: 10px;
+    background-color: rgb(223, 211, 195, 0.5) !important;
+    font-size: 20px !important;
+    border-radius: 50px 50px 50px 50px;
+  }
+
+  /* Body background is now handled by global.css */
+
+  .btn {
+    background-color: #7D6E83 !important;
+    border: 0 !important;
+    border-radius: 10px 10px 10px 10px;
+  }
+
+  .btn1 {
+    background-color: rgb(248, 237, 227, 0.6) !important;
+    border: 0 !important;
+    border-radius: 10px 10px 10px 10px;
+  }
+
+  /* Mobile-specific styles */
+  @media (max-width: 767.98px) {
     .card {
-            margin: 0 auto; 
-            float: none; 
-            margin-bottom: 10px; 
-            background-color: rgb(223, 211, 195, 0.5) !important; 
-            font-size: 20px !important; 
-            border-radius: 50px 50px 50px 50px;
-        }
-    body {
-            background-image: linear-gradient(to bottom,rgba(223,211,195,0.5), 
-rgb(223,211,195,0.5)),url("https://static.vecteezy.com/system/resources/previews/010/264/847/large_2x/an-image-of-plam-leave-shadow-on-the-wall-free-png.png");
+      width: 95% !important;
+      margin: 0.5rem auto !important;
+      border-radius: 30px !important;
+    }
 
-        }
-    .btn {
-            background-color: #7D6E83 !important;
-            border:0 !important;
-            border-radius: 10px 10px 10px 10px
-        }
-    .btn1 {
-            background-color: rgb(248, 237, 227, 0.6)  !important;
-            border:0 !important;
-            border-radius: 10px 10px 10px 10px
-        }
+    .btn-group {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+    }
 
+    .btn-group .btn1,
+    .btn-group form .btn1 {
+      padding: 0.25rem 0.5rem !important;
+      margin: 0 2px !important;
+    }
+  }
 </style>
+<!-- Include the responsive table CSS -->
+<link rel="stylesheet" href="/css/table-responsive.css">
+
 <div style="margin-top:100px"></div><br><br>
 <h4 class="text-center">All member profiles {{res.locals.user.name}}</h4><br>
 {{#if profiles}}
-<div class="card card-body border-0">
-    <table class="table table-stripted table-hover table-xl table-striped table-borderless ">
-        <thead>
-            <tr class="text-left">
-                <th>Created At</th>
-                <th>Avatar</th>
-                <th>Name</th>
-                <th>Email</th>
-                <th>Phone</th>
-                <th>Role</th>
-                <th>Badge</th>
-            </tr>
-        </thead>
-        <tbody>
-            {{#each profiles}} 
-            <tr>
-                <td class="align-middle">{{StringDate}}</td>
-                <td class="text-center align-middle">{{#if avatar.data}}<img src="data:image/{{avatar.contentType}}; base64, {{avatar.data}}" width="50"
-                        height="50" /> {{else}} - {{/if}}</td>
-                <td class="text-center align-middle">{{name}}</td>
-                <td class="align-middle">{{email}}</td>
-                <td class="align-middle">{{phone}}</td>
-                <td class="text-center align-middle">{{#if isAdmin}} admin {{else}} user {{/if}}</td>
-                <td class="text-center align-middle"><span class="badge badge-warning">{{badge}}</span></td>
-                <td class="text-center align-middle">
-                  <div class="btn-group btn-sm">
-                    {{!-- <form action="/users/addbadge/{{_id}}?_method=Addbadge" method="POST">
-                      <input type="hidden" name="_method" value="Addbadge">
-                      <input type="submit" class="btn1 btn-outline-info btn-sm" value="Give badge">
-                    </form> --}}
-                    <a href="/users/edit/{{_id}}" class="btn1 btn-outline-primary btn-sm" role="button"> Edit</a> 
-                    <form action="/users/{{_id}}?_method=Delete" method="POST">
-                      <input type="hidden" name="_method" value="Delete">
-                      <input type="submit" class="btn1 btn-outline-danger btn-sm ml-1" value="Delete">
-                    </form>
-                  </div>
-                </td>
-            </tr>
-{{/each}}
-        </tbody>
-    </table>
-</div><br>
+<div class="wide-container-admin">
+  <div class="all-cases-card card card-body border-0">
+    <div class="card-text" style="width: 100%;">
+      <div class="table-responsive-wide">
+        <table class="table table-stripted table-hover table-xl table-striped table-borderless profiles-admin-table">
+    <thead>
+      <tr class="text-center">
+        <th class="align-middle">Created At</th>
+        <th class="align-middle">Avatar</th>
+        <th class="align-middle">Name</th>
+        <th class="align-middle">Email</th>
+        <th class="align-middle">Phone</th>
+        <th class="align-middle">Role</th>
+        <th class="align-middle">Badge</th>
+        <th class="align-middle">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      {{#each profiles}}
+      <tr>
+        <td class="align-middle">{{StringDate}}</td>
+        <td class="text-center align-middle">{{#if avatar.data}}<img
+            src="data:image/{{avatar.contentType}}; base64, {{avatar.data}}" width="50" height="50" /> {{else}} -
+          {{/if}}</td>
+        <td class="text-center align-middle">{{name}}</td>
+        <td class="align-middle">{{email}}</td>
+        <td class="align-middle">{{phone}}</td>
+        <td class="text-center align-middle">{{#if isAdmin}} admin {{else}} user {{/if}}</td>
+        <td class="text-center align-middle"><span class="badge bg-warning text-dark">{{badge}}</span></td>
+        <td class="text-center align-middle actions-column">
+          <div class="btn-group btn-sm admin-buttons">
+            <a href="/users/edit/{{_id}}" class="btn1 btn-outline-info btn-sm" role="button" title="Edit" onclick="event.preventDefault(); document.getElementById('edit-form-{{_id}}').submit();">
+              <i class="fas fa-edit"></i>
+            </a>
+            <form id="edit-form-{{_id}}" action="/users/edit/{{_id}}" method="GET" style="display: none;">
+              <input type="hidden" name="_csrf" value="{{../csrfToken}}">
+            </form>
+
+            <form action="/users/{{_id}}?_method=Delete" method="POST" onsubmit="return confirm('Are you sure you want to delete this user?');" class="d-inline">
+              <input type="hidden" name="_method" value="Delete">
+              <input type="hidden" name="_csrf" value="{{../csrfToken}}">
+              <button type="submit" class="btn1 btn-outline-danger btn-sm ml-1" title="Delete">
+                <i class="fas fa-trash-alt"></i>
+              </button>
+            </form>
+          </div>
+        </td>
+      </tr>
+      {{/each}}
+    </tbody>
+        </table>
+      </div>
+    </div>
+  </div><br>
+</div>
 {{else}}
-<h2>No record found.</h2>
+<div class="text-center">
+  <h2>No record found.</h2>
+</div>
 {{/if}}
-</div>
-</div>

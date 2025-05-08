@@ -1,5 +1,40 @@
-<div style="margin-top:100px">
-<h1>
-    <img src="/img/404.jpg" title="404" alt="under construction" width="768" />
-</h1>
+{{!-- Link to the error pages CSS --}}
+<link rel="stylesheet" href="/css/error-pages.css">
+
+<div class="container" style="margin-top:100px">
+  <div class="error-container">
+    <h1 class="error-code">404</h1>
+    <h2 class="error-title">Page Not Found</h2>
+    <p class="error-message">
+      We're sorry, but the page you were looking for doesn't exist or has been moved.
+      Please check the URL or use the button below to return to the home page.
+    </p>
+
+    <div class="error-image-container">
+      <img src="/img/404.jpg" class="error-image" title="404" alt="Page not found" />
+    </div>
+
+    <div class="error-actions">
+      <a href="/" class="btn-home">Return to Home Page</a>
+    </div>
+
+    <div class="error-footer">
+      <p>If you believe this is an error, please contact our support team.</p>
+    </div>
+  </div>
 </div>
+
+<script>
+  // Log the 404 error for analytics purposes
+  console.log('404 error occurred at: ' + window.location.href);
+
+  // Add a listener to the home button for tracking
+  document.addEventListener('DOMContentLoaded', function() {
+    const homeButton = document.querySelector('.btn-home');
+    if (homeButton) {
+      homeButton.addEventListener('click', function() {
+        console.log('User clicked return to home from 404 page');
+      });
+    }
+  });
+</script>

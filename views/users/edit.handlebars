@@ -5,16 +5,16 @@
             text-indent: 2em;
         }
     .card {
-            margin: 0 auto; 
-            float: none; 
-            margin-bottom: 10px; 
-            background-color: rgb(223, 211, 195, 0.5) !important; 
-            font-size: 20px !important; 
+            margin: 0 auto;
+            float: none;
+            margin-bottom: 10px;
+            background-color: rgb(223, 211, 195, 0.5) !important;
+            font-size: 20px !important;
             border-radius: 50px 50px 50px 50px;
- 
+
         }
     body {
-            background-image: linear-gradient(to bottom,rgba(223,211,195,0.6), 
+            background-image: linear-gradient(to bottom,rgba(223,211,195,0.6),
 rgb(223,211,195,0.6)),url("https://static.vecteezy.com/system/resources/previews/010/264/847/large_2x/an-image-of-plam-leave-shadow-on-the-wall-free-png.png");
 
         }
@@ -31,37 +31,38 @@ rgb(223,211,195,0.6)),url("https://static.vecteezy.com/system/resources/previews
 
 
 </style>
-<div style="margin-top:100px"><br><br>
-    <h4 class="text-center">Edit User Profile</h4><br>
-{{#each errors}}
-<div class="alert alert-danger">{{test}}</div><br>
-{{else}}
-{{/each}}
+<!-- Include the responsive table CSS -->
+<link rel="stylesheet" href="/css/table-responsive.css">
+<div><br><br>
+  <h4 class="text-center">Edit User Profile</h4><br>
 
 <!-- _method with "put" -->
 <div class="card card-body ">
 <br>
-    <h6>
-        <form action="/users/edit/{{user._id}}?_method=PUT" method="POST">
-            <input type="hidden" name="_method" value="PUT" />
-            <div class="form-group">
-                <label for="name">Name</label>
-                <input type="text" class="form-control" name="name" value="{{user.name}}" readonly />
-                <br>
-                <label for="email">Email</label>
-                <input type="text" class="form-control" name="email" value="{{user.email}}"/>
-                <br>
-                <label for="phone">Phone [format +852-1234-5678]</label>
-                <input type="tel" class="form-control" name="phone" pattern="[+][0-9]{3}-[0-9]{4}-[0-9]{4}" value="{{user.phone}}"/> 
-                <hr>
-                <label for="email">Change Password</label>
-                <input type="password" class="form-control" name="password" value="{{password}}"/>
-                <label for="email">Confirm Password</label>
-                <input type="password" class="form-control" name="password2" value="{{password2}}"/>                          
-            </div><br>
-            <div class="text-center">
-            <button type="submit" class="btn text-white text-center">Submit</button>
-            </div><br>
-        </form>
-    </h6>
+<h6>
+  <form action="/users/edit/{{user._id}}?_method=PUT" method="POST">
+    <input type="hidden" name="_method" value="PUT" />
+    <input type="hidden" name="_csrf" value="{{csrfToken}}" />
+     <div class="form-group">
+       <label for="name">Name</label>
+         <input type="text" class="form-control" name="name" value="{{user.name}}" readonly />
+         <br>
+         <label for="email">Email</label>
+          <input type="text" class="form-control" name="email" value="{{user.email}}"/>
+         <br>
+         <label for="phone">Phone</label>
+          <input type="tel" class="form-control" name="phone" value="{{user.phone}}" placeholder="+852 9876-4321"/>
+          <small class="form-text text-muted">Hong Kong format: +852 9876-4321 or 98764321</small>
+         <hr>
+         <label for="password">Change Password</label>
+          <input type="password" class="form-control" name="password" autocomplete="new-password" />
+          <small class="form-text text-muted">Leave blank to keep current password</small>
+         <label for="password2">Confirm Password</label>
+          <input type="password" class="form-control" name="password2" autocomplete="new-password" />
+      </div><br>
+      <div class="text-center">
+        <button type="submit" class="btn text-white text-center">Submit</button>
+      </div><br>
+  </form>
+</h6>
 </div>

@@ -1,5 +1,55 @@
-<div style="margin-top:100px">
-<h1>
-    <img src="/img/500.jpg" title="500" alt="500 Server Error!" width="768" />
-</h1>
+{{!-- Link to the error pages CSS --}}
+<link rel="stylesheet" href="/css/error-pages.css">
+
+<div class="container" style="margin-top:100px">
+  <div class="error-container">
+    <h1 class="error-code">500</h1>
+    <h2 class="error-title">Internal Server Error</h2>
+    <p class="error-message">
+      We're sorry, but something went wrong on our end. Our team has been notified and is working to fix the issue.
+      Please try again later or use the button below to return to the home page.
+    </p>
+
+    <div class="error-image-container">
+      <img src="/img/500.jpg" class="error-image" title="500" alt="Server error" />
+    </div>
+
+    <div class="error-actions">
+      <a href="/" class="btn-home">Return to Home Page</a>
+      <p style="margin-top: 10px;">
+        <small>If the problem persists, please try refreshing the page or clearing your browser cache.</small>
+      </p>
+    </div>
+
+    <div class="error-footer">
+      <p>Error reference: {{#if errorId}}{{errorId}}{{else}}{{randomErrorId}}{{/if}}</p>
+    </div>
+  </div>
 </div>
+
+<script>
+  // Generate a random error ID if one wasn't provided by the server
+  document.addEventListener('DOMContentLoaded', function() {
+    const errorFooter = document.querySelector('.error-footer p');
+    if (errorFooter && errorFooter.textContent.includes('{{randomErrorId}}')) {
+      const randomId = 'ERR-' + Math.random().toString(36).substring(2, 10).toUpperCase();
+      errorFooter.textContent = 'Error reference: ' + randomId;
+
+      // Log the error for analytics purposes
+      console.error('500 error occurred with reference: ' + randomId);
+    }
+
+    // Add a listener to the home button for tracking
+    const homeButton = document.querySelector('.btn-home');
+    if (homeButton) {
+      homeButton.addEventListener('click', function() {
+        console.log('User clicked return to home from 500 page');
+      });
+    }
+
+    // Automatically refresh the page after 60 seconds
+    setTimeout(function() {
+      location.reload();
+    }, 60000);
+  });
+</script>

@@ -1,0 +1,189 @@
+/* Global styles for the Help and Offer application */
+
+/* Full-screen background image */
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-image: linear-gradient(to bottom, rgba(223, 211, 195, 0.5),
+      rgb(125, 110, 131, 0.5)), url("https://static.vecteezy.com/system/resources/previews/010/264/847/large_2x/an-image-of-plam-leave-shadow-on-the-wall-free-png.png");
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+  min-height: 100vh;
+  font-family: Arial, sans-serif;
+}
+
+/* Common button styling */
+.btn {
+  background-color: #7D6E83 !important;
+  border: 0 !important;
+  border-radius: 10px !important;
+  transition: all 0.3s ease;
+}
+
+.btn:hover {
+  opacity: 0.9;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Badge styling */
+.badge {
+  font-size: 0.8rem;
+  padding: 0.3rem 0.5rem;
+  border-radius: 0.25rem;
+  white-space: nowrap;
+  display: inline-block;
+  min-width: 70px;
+  text-align: center;
+}
+
+/* Action buttons styling */
+.btn-action {
+  width: 36px;
+  height: 36px;
+  padding: 6px 0;
+  border-radius: 50%;
+  text-align: center;
+  font-size: 14px;
+  line-height: 1.428571429;
+  margin-right: 5px;
+}
+
+.btn-outline-info {
+  color: #17a2b8;
+  border-color: #17a2b8;
+}
+
+.btn-outline-danger {
+  color: #dc3545;
+  border-color: #dc3545;
+}
+
+.btn-outline-success {
+  color: #28a745;
+  border-color: #28a745;
+}
+
+/* Hover effects for action buttons */
+.btn-outline-info:hover {
+  background-color: #17a2b8;
+  color: white;
+}
+
+.btn-outline-danger:hover {
+  background-color: #dc3545;
+  color: white;
+}
+
+.btn-outline-success:hover {
+  background-color: #28a745;
+  color: white;
+}
+
+/* Card styling */
+.card {
+  background-color: rgb(248, 237, 227, 0.7) !important;
+  border-radius: 50px !important;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+/* Mobile-specific styles */
+@media (max-width: 767.98px) {
+  .container {
+    padding: 0 !important;
+    margin: 0 auto !important;
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+
+  .card {
+    border-radius: 30px !important;
+    margin: 0.5rem auto !important;
+    width: 95% !important;
+    max-width: 600px !important;
+  }
+
+  .form-control, .input-group {
+    width: 100% !important;
+  }
+
+  .col-md-6.mx-auto, .col-md-8.mx-auto {
+    width: 95% !important;
+    max-width: 600px !important;
+    padding: 0 15px !important;
+  }
+}
+
+/* Responsive typography */
+.responsive-text-xs {
+  font-size: calc(10px + 0.5vw);
+}
+
+.responsive-text-sm {
+  font-size: calc(12px + 0.5vw);
+}
+
+.responsive-text-md {
+  font-size: calc(14px + 0.5vw);
+}
+
+.responsive-text-lg {
+  font-size: calc(16px + 0.5vw);
+}
+
+/* Table styling */
+.table {
+  background-color: rgb(248, 237, 227, 0.9);
+  transition: all 0.3s ease;
+}
+
+.table th {
+  font-size: calc(13px + 0.4vw);
+}
+
+.table td {
+  font-size: calc(12px + 0.3vw);
+}
+
+/* Form styling */
+.form-control {
+  border-radius: 10px;
+  border: 1px solid #ddd;
+  padding: 8px 12px;
+  transition: all 0.3s ease;
+}
+
+.form-control:focus {
+  border-color: #7D6E83;
+  box-shadow: 0 0 0 0.2rem rgba(125, 110, 131, 0.25);
+}
+
+/* Desktop form width adjustments */
+@media (min-width: 768px) {
+  .col-md-6.mx-auto {
+    max-width: 80% !important;
+    width: 80% !important;
+  }
+
+  .col-md-8.mx-auto {
+    max-width: 90% !important;
+    width: 90% !important;
+  }
+
+  .container {
+    max-width: 95% !important;
+    width: 95% !important;
+  }
+}
+
+/* Search form styling */
+.search-form {
+  margin-bottom: 20px;
+}

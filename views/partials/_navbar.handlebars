@@ -1,118 +1,149 @@
- <!-- within the navbar add more views -->
+<!-- within the navbar add more views -->
 
 <div class="container container-fluid d-flex">
-  <nav class="navbar fixed-top  navbar-light navbar-expand-sm mb-3">
+  <nav class="navbar fixed-top navbar-light navbar-expand-md mb-3">
     <style>
-        .navbar {
+      .navbar {
+        height: 100px;
+        background-color: rgba(248, 237, 227, 0.7);
+        font-style: times !important;
+        font-size: 24px;
+        position: fixed sticky;
+        backdrop-filter: blur(5px);
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      }
 
-            height: 100px;
-            background-color: rgb(248, 237, 227, 0.5);
-            font-style: times !important;
-            font-size:24px ;
-            position: fixed  sticky;
-            background-image: linear-gradient(to right,rgb(248, 237, 227, 0.8), 
-rgb(125, 110, 131, 0.7)),url("https://static.vecteezy.com/system/resources/previews/010/264/847/large_2x/an-image-of-plam-leave-shadow-on-the-wall-free-png.png");            
-        }
-        .navbar a{
-            color: #594545 !important;
-            text-shadow: 0 0 5px rgb(187, 173, 173),0 0 10px rgb(189, 170, 185),0 0 15px rgb(255, 225, 129),0 0 30px #D0B8A8,0 0 50px #8e2db4
-        }
-        .navbar-brand {
-            font-size:30px !important;
-            color: #F8EDE3 !important;
-        }
-        .nav-link {
-            color: #f11c09 !important;
+      .navbar a {
+        color: #594545 !important;
+        text-shadow: 0 0 5px rgb(187, 173, 173), 0 0 10px rgb(189, 170, 185), 0 0 15px rgb(255, 225, 129), 0 0 30px #D0B8A8, 0 0 50px #8e2db4
+      }
+
+      .navbar-brand {
+        font-size: 30px !important;
+        color: #F8EDE3 !important;
+      }
+
+      .nav-link {
+        color: #f11c09 !important;
+      }
+
+      .nav-item>a:hover {
+        color: #D0B8A8;
+      }
+
+      /*code to change background color*/
+      .navbar-nav>.active>a {
+        background-color: #F8EDE3;
+        color: #D0B8A8;
+      }
+
+      /* Right-align all navbar items in collapsed mode */
+      @media (max-width: 767.98px) {
+        .navbar-collapse {
+          background-color: rgba(248, 237, 227, 0.95);
+          border-radius: 0 0 15px 15px;
+          padding: 10px;
+          margin-top: 10px;
+          box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
 
-        .nav-item>a:hover {
-            color: #D0B8A8;
-        }
-        /*code to change background color*/
-        .navbar-nav>.active>a {
-            background-color: #F8EDE3;
-            color: #D0B8A8;
+        .navbar-collapse .navbar-nav {
+          text-align: right;
         }
 
+        .navbar-collapse .nav-item {
+          text-align: right;
+          padding: 5px 0;
+        }
 
+        .navbar-collapse .nav-link {
+          text-align: right;
+          padding-right: 1rem;
+          font-size: 20px;
+        }
+
+        /* Ensure dropdown menus are properly aligned */
+        .navbar-collapse .dropdown-menu {
+          text-align: right;
+          right: 0;
+          left: auto;
+          background-color: rgba(248, 237, 227, 0.9);
+          border: none;
+          box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Style for the toggler button */
+        .navbar-toggler {
+          border: none;
+          padding: 0.5rem;
+          margin-right: 1rem;
+        }
+
+        .navbar-toggler-icon {
+          width: 1.5em;
+          height: 1.5em;
+        }
+      }
     </style>
-  <div class="logo">
-        <img src="https://cdn3.iconfinder.com/data/icons/business-and-finance-76/64/C_Hand_Time-512.png" alt="Logo" width="50" height="50" />
-  </div>
+    <div class="logo">
+      <img src="https://cdn3.iconfinder.com/data/icons/business-and-finance-76/64/C_Hand_Time-512.png" alt="Logo"
+        width="50" height="50" />
+    </div>
 
-        <a class="navbar-brand font-weight-bold" href="/">HelpAndOffer</a>
+    <a class="navbar-brand font-weight-bold" href="/">HelpAndOffer</a>
 
-        <a class="nav-link" href="/">Home</a>
+    <button class="navbar-toggler shadow btn-sm" type="button" data-toggle="collapse"
+      data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon shadow-lg"></span>
+    </button>
 
-        <a class="nav-link" href="/about">About</a>
-
-  <div class="container-fluid">
-        <a href="#" class="navbar-brand"></a>
-        <a href="#" class="navbar-brand"></a>
-        <a href="#" class="navbar-brand"></a>
-        {{!-- <nav class="navbar-expand-sm"></nav> --}}
-
-        <button class="navbar-toggler shadow btn-sm" type="button" data-bs-toggle="collapse" data-toggle="collapse" data-bs-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation" data-target="#navbarNav">
-          <span class="navbar-toggler-icon shadow-lg"></span>
-        </button>
-        
-  <div class="container-fluid navbar-expand-sm">
     <div class="collapse navbar-collapse" id="navbarNav">
-      <ul class="navbar-nav ml-auto w-100  justify-content-end">
-          {{#if user}}
-          <li class="nav-item dropdown">
-            <a href="#" class="nav-link dropdown-toggle text-right  font-weight-bold" data-toggle="dropdown" id="navbarDropdownMenuLink">Cases</a>
-            <div class="dropdown-menu bg-light border-0 ">
-              <a href="/helpcases" class="dropdown-item text-center">My Requested</a>
-              <a href="/helpcases/add" class="dropdown-item  text-center">Request new case</a>
-              <a href="/helpcases/offered" class="dropdown-item text-center">My Offered</a> 
-              <hr>
-              <a href="/helpcases/records" class="dropdown-item text-center">All cases</a>
-            </div>
-          </li>
-          <li class="nav-item dropdown">
-            <a href="#" class="nav-link dropdown-toggle text-right  font-weight-bold" data-toggle="dropdown" id="navbarDropdownMenuLink">Profiles</a>
-            <div class="dropdown-menu   bg-light border-0 ">
-              <a href="/users/myprofile" class="dropdown-item text-center">My profile</a>
-              <hr>
-              <a href="/users/profiles" class="dropdown-item text-center">All profiles</a>
-            </div>
-          </li>
-          <li class="nav-item">
-            <a href="/users/logout" class="nav-link text-right font-weight-bold">logout 
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-door-open-fill" viewBox="0 0 16 16">
-                <path d="M1.5 15a.5.5 0 0 0 0 1h13a.5.5 0 0 0 0-1H13V2.5A1.5 1.5 0 0 0 11.5 1H11V.5a.5.5 0 0 0-.57-.495l-7 1A.5.5 0 0 0 3 1.5V15H1.5zM11 2h.5a.5.5 0 0 1 .5.5V15h-1V2zm-2.5 8c-.276 0-.5-.448-.5-1s.224-1 .5-1 .5.448.5 1-.224 1-.5 1z"/>
-              </svg></a> 
-          </li>
-
-          {{else}}
-                <li class="nav-item">
-                  <a href="/users/login" class="nav-link text-right">Login
-                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-door-open" viewBox="0 0 16 16">
-                    <path d="M8.5 10c-.276 0-.5-.448-.5-1s.224-1 .5-1 .5.448.5 1-.224 1-.5 1z"/>
-                    <path d="M10.828.122A.5.5 0 0 1 11 .5V1h.5A1.5 1.5 0 0 1 13 2.5V15h1.5a.5.5 0 0 1 0 1h-13a.5.5 0 0 1 0-1H3V1.5a.5.5 0 0 1 .43-.495l7-1a.5.5 0 0 1 .398.117zM11.5 2H11v13h1V2.5a.5.5 0 0 0-.5-.5zM4 1.934V15h6V1.077l-6 .857z"/>
-                  </svg>
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a href="/users/register" class="nav-link text-right">Register</a>
-                </li>
-        
-          {{/if}} 
+      <ul class="navbar-nav ml-auto w-100 justify-content-end">
+        <li class="nav-item">
+          <a class="nav-link text-right" href="/"><i class="fas fa-home"></i> Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-right" href="/search"><i class="fas fa-search"></i> Search</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-right" href="/about"><i class="fas fa-info-circle"></i> About</a>
+        </li>
+        {{#if user}}
+        <li class="nav-item dropdown">
+          <a href="#" class="nav-link dropdown-toggle text-right font-weight-bold" data-toggle="dropdown"
+            id="navbarDropdownMenuLink">Cases</a>
+          <div class="dropdown-menu bg-light border-0">
+            <a href="/helpcases" class="dropdown-item text-center">My Requested</a>
+            <a href="/helpcases/add" class="dropdown-item text-center">Request new case</a>
+            <a href="/helpcases/offered" class="dropdown-item text-center">My Offered</a>
+            <hr>
+            <a href="/helpcases/records" class="dropdown-item text-center">All cases</a>
+          </div>
+        </li>
+        <li class="nav-item dropdown">
+          <a href="#" class="nav-link dropdown-toggle text-right font-weight-bold" data-toggle="dropdown"
+            id="navbarDropdownMenuLink">Profiles</a>
+          <div class="dropdown-menu bg-light border-0">
+            <a href="/users/myprofile" class="dropdown-item text-center">My profile</a>
+            <hr>
+            <a href="/users/profiles" class="dropdown-item text-center">All profiles</a>
+          </div>
+        </li>
+        <li class="nav-item">
+          <a href="#" class="nav-link text-right font-weight-bold" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><i class="fas fa-sign-out-alt"></i> Logout</a>
+          <form id="logout-form" action="/users/logout" method="POST" style="display: none;">
+            <input type="hidden" name="_csrf" value="{{csrfToken}}">
+          </form>
+        </li>
+        {{else}}
+        <li class="nav-item">
+          <a href="/users/login" class="nav-link text-right"><i class="fas fa-sign-in-alt"></i> Login</a>
+        </li>
+        <li class="nav-item">
+          <a href="/users/register" class="nav-link text-right"><i class="fas fa-user-plus"></i> Register</a>
+        </li>
+        {{/if}}
       </ul>
     </div>
-  </div> </div>
-</nav> 
+  </nav>
 </div>
-
-
-
-
-
-
-
-
-
-
-
-

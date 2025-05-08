@@ -1,0 +1,223 @@
+/* Responsive table styles for all cases pages */
+
+/* Container for the card to allow wider content */
+.wide-container {
+    max-width: 1600px !important;
+    margin: 0 auto;
+    padding: 0 15px;
+}
+
+/* Extra wide container for admin pages with more buttons */
+.wide-container-admin {
+    max-width: 1800px !important;
+    margin: 0 auto;
+    padding: 0 15px;
+}
+
+/* Card styling */
+.all-cases-card {
+    margin: 0 auto;
+    float: none;
+    margin-bottom: 10px;
+    background-color: rgb(223, 211, 195, 0.4) !important;
+    font-size: 20px !important;
+    border-radius: 50px 50px 50px 50px;
+    width: 100%;
+    max-width: 100%;
+    overflow: hidden;
+}
+
+/* Card body styling */
+.all-cases-card .card-body {
+    width: 100% !important;
+    padding: 1.25rem !important;
+    overflow-x: auto;
+}
+
+/* Table container to allow horizontal scrolling */
+.table-responsive-wide {
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    display: block;
+    min-width: 100%;
+}
+
+/* Ensure the table takes full width of its container */
+.table-responsive-wide .table {
+    width: 100% !important;
+    margin: 0 auto;
+}
+
+/* Prevent unnecessary scrollbars */
+.table-responsive-wide::-webkit-scrollbar {
+    height: 8px;
+}
+
+.table-responsive-wide::-webkit-scrollbar-thumb {
+    background-color: rgba(125, 110, 131, 0.5);
+    border-radius: 4px;
+}
+
+.table-responsive-wide::-webkit-scrollbar-track {
+    background-color: rgba(248, 237, 227, 0.3);
+}
+
+/* Mobile-specific styles */
+@media (max-width: 767.98px) {
+    .wide-container,
+    .wide-container-admin {
+        padding: 0 5px;
+        max-width: none !important;
+        width: 100%;
+    }
+
+    .all-cases-card {
+        width: 95% !important;
+        margin: 0 auto;
+        border-radius: 30px;
+    }
+
+    /* Special handling for admin page */
+    .actions-column {
+        min-width: 100px !important;
+        width: 40% !important;
+    }
+
+    .all-cases-card .card-body {
+        padding: 0.75rem !important;
+    }
+
+    /* Hide Created At column on mobile */
+    .table th:nth-child(1),
+    .table td:nth-child(1),
+    /* Hide Details column on mobile */
+    .table th:nth-child(3),
+    .table td:nth-child(3) {
+        display: none !important;
+    }
+
+    /* Make remaining columns fit */
+    .table th:nth-child(2),
+    .table td:nth-child(2) { /* Title */
+        width: 25% !important;
+        max-width: 80px !important;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .table th:nth-child(4),
+    .table td:nth-child(4) { /* Requestor */
+        width: 20% !important;
+        max-width: 60px !important;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .table th:nth-child(5),
+    .table td:nth-child(5) { /* Status */
+        width: 20% !important;
+        max-width: 60px !important;
+    }
+
+    .table th:nth-child(6),
+    .table td:nth-child(6) { /* Actions */
+        width: 35% !important;
+        min-width: 90px !important;
+    }
+
+    .table th, .table td {
+        padding: 0.25rem !important;
+        font-size: 0.7rem !important;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    /* Make buttons in Actions column more compact */
+    .btn-group {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .btn-group .btn1,
+    .btn-group a.btn1 {
+        margin-bottom: 0.25rem;
+        margin-left: 0 !important;
+        padding: 0.15rem 0.3rem !important;
+        font-size: 0.65rem !important;
+        width: 100%;
+        text-align: center;
+    }
+
+    /* For recordsAdmin page with multiple buttons */
+    .btn-group form {
+        margin: 0 !important;
+        padding: 0 !important;
+        width: 100%;
+    }
+
+    .btn-group form .btn1 {
+        width: 100%;
+        margin-left: 0 !important;
+    }
+
+    /* Special handling for admin buttons on mobile */
+    .admin-buttons {
+        flex-direction: row !important;
+        flex-wrap: nowrap !important;
+        justify-content: center !important;
+    }
+
+    .admin-buttons a.btn1,
+    .admin-buttons form,
+    .admin-buttons form .btn1 {
+        padding: 0.1rem 0.2rem !important;
+        font-size: 0.65rem !important;
+        margin: 0 1px !important;
+        width: auto !important;
+        min-width: 25px !important;
+        height: 25px !important;
+    }
+}
+
+/* Admin page specific styles */
+.actions-column {
+    min-width: 120px !important;
+}
+
+.admin-buttons {
+    display: flex;
+    flex-direction: row !important;
+    justify-content: center;
+}
+
+.admin-buttons a.btn1,
+.admin-buttons form .btn1 {
+    margin: 0 2px !important;
+    padding: 0.25rem 0.5rem !important;
+}
+
+/* Landscape mode specific styles */
+@media (max-width: 915px) and (orientation: landscape) {
+    .wide-container {
+        max-width: 900px !important;
+        padding: 0 10px;
+    }
+
+    .wide-container-admin {
+        max-width: 1000px !important;
+        padding: 0 10px;
+    }
+
+    .all-cases-card {
+        max-width: 100%;
+    }
+
+    .table th, .table td {
+        padding: 0.5rem 0.75rem !important;
+    }
+}
