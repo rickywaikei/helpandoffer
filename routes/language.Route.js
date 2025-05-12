@@ -15,6 +15,10 @@ router.get('/:lang', (req, res) => {
   // Get the available languages from i18n
   const availableLanguages = req.app.get('i18n').getLocales ? req.app.get('i18n').getLocales() : ['en', 'zh-TW', 'zh-CN'];
 
+  console.log(`Available languages: ${JSON.stringify(availableLanguages)}`);
+  console.log(`Requested language: ${lang}`);
+  console.log(`Is language available: ${availableLanguages.includes(lang)}`);
+
   // Check if the requested language is available
   if (availableLanguages.includes(lang)) {
     console.log(`Switching language to: ${lang}`);

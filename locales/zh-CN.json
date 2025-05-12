@@ -172,7 +172,7 @@
     "userNotFound": "找不到用户，请重试！",
     "incorrectPassword": "密码不正确！",
     "loginRequired": "请登录以访问此页面",
-    "selectFile": "请在点击"上传"按钮前选择文件",
+    "selectFile": "请在点击\"上传\"按钮前选择文件",
     "fileProcessError": "处理上传文件时出错",
     "avatarUploadError": "上传头像时出错",
     "avatarDeleteError": "删除头像时出错",

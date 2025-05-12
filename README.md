@@ -110,7 +110,7 @@ A web application that connects people who need help with those who can offer as
 ## ⚙️ Configuration
 
 - **Database**: Configure MongoDB connection in `config.json` file
-- **Port**: Default is 3000, can be changed in `app.js`
+- **Port**: Default is 3000, can be changed in `config.js`
 - **Session Secret**: Set a strong random string in `config.json` file for session security
 
 ## 🔌 API Endpoints

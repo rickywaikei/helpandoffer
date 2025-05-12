@@ -22,6 +22,9 @@ i18n.configure({
   // Sync language files across all files
   syncFiles: true,
 
+  // Debug mode to see more information
+  debug: true,
+
   // Cookie name for storing locale preference
   cookie: 'locale',
 
