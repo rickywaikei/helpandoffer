@@ -1,10 +1,14 @@
 {{!-- Link to the error pages CSS --}}
 <link rel="stylesheet" href="/css/error-pages.css">
 
-<div class="container" style="margin-top:100px">
+<div class="page-header">
+  <h1>{{__ 'errors.404'}}</h1>
+  <p class="lead">{{__ 'errors.pageNotFoundDesc'}}</p>
+</div>
+
+<div class="content-section">
   <div class="error-container">
     <h1 class="error-code">404</h1>
-    <h2 class="error-title">{{__ 'errors.404'}}</h2>
     <p class="error-message">
       We're sorry, but the page you were looking for doesn't exist or has been moved.
       Please check the URL or use the button below to return to the home page.
@@ -22,6 +26,10 @@
       <p>If you believe this is an error, please contact our support team.</p>
     </div>
   </div>
+</div>
+
+<div class="version-info">
+  <p>{{__ 'app.name'}} - {{__ 'about.version'}} 3.2</p>
 </div>
 
 <script>

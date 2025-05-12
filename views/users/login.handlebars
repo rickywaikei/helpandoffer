@@ -1,68 +1,38 @@
-<style>
-  .row {}
+<div class="page-header">
+  <h1>{{__ 'auth.login'}}</h1>
+  <p class="lead">{{__ 'messages.welcome'}}</p>
+</div>
 
-  .card {
-    margin: 0 auto;
-    float: none;
-    margin-bottom: 10px;
-    background-color: rgb(223, 211, 195, 0.5) !important;
-    font-size: 20px !important;
-    border-radius: 50px 50px 50px 50px;
-  }
+<div class="row">
+  <div class="col-md-6 mx-auto">
+    <div class="modern-form">
+      <form action="/users/login" method="post">
+        <input type="hidden" name="_csrf" value="{{csrfToken}}" />
 
-  /* Body background is now handled by global.css */
+        <div class="form-group">
+          <label for="usernameInput">{{__ 'auth.name'}}</label>
+          <input type="username" name="usernameInput" class="form-control" required />
+        </div>
 
-  .btn {
-    background-color: #7D6E83 !important;
-    border: 0 !important;
-    border-radius: 10px 10px 10px 10px;
-  }
+        <div class="form-group">
+          <label for="password">{{__ 'auth.password'}}</label>
+          <input type="password" name="passwordInput" class="form-control" required autocomplete="current-password" />
+        </div>
 
-  .btn1 {
-    background-color: rgb(248, 237, 227, 0.6) !important;
-    border: 0 !important;
-    border-radius: 10px 10px 10px 10px;
-  }
+        <div class="text-center mt-4">
+          <button type="submit" class="btn">{{__ 'auth.loginButton'}}</button>
+        </div>
 
-  /* Mobile-specific styles */
-  @media (max-width: 767.98px) {
-    .card {
-      border-radius: 30px !important;
-      width: 100% !important;
-    }
-
-    .form-control {
-      width: 100% !important;
-    }
-
-    .form-group {
-      width: 100% !important;
-    }
-  }
-</style>
-<div style="margin-top:100px"><br><br>
-  <div class="row">
-    <div class="col-md-6 mx-auto">
-      <h3 class="text-center">{{__ 'auth.login'}}</h3><br>
-      <div class="card card-body">
-        <form action="/users/login" method="post">
-          <input type="hidden" name="_csrf" value="{{csrfToken}}" />
-          <div class="form-group"><br>
-            <label for="usernameInput">{{__ 'auth.name'}}</label>
-            <input type="username" name="usernameInput" class="form-control" required />
-          </div><br>
-          <div class="form-group">
-            <label for="password">{{__ 'auth.password'}}</label>
-            <input type="password" name="passwordInput" class="form-control" required autocomplete="current-password" />
-          </div><br>
-          <div class="text-center">
-            <button type="submit" class="btn text-white text-center">{{__ 'auth.loginButton'}}</button>
-          </div>
-          <div class="text-center mt-3">
-            <a href="/users/register">{{__ 'auth.noAccount'}}</a>
-          </div>
-        </form><br>
-      </div>
+        <div class="text-center mt-4">
+          <a href="/users/register" class="text-decoration-none">
+            <i class="fas fa-user-plus mr-1"></i> {{__ 'auth.noAccount'}}
+          </a>
+        </div>
+      </form>
     </div>
   </div>
+</div>
+
+<div class="version-info">
+  <p>{{__ 'app.name'}} - {{__ 'about.version'}} 3.2</p>
 </div>

@@ -1,65 +1,15 @@
-<style>
-  .row {
-    margin-top: 20px;
-    margin-bottom: 20px;
-    text-indent: 2em;
-  }
-
-  .card {
-    margin: 0 auto;
-    float: none;
-    margin-bottom: 10px;
-    background-color: rgb(223, 211, 195, 0.5) !important;
-    font-size: 20px !important;
-    border-radius: 50px 50px 50px 50px;
-  }
-
-  /* Body background is now handled by global.css */
-
-  .btn {
-    background-color: #7D6E83 !important;
-    border: 0 !important;
-    border-radius: 10px 10px 10px 10px;
-  }
-
-  .btn1 {
-    background-color: rgb(248, 237, 227, 0.6) !important;
-    border: 0 !important;
-    border-radius: 10px 10px 10px 10px;
-  }
-
-  /* Mobile-specific styles */
-  @media (max-width: 767.98px) {
-    .card {
-      width: 95% !important;
-      margin: 0.5rem auto !important;
-      border-radius: 30px !important;
-    }
-
-    .btn-group {
-      display: flex;
-      flex-direction: row;
-      justify-content: center;
-    }
-
-    .btn-group .btn1,
-    .btn-group form .btn1 {
-      padding: 0.25rem 0.5rem !important;
-      margin: 0 2px !important;
-    }
-  }
-</style>
 <!-- Include the responsive table CSS -->
 <link rel="stylesheet" href="/css/table-responsive.css">
 
-<div style="margin-top:100px"></div><br><br>
-<h4 class="text-center">{{__ 'profile.allProfiles'}} {{res.locals.user.name}}</h4><br>
+<div class="page-header">
+  <h1>{{__ 'profile.allProfiles'}} ({{__ 'profile.admin'}})</h1>
+  <p class="lead">{{__ 'profile.allProfilesDesc'}}</p>
+</div>
+
 {{#if profiles}}
-<div class="wide-container-admin">
-  <div class="all-cases-card card card-body border-0">
-    <div class="card-text" style="width: 100%;">
-      <div class="table-responsive-wide">
-        <table class="table table-stripted table-hover table-xl table-striped table-borderless profiles-admin-table">
+<div class="content-section">
+  <div class="table-responsive-wide">
+        <table class="modern-table">
     <thead>
       <tr class="text-center">
         <th class="align-middle">{{__ 'cases.createdAt'}}</th>
@@ -83,7 +33,7 @@
         <td class="align-middle">{{email}}</td>
         <td class="align-middle">{{phone}}</td>
         <td class="text-center align-middle">{{#if isAdmin}} {{__ 'profile.admin'}} {{else}} {{__ 'profile.user'}} {{/if}}</td>
-        <td class="text-center align-middle"><span class="badge bg-warning text-dark">{{badge}}</span></td>
+        <td class="text-center align-middle"><span class="modern-badge badge-attending">{{badge}}</span></td>
         <td class="text-center align-middle actions-column">
           <div class="btn-group btn-sm admin-buttons">
             <a href="/users/edit/{{_id}}" class="btn1 btn-outline-info btn-sm" role="button" title="{{__ 'profile.editProfile'}}" onclick="event.preventDefault(); document.getElementById('edit-form-{{_id}}').submit();">
@@ -107,11 +57,13 @@
     </tbody>
         </table>
       </div>
-    </div>
-  </div><br>
 </div>
 {{else}}
-<div class="text-center">
+<div class="content-section text-center">
   <h2>{{__ 'cases.noRecord'}}</h2>
 </div>
 {{/if}}
+
+<div class="version-info">
+  <p>{{__ 'app.name'}} - {{__ 'about.version'}} 3.2</p>
+</div>

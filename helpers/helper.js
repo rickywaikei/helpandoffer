@@ -45,8 +45,7 @@ export const passportConfig = (passport) => {
         // If user not found, return error
         if (!user) {
           return done(null, false, {
-            type: "fail_passport",
-            message: "User not found, please try again!",
+            message: "errors.userNotFound",
           });
         }
 
@@ -60,8 +59,7 @@ export const passportConfig = (passport) => {
           } else {
             // If passwords don't match, authentication failed
             return done(null, false, {
-              type: "fail_passport",
-              message: "Incorrect password!",
+              message: "errors.incorrectPassword",
             });
           }
         });
@@ -129,7 +127,7 @@ export const ensureAuthenticated = (req, res, next) => {
   // Flash a message to the user
   req.flash(
     "error_msg",
-    "Please log in to access this page"
+    req.__('errors.loginRequired')
   );
 
   // Redirect to login page
@@ -178,11 +176,14 @@ export const getLogTime = () => {
 /**
  * Validate Phone Number
  *
- * Validates phone numbers with special support for Hong Kong format.
+ * Validates phone numbers with flexible format support.
  * Supports formats like:
+ * - +1 123-4567
+ * - +44 1234-5678
  * - +852 9876-4321
- * - 98765432
- * - 85298765432
+ * - 98765432 (no country code)
+ * - 123-4567 (no country code)
+ * - 1234-5678 (no country code)
  *
  * @param {string} input_str - Phone number to validate
  * @returns {boolean} True if valid, false otherwise
@@ -191,28 +192,26 @@ export const validatePhoneNumber = (input_str) => {
   // If input is empty, consider it valid (since phone is optional)
   if (!input_str) return true;
 
-  // For Hong Kong phone numbers like +852 9876-4321
-  // First, try a direct match with a flexible regex for Hong Kong format
-  const hkRegex = /^(\+?852)?[ -]?([2-9]\d{3})[ -]?(\d{4})$/;
-  if (hkRegex.test(input_str)) {
+  // Remove all spaces for normalization
+  const normalizedInput = input_str.replace(/\s+/g, '');
+
+  // Case 1: Phone with country code (+1, +44, +852, etc.)
+  // Format: +[1-3 digits] [3-4 digits]-[3-4 digits] or without dash
+  const countryCodeRegex = /^\+\d{1,3}[-]?\d{3,4}[-]?\d{3,4}$/;
+  if (countryCodeRegex.test(normalizedInput)) {
     return true;
   }
 
-  // If direct match fails, try normalizing and checking
-  // Remove all non-digit characters for normalization
-  const digitsOnly = input_str.replace(/\D/g, '');
-
-  // Case 1: 8 digits (local format without country code)
-  // Hong Kong phone numbers start with 2-9 and are 8 digits long
-  if (digitsOnly.length === 8 && /^[2-9]\d{7}$/.test(digitsOnly)) {
+  // Case 2: Phone without country code
+  // Format: [3-4 digits]-[3-4 digits] or without dash
+  const localPhoneRegex = /^\d{3,4}[-]?\d{3,4}$/;
+  if (localPhoneRegex.test(normalizedInput)) {
     return true;
   }
 
-  // Case 2: 10-11 digits (with 852 country code)
-  // Hong Kong country code (852) followed by an 8-digit phone number
-  if ((digitsOnly.length === 11 || digitsOnly.length === 10) &&
-      digitsOnly.startsWith('852') &&
-      /^852[2-9]\d{6,7}$/.test(digitsOnly)) {
+  // Case 3: Simple digit sequence (7-8 digits) without formatting
+  const simpleDigitsRegex = /^\d{7,8}$/;
+  if (simpleDigitsRegex.test(normalizedInput)) {
     return true;
   }
 

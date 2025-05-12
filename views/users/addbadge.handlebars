@@ -1,22 +1,12 @@
-<div style="margin-top:100px">
-    <style>
-        label {
-        text-align: right;
-        width: 200px;
-        }
-    </style>
+<div class="page-header">
+  <h1>{{__ 'profile.userProfile'}}</h1>
+  <p class="lead">{{__ 'profile.userProfileDesc'}}</p>
+</div>
 
-<div class="container">
-
-<div class="card-group border-0">
-  <div class="card border-0">
-    <div class="card-body">
-      <br>
-    <div class="text-center">
-      <h5><b>{{__ 'profile.userProfile'}}</b></h5>
-        <br>
-        <br>
-    </div>
+<div class="content-section">
+  <div class="card-group border-0">
+    <div class="card border-0">
+      <div class="card-body">
     <table class="table table-hover table-borderless">
       <tbody>
         <tr>
@@ -33,7 +23,7 @@
         </tr>
         <tr>
           <th scope="row">{{__ 'profile.receivedBadges'}}: </th>
-            <td><span class="badge badge-warning">{{badge}}</span></td>
+            <td><span class="modern-badge badge-attending">{{badge}}</span></td>
         </tr>
       </tbody>
     </table>
@@ -89,3 +79,6 @@
   </div>
 </div>
 
+<div class="version-info">
+  <p>{{__ 'app.name'}} - {{__ 'about.version'}} 3.2</p>
+</div>

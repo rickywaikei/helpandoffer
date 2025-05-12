@@ -1,66 +1,11 @@
-<style>
-  .card {
-    background-color: rgb(248, 237, 227, 0.7) !important;
-    font-size: 20px !important;
-    font: #7D6E83 !important;
-    border-radius: 50px 50px 50px 50px !important;
-  }
+<div class="page-header">
+  <h1>{{__ 'cases.editCase'}}</h1>
+  <p class="lead">{{__ 'cases.editCaseDesc'}}</p>
+</div>
 
-  /* Body background is now handled by global.css */
-
-  .table {
-    background-color: #F8EDE3;
-    background-color: rgb(248, 237, 227, 0.9);
-    font-style: times;
-    font-size: 16px;
-    position: fixed sticky;
-    font: #7D6E83 !important;
-  }
-
-  .nav-link {
-    color: rgb(125, 110, 131) !important;
-  }
-
-    {
-      {
-      !-- .link {
-        color: #7D6E83 !important;
-      }
-
-      .item>a:hover {
-        color: #D0B8A8 !important;
-      }
-
-      --
-    }
-  }
-
-  /*code to change background color*/
-  .nav>.active>a {
-    background-color: rgba(0, 0, 0, 0.5) !important;
-    color: #D0B8A8 !important;
-  }
-
-  .btn {
-    background-color: #7D6E83 !important;
-    border: 0 !important;
-    border-radius: 10px 10px 10px 10px !important;
-  }
-
-  .carousel-caption {
-    text-shadow: 0 0 5px rgb(33, 30, 30), 0 0 10px rgb(88, 37, 74), 0 0 15px rgb(153, 167, 70), 0 0 40px #46453e, 0 0 70px #2b0e3f
-  }
-</style>
-<div style="margin-top:100px"><br><br>
-  <div class="row">
-    <div class="col-md-6 mx-auto">
-      {{#each errors}}
-      <div class="alert alert-danger">{{test}}</div>
-      {{else}}
-      {{/each}}
-      <h4 class="text-center">{{__ 'cases.editCase'}}</h4><br>
-      <!-- _method with "put" -->
-      <div class="card card-body">
+<div class="row">
+  <div class="col-md-6 mx-auto">
+    <div class="modern-form">
         <form action="/helpcases/edit/{{helpcase._id}}?_method=PUT" method="POST">
           <input type="hidden" name="_method" value="PUT" />
           <input type="hidden" name="_csrf" value="{{csrfToken}}" />
@@ -106,7 +51,11 @@
           <label for="offermsg">{{__ 'messages.previousMessages'}}</label>
           <textarea name="offermsg" class="form-control" rows="4" readonly>{{helpcase.offermsg}}</textarea>
         </div>
-      </div><br>
+      </div>
     </div>
   </div>
+</div>
+
+<div class="version-info">
+  <p>{{__ 'app.name'}} - {{__ 'about.version'}} 3.2</p>
 </div>

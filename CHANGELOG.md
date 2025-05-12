@@ -5,6 +5,39 @@ All notable changes to the Help and Offer Platform will be documented in this fi
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [3.2.0] - 2025-12-05
+
+### Added
+- Enhanced phone number validation to support multiple international formats
+- Support for various phone number formats with or without country codes
+- Multi-language support for all error messages and info messages in controller files
+- Multi-language support for authentication messages in helper.js
+
+### Changed
+- Updated phone number format examples in all forms to show "+123 456-7890"
+- Improved error message translations for better user experience
+- Enhanced authentication error handling with proper translations
+
+### Fixed
+- Fixed authentication error messages to properly display in the user's selected language
+- Improved error handling in passport configuration
+
+## [3.1.0] - 2025-10-15
+
+### Added
+- Consistent header style across all pages
+- Version number display in the background of all pages
+- Improved mobile responsiveness for tables
+
+### Changed
+- Reduced space between navbar and carousel on home page
+- Redesigned navbar layout with properly centered language dropdown menu
+- Applied consistent design style from About page to all other pages
+
+### Fixed
+- Fixed status badge styling to ensure background colors fully cover text in mobile view
+- Fixed My Profile page with working Delete Avatar, Upload Avatar, and Save Profile buttons
+
 ## [3.0.0] - 2025-08-05
 
 ### Added

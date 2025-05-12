@@ -1,53 +1,14 @@
-<style>
-  .row {
-    margin-top: 20px;
-    margin-bottom: 20px;
-  }
-
-  .card {
-    margin: 0 auto;
-    float: none;
-    margin-bottom: 10px;
-    background-color: rgb(248, 237, 227, 0.8) !important;
-    font-size: 20px !important;
-    border-radius: 50px 50px 50px 50px;
-  }
-
-  .btn {
-    background-color: #7D6E83 !important;
-    border: 0 !important;
-    border-radius: 10px 10px 10px 10px;
-  }
-
-  .btn-outline-danger {
-    background-color: transparent !important;
-    border: 1px solid #dc3545 !important;
-    color: #dc3545 !important;
-  }
-
-  .btn-outline-danger:hover {
-    background-color: #dc3545 !important;
-    color: white !important;
-  }
-
-  label {
-    text-align: left;
-    font-size: 12px !important;
-    border: 0 !important;
-  }
-</style>
 <!-- Include the responsive table CSS -->
 <link rel="stylesheet" href="/css/table-responsive.css">
 
-<div>
-  <div class="container">
-    <div class="row">
-      <div class="col-md-8 mx-auto">
-        <br><br>
-        <h4 class="text-center">{{__ 'profile.myProfile'}}</h4><br>
+<div class="page-header">
+  <h1>{{__ 'profile.myProfile'}}</h1>
+  <p class="lead">{{__ 'profile.myProfileDesc'}}</p>
+</div>
 
-        <div class="card border-0">
-          <div class="card-body" style="padding: 2rem;">
+<div class="row">
+  <div class="col-md-8 mx-auto">
+    <div class="modern-form">
             <!-- Avatar Display -->
             <div class="row mb-4">
               <div class="col-md-12 text-center">
@@ -115,7 +76,7 @@
                       <tr>
                         <td scope="row">{{__ 'profile.phone'}}</td>
                         <td>
-                          <input type="tel" class="form-control" name="phone" value="{{phone}}" placeholder="+852 9876-4321" />
+                          <input type="tel" class="form-control" name="phone" value="{{phone}}" placeholder="+123 456-7890" />
                           <small class="form-text text-muted">{{__ 'auth.phoneFormat'}}</small>
                         </td>
                       </tr>
@@ -154,4 +115,8 @@
       </div>
     </div>
   </div>
+</div>
+
+<div class="version-info">
+  <p>{{__ 'app.name'}} - {{__ 'about.version'}} 3.2</p>
 </div>

@@ -305,7 +305,16 @@ app.use(function(req, res, next) {
   // Make flash messages available to views
   res.locals.success_msg = req.flash("success_msg");
   res.locals.error_msg = req.flash("error_msg");
-  res.locals.fail_passport = req.flash("fail_passport");
+
+  // Handle passport error messages
+  const passportErrors = req.flash("error");
+  if (passportErrors && passportErrors.length > 0) {
+    res.locals.fail_passport = passportErrors.map(error => {
+      return { message: error };
+    });
+  } else {
+    res.locals.fail_passport = [];
+  }
 
   // Make user data available to views if logged in
   res.locals.user = req.user || null;

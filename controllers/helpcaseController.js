@@ -19,10 +19,10 @@ export const getHelpcases = (req, res) => {
 export const postAddHelpcase = (req, res) => {
   let errors = []; // push error message if empty input
   if (!req.body.title) {
-    errors.push({ text: "Please add a title" });
+    errors.push({ text: req.__('messages.addTitle') });
   }
   if (!req.body.details) {
-    errors.push({ text: "Please add some details" });
+    errors.push({ text: req.__('messages.addDetails') });
   }
   // if there are errors, render the page with error message
   if (errors.length > 0) {
@@ -38,7 +38,7 @@ export const postAddHelpcase = (req, res) => {
       user: res.locals.user._id,
     };
     new Helpcase(newhelpcase).save().then((helpcase) => {
-      req.flash("success_msg", "New case added !");
+      req.flash("success_msg", req.__('messages.addNewCase'));
       res.redirect("/helpcases");
     });
   }
@@ -71,7 +71,7 @@ export const putEditHelpcase = (req, res) => {
     helpcase.title = req.body.title; //processed by bodyparser
     helpcase.details = req.body.details;
     helpcase.save().then(() => {
-      req.flash("success_msg", "Updated this case !");
+      req.flash("success_msg", req.__('messages.caseUpdated'));
       res.redirect("/helpcases");
     });
   });
@@ -79,7 +79,7 @@ export const putEditHelpcase = (req, res) => {
 
 export const deleteHelpcase = (req, res) => {
   Helpcase.deleteOne({ _id: req.params.id }).then(() => {
-    req.flash("error_msg", "Helpcase Deleted !");
+    req.flash("error_msg", req.__('messages.caseDeleted'));
     res.redirect("/helpcases");
   });
 };
@@ -149,7 +149,7 @@ export const putAddoffer = (req, res) => {
     offercase.offermsg =
       getTimestamp() + res.locals.user.name + ": " + req.body.offermsg;
     offercase.save().then(() => {
-      req.flash("success_msg", "You are added as offerer the case !");
+      req.flash("success_msg", req.__('messages.offerAdded'));
       res.redirect("/helpcases/offered");
     });
   });
@@ -181,7 +181,7 @@ export const putUpdateoffer = (req, res) => {
       "\n" +
       offercase.offermsg;
     offercase.save().then(() => {
-      req.flash("success_msg", "Message sent and updated case!");
+      req.flash("success_msg", req.__('messages.caseUpdated'));
       if (offercase.offer == res.locals.user.name) {
         res.redirect("/helpcases/offered");
       } else {
@@ -209,7 +209,7 @@ export const putRemoveoffer = (req, res) => {
       "\n" +
       offercase.offermsg;
     offercase.save().then(() => {
-      req.flash("success_msg", "You are added as offerer the case !");
+      req.flash("success_msg", req.__('messages.caseUpdated'));
       res.redirect("/helpcases/offered");
     });
   });
@@ -255,7 +255,7 @@ export const putGiveBadge = (req, res, next) => {
           offeruser.name
       );
       offeruser.save().then(() => {
-        req.flash("success_msg", "A badge is given to the user !");
+        req.flash("success_msg", req.__('messages.badgeGiven'));
         res.redirect("/helpcases");
       });
     });

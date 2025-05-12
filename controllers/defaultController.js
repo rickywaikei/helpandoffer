@@ -447,11 +447,11 @@ export const postSendMsg = (req, res) => {
 
   // Check for required fields
   if (!req.body.subject) {
-    errors.push({ text: "Please add a subject" });
+    errors.push({ text: req.__('messages.addTitle') });
   }
 
   if (!req.body.message) {
-    errors.push({ text: "Please add some message" });
+    errors.push({ text: req.__('messages.addDetails') });
   }
 
   // If validation fails, re-render the form with errors
@@ -475,13 +475,13 @@ export const postSendMsg = (req, res) => {
       .save()
       .then((helpcase) => {
         // Show success message and redirect
-        req.flash("success_msg", "Your message has been received!");
+        req.flash("success_msg", req.__('messages.contactReceived'));
         res.redirect("/about");
       })
       .catch((err) => {
         // Handle database errors
         console.error("Error saving contact message:", err);
-        req.flash("error_msg", "There was an error processing your message. Please try again.");
+        req.flash("error_msg", req.__('messages.contactError'));
         res.redirect("/about");
       });
   }

@@ -1,59 +1,58 @@
-<div class="container px-0 mx-auto" style="margin-top: 120px;">
-  <div class="card text-center mx-auto" style="max-width: 1200px;">
-    <div class="card-header p-3">
-      <h3 class="card-title">{{__ 'search.searchHelpCases'}}</h3>
-    </div>
+<div class="page-header">
+  <br>
+  <h1>{{__ 'search.searchHelpCases'}}</h1>
+  <p class="lead">{{__ 'search.enterSearchTerm'}}</p>
+</div>
 
-    <div class="card-body p-3">
-      <div class="row mb-4">
-        <div class="col-md-8 mx-auto">
-          <form method="GET" action="/search" class="search-form">
-            <div class="input-group">
-              <input
-                class="form-control rounded-left"
-                type="search"
-                name="searchInput"
-                value="{{searchTerm}}"
-                placeholder="{{__ 'search.searchPlaceholder'}}"
-                aria-label="{{__ 'search.searchAriaLabel'}}"
-                required
-              >
-              <div class="input-group-append">
-                <button class="btn btn-primary" type="submit">
-                  <i class="fas fa-search"></i> {{__ 'search.searchButton'}}
-                </button>
-              </div>
-            </div>
-          </form>
+<div class="content-section">
+  <div class="row mb-4">
+    <div class="col-md-8 mx-auto">
+      <form method="GET" action="/search" class="search-form">
+        <div class="input-group">
+          <input
+            class="form-control"
+            type="search"
+            name="searchInput"
+            value="{{searchTerm}}"
+            placeholder="{{__ 'search.searchPlaceholder'}}"
+            aria-label="{{__ 'search.searchAriaLabel'}}"
+            required
+          >
+          <div class="input-group-append">
+            <button class="btn" type="submit">
+              <i class="fas fa-search"></i> {{__ 'search.searchButton'}}
+            </button>
+          </div>
         </div>
-      </div>
+      </form>
+    </div>
+  </div>
 
       {{#if records}}
         <div class="table-responsive">
-          <table class="table table-hover table-borderless table-striped bg-transparent"
-            style="background-repeat: repeat; background-image: linear-gradient(rgb(248, 237, 227,0.9), rgb(208, 184, 168, 0.6)), url(https://blog.japanwondertravel.com/wp-content/uploads/2021/11/yukiya-shiba-LSyjrJFV-pw-unsplash.jpg)">
-            <thead class="text-muted">
-              <tr class="text-center">
-                <th class="align-middle">{{__ 'cases.createdAt'}}</th>
-                <th class="align-middle">{{__ 'cases.title'}}</th>
-                <th class="align-middle">{{__ 'cases.details'}}</th>
-                <th class="align-middle">{{__ 'cases.status'}}</th>
+          <table class="modern-table">
+            <thead>
+              <tr>
+                <th>{{__ 'cases.createdAt'}}</th>
+                <th>{{__ 'cases.title'}}</th>
+                <th>{{__ 'cases.details'}}</th>
+                <th>{{__ 'cases.status'}}</th>
               </tr>
             </thead>
-            <tbody class="text-muted">
+            <tbody>
               {{#each records}}
-              <tr class="text-left">
-                <td class="align-middle">{{StringDate}}</td>
-                <td class="text-center align-middle">{{title}}</td>
-                <td class="align-middle">{{details}}</td>
-                <td class="text-center align-middle">
+              <tr>
+                <td>{{StringDate}}</td>
+                <td>{{title}}</td>
+                <td>{{details}}</td>
+                <td>
                   {{#if solved}}
-                    <span class="badge bg-success text-white">{{__ 'cases.solved'}}</span>
+                    <span class="modern-badge badge-solved">{{__ 'cases.solved'}}</span>
                   {{else}}
                     {{#if offer}}
-                      <span class="badge bg-warning text-dark">{{__ 'cases.attending'}}</span>
+                      <span class="modern-badge badge-attending">{{__ 'cases.attending'}}</span>
                     {{else}}
-                      <span class="badge bg-secondary text-white">{{__ 'cases.unattended'}}</span>
+                      <span class="modern-badge badge-unattended">{{__ 'cases.unattended'}}</span>
                     {{/if}}
                   {{/if}}
                 </td>
@@ -64,201 +63,113 @@
         </div>
 
         {{#if pagination}}
-        <div class="pagination-container">
-          <div class="items-per-page">
-            <form id="itemsPerPageForm" method="GET" action="/search">
-              <label for="itemsPerPage">{{__ 'pagination.itemsPerPage'}}:</label>
-              <select id="itemsPerPage" name="itemsPerPage" class="form-select form-select-sm" onchange="document.getElementById('itemsPerPageForm').submit()">
-                {{#if (eq pagination.itemsPerPage 5)}}
-                  <option value="5" selected>5</option>
-                {{else}}
-                  <option value="5">5</option>
+        <div class="mt-4">
+          <div class="row align-items-center mb-3">
+            <div class="col-md-4">
+              <form id="itemsPerPageForm" method="GET" action="/search" class="d-flex align-items-center">
+                <label for="itemsPerPage" class="me-2">{{__ 'pagination.itemsPerPage'}}:</label>
+                <select id="itemsPerPage" name="itemsPerPage" class="form-select form-select-sm" style="width: auto;" onchange="document.getElementById('itemsPerPageForm').submit()">
+                  <option value="5" {{#if (eq pagination.itemsPerPage 5)}}selected{{/if}}>5</option>
+                  <option value="10" {{#if (eq pagination.itemsPerPage 10)}}selected{{/if}}>10</option>
+                  <option value="25" {{#if (eq pagination.itemsPerPage 25)}}selected{{/if}}>25</option>
+                </select>
+                <input type="hidden" name="page" value="1">
+                {{#if searchTerm}}
+                <input type="hidden" name="searchInput" value="{{searchTerm}}">
                 {{/if}}
+              </form>
+            </div>
 
-                {{#if (eq pagination.itemsPerPage 10)}}
-                  <option value="10" selected>10</option>
-                {{else}}
-                  <option value="10">10</option>
-                {{/if}}
-
-                {{#if (eq pagination.itemsPerPage 25)}}
-                  <option value="25" selected>25</option>
-                {{else}}
-                  <option value="25">25</option>
-                {{/if}}
-              </select>
-              <input type="hidden" name="page" value="1">
-              {{#if searchTerm}}
-              <input type="hidden" name="searchInput" value="{{searchTerm}}">
-              {{/if}}
-            </form>
+            <div class="col-md-8 text-md-end">
+              <div class="pagination-info">
+                {{__ 'pagination.showing'}} {{pagination.startIndex}} {{__ 'pagination.to'}} {{pagination.endIndex}} {{__ 'pagination.of'}} {{pagination.totalRecords}} {{__ 'pagination.entries'}}
+              </div>
+            </div>
           </div>
 
-          <div class="pagination-info">
-            {{__ 'pagination.showing'}} {{pagination.startIndex}} {{__ 'pagination.to'}} {{pagination.endIndex}} {{__ 'pagination.of'}} {{pagination.totalRecords}} {{__ 'pagination.entries'}}
-          </div>
-
-          <ul class="pagination">
-            <!-- First and Previous buttons -->
-            {{#if pagination.hasPrevPage}}
-              <li class="page-item">
-                <a class="page-link" href="/search?page=1&itemsPerPage={{pagination.itemsPerPage}}{{#if searchTerm}}&searchInput={{searchTerm}}{{/if}}" aria-label="First">
-                  <span aria-hidden="true">&laquo;&laquo;</span>
-                </a>
-              </li>
-              <li class="page-item">
-                <a class="page-link" href="/search?page={{pagination.prevPage}}&itemsPerPage={{pagination.itemsPerPage}}{{#if searchTerm}}&searchInput={{searchTerm}}{{/if}}" aria-label="Previous">
-                  <span aria-hidden="true">&laquo;</span>
-                </a>
-              </li>
-            {{else}}
-              <li class="page-item disabled">
-                <a class="page-link" href="#" aria-label="First">
-                  <span aria-hidden="true">&laquo;&laquo;</span>
-                </a>
-              </li>
-              <li class="page-item disabled">
-                <a class="page-link" href="#" aria-label="Previous">
-                  <span aria-hidden="true">&laquo;</span>
-                </a>
-              </li>
-            {{/if}}
-
-            <!-- Page numbers -->
-            {{#each pagination.pages}}
-              {{#if (eq this "...")}}
-                <li class="page-item disabled">
-                  <span class="page-link">...</span>
+          <nav aria-label="Page navigation" class="d-flex justify-content-center">
+            <ul class="pagination">
+              <!-- First and Previous buttons -->
+              {{#if pagination.hasPrevPage}}
+                <li class="page-item">
+                  <a class="page-link" href="/search?page=1&itemsPerPage={{pagination.itemsPerPage}}{{#if searchTerm}}&searchInput={{searchTerm}}{{/if}}" aria-label="First">
+                    <span aria-hidden="true">&laquo;&laquo;</span>
+                  </a>
+                </li>
+                <li class="page-item">
+                  <a class="page-link" href="/search?page={{pagination.prevPage}}&itemsPerPage={{pagination.itemsPerPage}}{{#if searchTerm}}&searchInput={{searchTerm}}{{/if}}" aria-label="Previous">
+                    <span aria-hidden="true">&laquo;</span>
+                  </a>
                 </li>
               {{else}}
-                {{#if (eq ../pagination.page this)}}
-                  <li class="page-item active">
-                    <span class="page-link">{{this}}</span>
+                <li class="page-item disabled">
+                  <a class="page-link" href="#" aria-label="First">
+                    <span aria-hidden="true">&laquo;&laquo;</span>
+                  </a>
+                </li>
+                <li class="page-item disabled">
+                  <a class="page-link" href="#" aria-label="Previous">
+                    <span aria-hidden="true">&laquo;</span>
+                  </a>
+                </li>
+              {{/if}}
+
+              <!-- Page numbers -->
+              {{#each pagination.pages}}
+                {{#if (eq this "...")}}
+                  <li class="page-item disabled">
+                    <span class="page-link">...</span>
                   </li>
                 {{else}}
-                  <li class="page-item">
-                    <a class="page-link" href="/search?page={{this}}&itemsPerPage={{../pagination.itemsPerPage}}{{#if ../searchTerm}}&searchInput={{../searchTerm}}{{/if}}">{{this}}</a>
-                  </li>
+                  {{#if (eq ../pagination.page this)}}
+                    <li class="page-item active">
+                      <span class="page-link">{{this}}</span>
+                    </li>
+                  {{else}}
+                    <li class="page-item">
+                      <a class="page-link" href="/search?page={{this}}&itemsPerPage={{../pagination.itemsPerPage}}{{#if ../searchTerm}}&searchInput={{../searchTerm}}{{/if}}">{{this}}</a>
+                    </li>
+                  {{/if}}
                 {{/if}}
-              {{/if}}
-            {{/each}}
+              {{/each}}
 
-            <!-- Next and Last buttons -->
-            {{#if pagination.hasNextPage}}
-              <li class="page-item">
-                <a class="page-link" href="/search?page={{pagination.nextPage}}&itemsPerPage={{pagination.itemsPerPage}}{{#if searchTerm}}&searchInput={{searchTerm}}{{/if}}" aria-label="Next">
-                  <span aria-hidden="true">&raquo;</span>
-                </a>
-              </li>
-              <li class="page-item">
-                <a class="page-link" href="/search?page={{pagination.totalPages}}&itemsPerPage={{pagination.itemsPerPage}}{{#if searchTerm}}&searchInput={{searchTerm}}{{/if}}" aria-label="Last">
-                  <span aria-hidden="true">&raquo;&raquo;</span>
-                </a>
-              </li>
-            {{else}}
-              <li class="page-item disabled">
-                <a class="page-link" href="#" aria-label="Next">
-                  <span aria-hidden="true">&raquo;</span>
-                </a>
-              </li>
-              <li class="page-item disabled">
-                <a class="page-link" href="#" aria-label="Last">
-                  <span aria-hidden="true">&raquo;&raquo;</span>
-                </a>
-              </li>
-            {{/if}}
-          </ul>
+              <!-- Next and Last buttons -->
+              {{#if pagination.hasNextPage}}
+                <li class="page-item">
+                  <a class="page-link" href="/search?page={{pagination.nextPage}}&itemsPerPage={{pagination.itemsPerPage}}{{#if searchTerm}}&searchInput={{searchTerm}}{{/if}}" aria-label="Next">
+                    <span aria-hidden="true">&raquo;</span>
+                  </a>
+                </li>
+                <li class="page-item">
+                  <a class="page-link" href="/search?page={{pagination.totalPages}}&itemsPerPage={{pagination.itemsPerPage}}{{#if searchTerm}}&searchInput={{searchTerm}}{{/if}}" aria-label="Last">
+                    <span aria-hidden="true">&raquo;&raquo;</span>
+                  </a>
+                </li>
+              {{else}}
+                <li class="page-item disabled">
+                  <a class="page-link" href="#" aria-label="Next">
+                    <span aria-hidden="true">&raquo;</span>
+                  </a>
+                </li>
+                <li class="page-item disabled">
+                  <a class="page-link" href="#" aria-label="Last">
+                    <span aria-hidden="true">&raquo;&raquo;</span>
+                  </a>
+                </li>
+              {{/if}}
+            </ul>
+          </nav>
         </div>
         {{/if}}
       {{else}}
         {{#if searchTerm}}
-          <div class="alert alert-info">
-            <i class="fas fa-info-circle"></i> {{__ 'search.noResultsFound'}} "{{searchTerm}}". {{__ 'search.tryDifferentTerm'}}
-          </div>
-        {{else}}
-          <div class="alert alert-secondary">
-            <i class="fas fa-search"></i> {{__ 'search.enterSearchTerm'}}
+          <div class="alert alert-info" style="border-radius: 15px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
+            <i class="fas fa-info-circle mr-2"></i> {{__ 'search.noResultsFound'}} "{{searchTerm}}". {{__ 'search.tryDifferentTerm'}}
           </div>
         {{/if}}
       {{/if}}
-    </div>
-  </div>
 </div>
 
-<style>
-  /* Body background is now handled by global.css */
-
-  .card {
-    background-color: rgb(248, 237, 227, 0.7) !important;
-    font-size: 20px !important;
-    border-radius: 50px 50px 50px 50px !important;
-    overflow: hidden;
-  }
-
-  .search-form {
-    margin-bottom: 20px;
-  }
-
-  .badge {
-    font-size: 0.9rem;
-    padding: 0.4rem 0.6rem;
-  }
-
-  /* Responsive table styling */
-  .table {
-    background-color: rgb(248, 237, 227, 0.9);
-    font-style: times;
-    position: fixed sticky;
-    transition: all 0.3s ease;
-  }
-
-  .table th {
-    font-size: calc(13px + 0.4vw);
-    transition: padding 0.3s ease;
-  }
-
-  .table td {
-    font-size: calc(12px + 0.3vw);
-    transition: padding 0.3s ease;
-  }
-
-  .btn {
-    background-color: #7D6E83 !important;
-    border: 0 !important;
-    border-radius: 10px 10px 10px 10px !important;
-  }
-
-  /* Mobile-specific styles */
-  @media (max-width: 767.98px) {
-    .container {
-      padding: 0 !important;
-      margin: 0 auto !important;
-      width: 100% !important;
-      max-width: 100% !important;
-    }
-
-    .card {
-      border-radius: 30px !important;
-      margin: 0.5rem auto !important;
-      width: 95% !important;
-      max-width: 600px !important;
-    }
-
-    .col-md-8.mx-auto {
-      width: 100% !important;
-      padding: 0 15px !important;
-    }
-
-    .form-control, .input-group {
-      width: 100% !important;
-    }
-
-    .input-group-append {
-      display: flex !important;
-    }
-
-    .search-form {
-      width: 100% !important;
-    }
-  }
-</style>
+<div class="version-info">
+  <p>{{__ 'app.name'}} - {{__ 'about.version'}} 3.2</p>
+</div>

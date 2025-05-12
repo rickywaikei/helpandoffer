@@ -11,7 +11,7 @@ A web application that connects people who need help with those who can offer as
 - **Pagination**: Browse through listings with customizable items per page (5, 10, or 25 items)
 - **CSRF Protection**: Enhanced security for form submissions and logout
 - **Error Handling**: Custom 404 and 500 error pages with return to home option
-- **Phone Number Support**: Validation for Hong Kong phone number format (+852 9876-4321)
+- **Phone Number Support**: Flexible validation for international phone formats (e.g., +123 456-7890, 123-4567, etc.)
 - **User Profiles**: Detailed user profiles with badges and achievements
 - **Multi-language Support**: Full internationalization with English, Traditional Chinese, and Simplified Chinese
 - **Modern UI**: Redesigned About page with improved layout and user experience
@@ -169,3 +169,5 @@ This project is licensed under the ISC License.
 ---
 
 © 2022-2026 Help and Offer Platform. All rights reserved.
+
+Current Version: 3.2.0

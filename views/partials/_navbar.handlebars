@@ -4,13 +4,14 @@
   <nav class="navbar fixed-top navbar-light navbar-expand-md mb-3">
     <style>
       .navbar {
-        height: 100px;
-        background-color: rgba(248, 237, 227, 0.7);
+        height: 70px;
+        background-color: rgba(248, 237, 227, 0.8);
         font-style: times !important;
-        font-size: 24px;
+        font-size: 20px;
         position: fixed sticky;
         backdrop-filter: blur(5px);
         box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        padding: 0.5rem 1rem;
       }
 
       .navbar a {
@@ -19,8 +20,18 @@
       }
 
       .navbar-brand {
-        font-size: 30px !important;
+        font-size: 24px !important;
         color: #F8EDE3 !important;
+        margin-right: 0.5rem;
+      }
+
+      .logo {
+        margin-right: 0.5rem;
+      }
+
+      .logo img {
+        width: 40px;
+        height: 40px;
       }
 
       .nav-link {
@@ -41,10 +52,17 @@
       .center-nav {
         display: flex;
         justify-content: center;
+        flex-wrap: nowrap;
       }
 
       .center-nav .nav-item {
-        margin: 0 10px;
+        margin: 0 8px;
+        white-space: nowrap;
+      }
+
+      .center-nav .nav-link {
+        padding: 0.5rem 0.75rem;
+        font-size: 18px;
       }
 
       /* Right nav styles */
@@ -52,41 +70,85 @@
         justify-content: flex-end;
       }
 
+      /* Dropdown menu styles */
+      .dropdown-menu {
+        min-width: 100%;
+        padding: 0.5rem 0;
+        margin: 0;
+        border-radius: 10px;
+        border: none;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      }
+
+      .dropdown-item {
+        padding: 0.5rem 1rem;
+        font-size: 16px;
+      }
+
       /* Responsive styles for mobile devices */
       @media (max-width: 767.98px) {
+        .navbar {
+          height: auto;
+          min-height: 60px;
+          padding: 0.5rem;
+        }
+
+        .navbar-brand {
+          font-size: 20px !important;
+        }
+
+        .logo img {
+          width: 35px;
+          height: 35px;
+        }
+
         .navbar-collapse {
           background-color: rgba(248, 237, 227, 0.95);
           border-radius: 0 0 15px 15px;
           padding: 10px;
-          margin-top: 10px;
+          margin-top: 5px;
           box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+          max-height: calc(100vh - 70px);
+          overflow-y: auto;
         }
 
         /* Center nav becomes stacked in mobile */
         .center-nav {
           margin-bottom: 15px;
           width: 100%;
+          flex-direction: column;
         }
 
         .center-nav .nav-item {
           text-align: center;
           margin: 5px 0;
+          width: 100%;
+        }
+
+        .center-nav .nav-link {
+          padding: 0.5rem;
+          font-size: 16px;
+          width: 100%;
+          display: block;
         }
 
         /* Right nav alignment in mobile */
         .right-nav {
           width: 100%;
+          border-top: 1px solid rgba(0, 0, 0, 0.1);
+          padding-top: 10px;
         }
 
         .right-nav .nav-item {
           text-align: right;
           padding: 5px 0;
+          width: 100%;
         }
 
         .right-nav .nav-link {
           text-align: right;
           padding-right: 1rem;
-          font-size: 20px;
+          font-size: 16px;
         }
 
         /* Ensure dropdown menus are properly aligned */
@@ -94,45 +156,80 @@
           background-color: rgba(248, 237, 227, 0.9);
           border: none;
           box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+          position: static;
+          float: none;
+          width: 100%;
+          margin-top: 5px;
+          margin-bottom: 5px;
+        }
+
+        .dropdown-item {
+          white-space: normal;
+          text-align: center;
+          padding: 0.5rem;
         }
 
         /* Center nav dropdowns */
         .center-nav .dropdown-menu {
           text-align: center;
-          left: 50%;
-          transform: translateX(-50%);
+          transform: none;
+          padding: 0.25rem 0;
+        }
+
+        .center-nav .dropdown-item {
+          padding: 0.5rem;
+          font-size: 14px;
         }
 
         /* Right nav dropdowns */
         .right-nav .dropdown-menu {
           text-align: right;
-          right: 0;
+          right: auto;
           left: auto;
+        }
+
+        .right-nav .dropdown-item {
+          text-align: right;
+          padding: 0.5rem 1rem;
         }
 
         /* Style for the toggler button */
         .navbar-toggler {
           border: none;
-          padding: 0.5rem;
-          margin-right: 1rem;
+          padding: 0.4rem;
+          margin-right: 0.5rem;
+          background-color: transparent;
         }
 
         .navbar-toggler-icon {
-          width: 1.5em;
-          height: 1.5em;
+          width: 1.25em;
+          height: 1.25em;
+        }
+
+        /* Fix for language dropdown on small screens */
+        .center-nav .dropdown {
+          position: static;
+        }
+
+        .center-nav .dropdown-menu {
+          width: 90%;
+          margin: 0 auto;
+          left: 0;
+          right: 0;
         }
       }
     </style>
-    <div class="logo">
-      <img src="https://cdn3.iconfinder.com/data/icons/business-and-finance-76/64/C_Hand_Time-512.png" alt="Logo"
-        width="50" height="50" />
+    <div class="d-flex align-items-center">
+      <div class="logo">
+        <img src="https://cdn3.iconfinder.com/data/icons/business-and-finance-76/64/C_Hand_Time-512.png" alt="Logo"
+          width="40" height="40" />
+      </div>
+      <a class="navbar-brand font-weight-bold" href="/">{{t 'app.name'}}</a>
     </div>
 
-    <a class="navbar-brand font-weight-bold" href="/">{{t 'app.name'}}</a>
-
-    <button class="navbar-toggler shadow btn-sm" type="button" data-toggle="collapse"
+    <button class="navbar-toggler" type="button" data-toggle="collapse"
       data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon shadow-lg"></span>
+      <span class="navbar-toggler-icon"></span>
     </button>
 
     <div class="collapse navbar-collapse" id="navbarNav">
@@ -149,17 +246,17 @@
         </li>
         <li class="nav-item dropdown">
           <a href="#" class="nav-link dropdown-toggle text-center" data-toggle="dropdown" id="languageDropdown">
-            <i class="fas fa-globe"></i> {{t 'nav.language'}}
+            <i class="fas fa-globe"></i> <span class="d-none d-md-inline">{{t 'nav.language'}}</span>
           </a>
           <div class="dropdown-menu bg-light border-0">
-            <a href="/language/en" class="dropdown-item text-center {{#if_eq currentLanguage 'en'}}font-weight-bold{{/if_eq}}">
-              {{t 'nav.english'}}
+            <a href="/language/en" class="dropdown-item {{#if_eq currentLanguage 'en'}}font-weight-bold{{/if_eq}}">
+              <span class="flag-icon">🇺🇸</span> {{t 'nav.english'}}
             </a>
-            <a href="/language/zh-TW" class="dropdown-item text-center {{#if_eq currentLanguage 'zh-TW'}}font-weight-bold{{/if_eq}}">
-              {{t 'nav.traditionalChinese'}}
+            <a href="/language/zh-TW" class="dropdown-item {{#if_eq currentLanguage 'zh-TW'}}font-weight-bold{{/if_eq}}">
+              <span class="flag-icon">🇭🇰</span> {{t 'nav.traditionalChinese'}}
             </a>
-            <a href="/language/zh-CN" class="dropdown-item text-center {{#if_eq currentLanguage 'zh-CN'}}font-weight-bold{{/if_eq}}">
-              {{t 'nav.simplifiedChinese'}}
+            <a href="/language/zh-CN" class="dropdown-item {{#if_eq currentLanguage 'zh-CN'}}font-weight-bold{{/if_eq}}">
+              <span class="flag-icon">🇨🇳</span> {{t 'nav.simplifiedChinese'}}
             </a>
           </div>
         </li>

@@ -42,41 +42,41 @@ export const handleAvatarUpload = (req, res) => {
   upload.single("avatarUpload")(req, res, (err) => {
     if (err) {
       console.error("Avatar upload error:", err);
-      req.flash("error_msg", err.message || "Error uploading avatar");
+      req.flash("error_msg", err.message || req.__('errors.avatarUploadError'));
       return res.redirect("/users/myprofile");
     }
-    
+
     // No file was uploaded
     if (!req.file) {
       console.log("No file uploaded");
-      req.flash("error_msg", "Please select a file before clicking 'Upload' button");
+      req.flash("error_msg", req.__('errors.selectFile'));
       return res.redirect("/users/myprofile");
     }
-    
+
     console.log("File uploaded:", req.file.path);
-    
+
     try {
       // Read file and convert to base64
       const avatarData = fs.readFileSync(req.file.path).toString("base64");
       const avatarContentType = req.file.mimetype;
-      
+
       // Find user and update avatar
       User.findById(res.locals.user._id)
         .then(user => {
           if (!user) {
             console.log("User not found");
-            req.flash("error_msg", "User not found");
+            req.flash("error_msg", req.__('errors.userNotFound'));
             return res.redirect("/users/myprofile");
           }
-          
+
           // Set avatar data
           if (!user.avatar) {
             user.avatar = {};
           }
-          
+
           user.avatar.data = avatarData;
           user.avatar.contentType = avatarContentType;
-          
+
           // Save user
           return user.save();
         })
@@ -87,19 +87,19 @@ export const handleAvatarUpload = (req, res) => {
           } catch (err) {
             console.error("Error deleting temp file:", err);
           }
-          
+
           console.log(getLogTime() + " " + res.locals.user.name + " uploaded avatar");
-          req.flash("success_msg", "Avatar uploaded successfully!");
+          req.flash("success_msg", req.__('messages.avatarUploaded'));
           res.redirect("/users/myprofile");
         })
         .catch(err => {
           console.error("Error saving avatar:", err);
-          req.flash("error_msg", "Error uploading avatar");
+          req.flash("error_msg", req.__('errors.avatarUploadError'));
           res.redirect("/users/myprofile");
         });
     } catch (error) {
       console.error("Unexpected error in avatar upload:", error);
-      req.flash("error_msg", "An unexpected error occurred");
+      req.flash("error_msg", req.__('errors.serverError'));
       res.redirect("/users/myprofile");
     }
   });
@@ -109,7 +109,7 @@ export const handleAvatarUpload = (req, res) => {
 export const handleAvatarDelete = (req, res) => {
   console.log("Delete avatar started");
   console.log("Deleting avatar for user:", res.locals.user._id);
-  
+
   // Find user and remove avatar
   User.findByIdAndUpdate(
     res.locals.user._id,
@@ -118,12 +118,12 @@ export const handleAvatarDelete = (req, res) => {
   )
     .then(() => {
       console.log(getLogTime() + " " + res.locals.user.name + " deleted avatar");
-      req.flash("success_msg", "Avatar successfully deleted!");
+      req.flash("success_msg", req.__('messages.avatarDeleted'));
       res.redirect("/users/myprofile");
     })
     .catch(err => {
       console.error("Error deleting avatar:", err);
-      req.flash("error_msg", "Error deleting avatar");
+      req.flash("error_msg", req.__('errors.avatarDeleteError'));
       res.redirect("/users/myprofile");
     });
 };

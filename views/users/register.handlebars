@@ -1,83 +1,54 @@
-<style>
-    .row {
-        margin: 0 auto;
-    }
+<div class="page-header">
+  <h1>{{__ 'auth.register'}}</h1>
+  <p class="lead">{{__ 'auth.createAccount'}}</p>
+</div>
 
-    .card {
-        margin: 0 auto;
-        float: none;
-        margin-bottom: 10px;
-        background-color: rgb(223, 211, 195, 0.5) !important;
-        font-size: 20px !important;
-        border-radius: 50px 50px 50px 50px;
-    }
-
-    /* Body background is now handled by global.css */
-
-    .btn {
-        background-color: #7D6E83 !important;
-        border: 0 !important;
-        border-radius: 10px 10px 10px 10px;
-    }
-
-    .btn1 {
-        background-color: rgb(248, 237, 227, 0.6) !important;
-        border: 0 !important;
-        border-radius: 10px 10px 10px 10px;
-    }
-
-    /* Mobile-specific styles */
-    @media (max-width: 767.98px) {
-        .card {
-            border-radius: 30px !important;
-            width: 100% !important;
-        }
-
-        .form-control {
-            width: 100% !important;
-        }
-
-        .form-group {
-            width: 100% !important;
-        }
-    }
-</style>
-<div style="margin-top:100px"><br>
 <div class="row">
-  <div class="col-md-6 mx-auto"><br>
-    <h3 class="text-center">{{__ 'auth.register'}}</h3><br>
-    <form action="/users/register" method="post" class="card card-body border-0">
-      <input type="hidden" name="_csrf" value="{{csrfToken}}" />
-      <div class="form-group text-left" ><br>
-        <label for="name">{{__ 'auth.name'}}</label>
-        <input type="text" class="form-control" name="name" value="{{name}}" autocomplete="off" />
-      </div>
-      <div class="form-group">
-        <label for="email">{{__ 'auth.email'}}</label>
-        <input type="email" class="form-control" name="email" value="{{email}}" autocomplete="off" />
-      </div>
-      <div class="form-group">
-        <label for="phone">{{__ 'auth.phone'}}</label>
-        <input type="tel" class="form-control" name="phone" value="{{phone}}" placeholder="+852 9876-4321" />
-        <small class="form-text text-muted">{{__ 'auth.phoneFormat'}}</small>
-      </div>
-      <div class="form-group">
-        <label for="password">{{__ 'auth.password'}}</label>
-        <input type="password" class="form-control" name="password" value="{{password}}" />
-      </div>
-      <div class="form-group">
-        <label for="password2">{{__ 'auth.confirmPassword'}}</label>
-        <input type="password" class="form-control" name="password2" value="{{password2}}" />
-      </div>
-      <br>
-      <div class="text-center">
-        <button type="submit" class="btn text-white text-center">{{__ 'auth.registerButton'}}</button>
-      </div>
-      <div class="text-center mt-3">
-        <a href="/users/login">{{__ 'auth.haveAccount'}}</a>
-      </div>
-      <br>
-    </form>
+  <div class="col-md-6 mx-auto">
+    <div class="modern-form">
+      <form action="/users/register" method="post">
+        <input type="hidden" name="_csrf" value="{{csrfToken}}" />
+
+        <div class="form-group">
+          <label for="name">{{__ 'auth.name'}}</label>
+          <input type="text" class="form-control" name="name" value="{{name}}" autocomplete="off" required />
+        </div>
+
+        <div class="form-group">
+          <label for="email">{{__ 'auth.email'}}</label>
+          <input type="email" class="form-control" name="email" value="{{email}}" autocomplete="off" required />
+        </div>
+
+        <div class="form-group">
+          <label for="phone">{{__ 'auth.phone'}}</label>
+          <input type="tel" class="form-control" name="phone" value="{{phone}}" placeholder="+123 456-7890" />
+          <small class="form-text text-muted">{{__ 'auth.phoneFormat'}}</small>
+        </div>
+
+        <div class="form-group">
+          <label for="password">{{__ 'auth.password'}}</label>
+          <input type="password" class="form-control" name="password" value="{{password}}" required />
+        </div>
+
+        <div class="form-group">
+          <label for="password2">{{__ 'auth.confirmPassword'}}</label>
+          <input type="password" class="form-control" name="password2" value="{{password2}}" required />
+        </div>
+
+        <div class="text-center mt-4">
+          <button type="submit" class="btn">{{__ 'auth.registerButton'}}</button>
+        </div>
+
+        <div class="text-center mt-4">
+          <a href="/users/login" class="text-decoration-none">
+            <i class="fas fa-sign-in-alt mr-1"></i> {{__ 'auth.haveAccount'}}
+          </a>
+        </div>
+      </form>
+    </div>
   </div>
 </div>
+
+<div class="version-info">
+  <p>{{__ 'app.name'}} - {{__ 'about.version'}} 3.2</p>
 </div>
