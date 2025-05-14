@@ -302,14 +302,6 @@ app.use((req, res, next) => {
     return next();
   }
 
-  // Generate CSRF token function
-  req.csrfToken = function() {
-    if (!req.session.csrfToken) {
-      req.session.csrfToken = crypto.randomBytes(20).toString('hex');
-    }
-    return req.session.csrfToken;
-  };
-
   // Verify CSRF token
   const token = req.body._csrf || req.query._csrf;
   if (!token || token !== req.session.csrfToken) {
