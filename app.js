@@ -49,7 +49,7 @@ import methodOverride from "method-override";
 
 // CSRF - Cross-Site Request Forgery protection
 // Prevents CSRF attacks by requiring a token in non-GET requests
-import csrf from 'csurf';
+import crypto from 'crypto';
 
 // Passport - Authentication middleware for Node.js
 // Handles user authentication with various strategies (local, OAuth, etc.)
@@ -280,20 +280,35 @@ app.use(passport.session());
 /**
  * Security Configuration
  */
-// CSRF protection middleware
-const csrfProtection = csrf({
-  cookie: false,  // Use session instead of cookies
-  ignoreMethods: ['GET', 'HEAD', 'OPTIONS'] // Only apply CSRF protection to state-changing methods
-});
-
-// Apply CSRF protection to all routes except file uploads
+// Simple CSRF protection middleware
 app.use((req, res, next) => {
-  // Skip CSRF for avatar upload
-  if (req.path === '/users/myprofile/upload-avatar') {
+  // Skip CSRF for GET, HEAD, OPTIONS requests and avatar upload
+  if (req.method === 'GET' || req.method === 'HEAD' || req.method === 'OPTIONS' ||
+      req.path === '/users/myprofile/upload-avatar') {
     return next();
   }
-  // Apply CSRF protection to all other routes
-  csrfProtection(req, res, next);
+
+  // Generate CSRF token function
+  req.csrfToken = function() {
+    if (!req.session.csrfToken) {
+      req.session.csrfToken = crypto.randomBytes(20).toString('hex');
+    }
+    return req.session.csrfToken;
+  };
+
+  // Verify CSRF token
+  const token = req.body._csrf || req.query._csrf;
+  if (!token || token !== req.session.csrfToken) {
+    console.log('CSRF token validation failed');
+    console.log('Token received:', token);
+    console.log('Token expected:', req.session.csrfToken);
+    return res.status(403).render('500', {
+      error: 'CSRF token validation failed',
+      layout: 'error'
+    });
+  }
+
+  next();
 });
 
 /**
@@ -320,10 +335,11 @@ app.use(function(req, res, next) {
   res.locals.user = req.user || null;
 
   // Make CSRF token available to all views for form protection
-  // Only add CSRF token if the route has CSRF protection
-  if (req.csrfToken && typeof req.csrfToken === 'function') {
-    res.locals.csrfToken = req.csrfToken();
+  // Generate a new CSRF token for each request
+  if (!req.session.csrfToken) {
+    req.session.csrfToken = crypto.randomBytes(20).toString('hex');
   }
+  res.locals.csrfToken = req.session.csrfToken;
 
   // Make current language available to all views
   res.locals.currentLanguage = req.getLocale();

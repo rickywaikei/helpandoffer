@@ -1,0 +1,26 @@
+version: '3.8'
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: helpandoffer-app
+    restart: always
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=development
+      - MONGO_URI=${MONGO_URI}
+      - SESSION_SECRET=${SESSION_SECRET}
+      - ADMIN_USER_ID=${ADMIN_USER_ID}
+      - PORT=3000
+    volumes:
+      - ./config.json:/usr/src/app/config.json
+      - ./uploads:/usr/src/app/uploads
+    networks:
+      - npm-network
+
+networks:
+  npm-network:
+    external: true

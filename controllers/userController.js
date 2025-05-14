@@ -168,8 +168,7 @@ export const getMyprofile = (req, res) => {
     phone: res.locals.user.phone,
     avatar: res.locals.user.avatar,
     badge: res.locals.user.badge,
-    isAdmin: res.locals.user.isAdmin,
-    csrfToken: req.csrfToken()
+    isAdmin: res.locals.user.isAdmin
   });
 };
 
@@ -359,8 +358,7 @@ export const postEditUser = (req, res) => {
           name: user.name,
           email: req.body.email || user.email,
           phone: req.body.phone || user.phone
-        },
-        csrfToken: req.csrfToken()
+        }
       });
     } else {
       if (req.body.email) {
@@ -475,8 +473,7 @@ export const putUpdateMyprofile = (req, res) => {
           phone: req.body.phone || user.phone,
           avatar: user.avatar,
           badge: user.badge,
-          isAdmin: user.isAdmin,
-          csrfToken: req.csrfToken()
+          isAdmin: user.isAdmin
         });
       }
 

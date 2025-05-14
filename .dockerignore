@@ -1,0 +1,38 @@
+# Node modules
+node_modules
+
+# Logs
+logs
+*.log
+npm-debug.log*
+
+# Environment variables
+.env
+.env.local
+.env.development
+.env.test
+.env.production
+
+# Git files
+.git
+.gitignore
+
+# Docker files
+Dockerfile
+docker-compose.yml
+.dockerignore
+
+# Other files
+README.md
+CHANGELOG.md
+LICENSE
+.DS_Store
+.vscode
+*.md
+!README.md
+
+# Temporary files
+tmp
+temp
+.tmp
+.temp
