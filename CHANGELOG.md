@@ -5,6 +5,23 @@ All notable changes to the Help and Offer Platform will be documented in this fi
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [3.4.1] - 2023-05-14
+
+### Added
+- Consistent version display across all pages using the _version partial
+- Improved form styling with better spacing and font sizes
+- Enhanced mobile responsiveness for all forms and tables
+
+### Changed
+- Updated version number in package.json and all templates
+- Improved error handling for CSRF token validation
+- Enhanced user experience with more consistent UI elements
+
+### Fixed
+- Fixed CSRF token generation to prevent duplicate tokens and 500 errors
+- Fixed version display inconsistency across pages
+- Improved form field alignment and spacing on mobile devices
+
 ## [3.2.0] - 2025-12-05
 
 ### Added

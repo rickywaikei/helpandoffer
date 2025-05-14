@@ -1,6 +1,6 @@
 {
   "name": "helpandoffer",
-  "version": "3.2.0",
+  "version": "3.4.1",
   "description": "Help and Offer Platform - Connecting people who need help with those who can offer assistance",
   "main": "app.js",
   "scripts": {
