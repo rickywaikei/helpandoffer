@@ -153,7 +153,11 @@ export const postLogin = (req, res, next) => {
 };
 
 export const getLogout = (req, res) => {
-  // console.log(getLogTime() + " logout: " + res.locals.user.name); // todo logout
+  // Log the user's name before logging out
+  if (res.locals.user && res.locals.user.name) {
+    console.log(getLogTime() + " logout: " + res.locals.user.name);
+  }
+
   req.logout((err) => {
     if (err) throw err;
     req.flash("success_msg", req.__('messages.logoutSuccess'));
