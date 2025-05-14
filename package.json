@@ -4,9 +4,10 @@
   "description": "Help and Offer Platform - Connecting people who need help with those who can offer assistance",
   "main": "app.js",
   "scripts": {
-    "start": "node app.js",
-    "start:prod": "NODE_ENV=production node app.js",
-    "dev": "nodemon app.js"
+    "start": "NODE_OPTIONS=\"--no-warnings\" node app.js",
+    "start:prod": "NODE_ENV=production NODE_OPTIONS=\"--no-warnings\" node app.js",
+    "dev": "nodemon app.js",
+    "start:clean": "./start.sh"
   },
   "author": "",
   "license": "ISC",

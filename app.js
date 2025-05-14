@@ -79,7 +79,18 @@ import {
 
 // Configuration settings from JSON file
 // Contains environment-specific settings that can be changed without code modification
-import config from "./config.json" assert {type: 'json'};
+import fs from 'fs';
+import path from 'path';
+import { fileURLToPath } from 'url';
+
+// Get the directory name of the current module
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+// Read and parse the config.json file
+const configPath = path.join(__dirname, 'config.json');
+const configData = fs.readFileSync(configPath, 'utf8');
+const config = JSON.parse(configData);
 
 // Initialize passport with our configuration
 passportConfig(passport);
@@ -188,6 +199,9 @@ app.set('views', './views'); // Directory containing view templates
  * Database Connection Setup
  * Connect to MongoDB using Mongoose
  */
+// Set strictQuery to suppress the deprecation warning
+mongoose.set('strictQuery', false);
+
 const mongoURI = process.env.MONGO_URI || config.db.mongoURI;
 mongoose
   .connect(mongoURI)
